@@ -18,13 +18,14 @@ if os.path.exists("spanish_vocab.txt"):
     except Exception as e:
         print(f"Note: Could not read spanish_vocab.txt ({e}), proceeding without it.")
 
-# 2. Grab your secret keys from repository settings
+# 2. Grab your secret keys from repository settings (using your exact names!)
 gemini_api_key = os.environ.get("GEMINI_API_KEY")
-email_user = os.environ.get("EMAIL_USER")
-email_password = os.environ.get("EMAIL_PASSWORD")
+smtp_user = os.environ.get("SMTP_USER")
+smtp_password = os.environ.get("SMTP_PASSWORD")
+to_email = os.environ.get("TO_EMAIL")
 
-if not gemini_api_key or not email_user or not email_password:
-    print("Error: Missing required environment variables (GEMINI_API_KEY, EMAIL_USER, or EMAIL_PASSWORD).")
+if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
+    print("Error: Missing required environment variables (GEMINI_API_KEY, SMTP_USER, SMTP_PASSWORD, or TO_EMAIL).")
     exit(1)
 
 # 3. Request a personalized lesson layout from Gemini
@@ -71,8 +72,8 @@ except Exception as e:
 
 # 4. Format and send the email
 msg = MIMEMultipart()
-msg['From'] = email_user
-msg['To'] = email_user  
+msg['From'] = smtp_user
+msg['To'] = to_email  
 msg['Subject'] = "Your Daily Spanish Workout 🇪🇸"
 msg.attach(MIMEText(workout_text, 'plain'))
 
@@ -80,8 +81,8 @@ print("Sending email...")
 try:
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
-    server.login(email_user, email_password)
-    server.sendmail(email_user, email_user, msg.as_string())
+    server.login(smtp_user, smtp_password)
+    server.sendmail(smtp_user, to_email, msg.as_string())
     server.close()
     print("Success! Your daily Spanish workout has been emailed.")
 except Exception as e:
