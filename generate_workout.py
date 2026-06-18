@@ -1,64 +1,89 @@
 import os
-import requests
-from datetime import datetime
+import random
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import json
+import urllib.request
 
-# 1. Read your vocabulary file
-with open("spanish_vocab.txt", "r", encoding="utf-8") as f:
-    vocab_content = f.read()
+# 1. Look for custom vocabulary words in your repository
+vocab_context = ""
+if os.path.exists("spanish_vocab.txt"):
+    try:
+        with open("spanish_vocab.txt", "r", encoding="utf-8") as f:
+            words = [line.strip() for line in f if line.strip()]
+        if words:
+            sample_words = random.sample(words, min(len(words), 8))
+            vocab_context = f"\nPlease try to incorporate some of these specific vocabulary words/phrases into today's workout: {', '.join(sample_words)}"
+    except Exception as e:
+        print(f"Note: Could not read spanish_vocab.txt ({e}), proceeding without it.")
 
-# 2. Grab your Gemini API Key from GitHub Secrets
-api_key = os.environ.get("GEMINI_API_KEY")
+# 2. Grab your secret keys from repository settings
+gemini_api_key = os.environ.get("GEMINI_API_KEY")
+email_user = os.environ.get("EMAIL_USER")
+email_password = os.environ.get("EMAIL_PASSWORD")
 
-# 3. Formulate the strict instructions for the AI Coach
-system_prompt = f"""You are a personal Spanish micro-coach. Every day, you generate a "Daily 5-Minute Workout" for a student based on their technical constraints.
+if not gemini_api_key or not email_user or not email_password:
+    print("Error: Missing required environment variables (GEMINI_API_KEY, EMAIL_USER, or EMAIL_PASSWORD).")
+    exit(1)
 
-CRITICAL CONSTRAINT:
-The student has a very specific vocabulary list provided below. Except for the specific new target words/phrases introduced in Part 1 and Part 2, ALL OTHER WORDS used in the example sentences, conversational blurbs, and translation challenges MUST come strictly from the provided vocabulary list or be direct conjugations of the verbs listed.
+# 3. Request a personalized lesson layout from Gemini
+url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_api_key}"
 
-CONJUGATION BOUNDARY:
-For every verb listed under "CORE VERB LIST", you are fully allowed to use the Present tense, Present Progressive (-iendo), Preterite past, and Imperfect past. Do NOT use future, conditional, or subjunctive tenses. Do NOT use unlisted nouns/adjectives (e.g. do NOT use words like "servidor", "informe", or "mal humor").
+prompt = f"""
+You are an expert personal Spanish tutor. Generate a daily "Spanish Workout" for a student with the following current grammar knowledge base:
+- Present Tense: Regular verbs (comer, beber, hablar) and stem-changing verbs (querer, dormir, almorzar, poder, volver, empezar, entender).
+- Ser vs Estar: Core distinctions between traits and temporary states/locations.
+- Preterite Tense: Regular -ar, -er, -ir verbs and high-frequency irregulars (fui, estuve).
+- Imperfect Tense, basic commands, and direct/indirect object pronoun structures.
+{vocab_context}
 
-Here is the student's allowed language matrix:
-\"\"\"
-{vocab_content}
-\"\"\"
+Please structure the workout beautifully as follows:
+1. **Warm-up**: 3 quick conjugations or small exercises based on their level.
+2. **Translation Challenge**: 3 English sentences to translate into Spanish using their grammar.
+3. **Short Reading Passage**: A short paragraph (4-5 sentences) written in natural Spanish utilizing these rules, followed by 2 reading comprehension questions.
+4. **Answer Key**: Place the full answer key at the very bottom with a clear spoiler separation line so they don't see it immediately.
 
-OUTPUT FORMAT RULES:
-- Output your entire response as raw, clean HTML. 
-- Use standard tags like <h3>, <p>, <ul>, <li>, and <strong> for clean visual display in an email application.
-- Do NOT wrap your output in markdown code fence syntax like ```html. Start with the HTML tags directly.
-- All section headers and instructional explanations must be written in English.
-
-Structure to generate:
-   - Part 1: 🌟 Word of the Day. Introduce a practical everyday Spanish noun, adjective, or verb (can be a new word) + English translation + an example sentence in Spanish (using ONLY otherwise known words/conjugations from the list) with its English translation.
-   - Part 2: 🗣️ Phrase of the Day. Provide a fixed conversational, idiomatic expression. Include its English meaning and a brief context or example sentence.
-   - Part 3: 💬 Street Blurb. A quick 2-line A/B natural dialogue showing conversational flow using ONLY the user's core vocabulary and the 4 permitted verb tenses. Include the full English translation directly below it.
-   - Part 4: 🔀 Challenge 1: Translate to Spanish (English ➔ Spanish). Provide exactly 1 sentence to translate into Spanish. Intentionally target past tenses (Preterite or Imperfect) using ONLY known words. Do NOT provide the answer.
-   - Part 5: 🔄 Challenge 2: Translate to English (Spanish ➔ English). Provide exactly 1 natural Spanish sentence using ONLY known words or allowed verb tenses to translate into English. Do NOT provide the answer.
+Keep instructions in English and keep markdown styling simple so it reads perfectly in a standard text email.
 """
 
-# 4. Request the workout from the free Google Gemini API
-url = f"[https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=](https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=){api_key}"
-headers = {"Content-Type": "application/json"}
 data = {
     "contents": [{
-        "parts": [{
-            "text": f"{system_prompt}\n\nGenerate today's unique daily email workout block for {datetime.now().strftime('%B %d, %Y')}."
-        }]
-    }],
-    "generationConfig": {
-        "temperature": 0.3
-    }
+        "parts": [{"text": prompt}]
+    }]
 }
 
-response = requests.post(url, headers=headers, json=data)
-response.raise_for_status()
+print("Calling Gemini API...")
+req = urllib.request.Request(
+    url,
+    data=json.dumps(data).encode("utf-8"),
+    headers={"Content-Type": "application/json"},
+    method="POST"
+)
 
-# Extract the generated text out of the response data structure
-workout_html = response.json()["candidates"][0]["content"]["parts"][0]["text"]
+try:
+    with urllib.request.urlopen(req) as response:
+        result = json.loads(response.read().decode("utf-8"))
+        workout_text = result['candidates'][0]['content']['parts'][0]['text']
+except Exception as e:
+    print(f"Error calling Gemini API: {e}")
+    exit(1)
 
-# 5. Write the output into a physical file to be emailed
-with open("workout.html", "w", encoding="utf-8") as f:
-    f.write(workout_html)
+# 4. Format and send the email
+msg = MIMEMultipart()
+msg['From'] = email_user
+msg['To'] = email_user  
+msg['Subject'] = "Your Daily Spanish Workout 🇪🇸"
+msg.attach(MIMEText(workout_text, 'plain'))
 
-print("workout.html successfully written via Gemini!")
+print("Sending email...")
+try:
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(email_user, email_password)
+    server.sendmail(email_user, email_user, msg.as_string())
+    server.close()
+    print("Success! Your daily Spanish workout has been emailed.")
+except Exception as e:
+    print(f"Error sending email: {e}")
+    exit(1)
