@@ -47,7 +47,7 @@ if os.path.exists(word_bank_file):
                 last_item = word_bank[-1]
                 previous_word_info = f"'{last_item['word']}' ({last_item['meaning']})"
     except Exception as e:
-        print(f"Nota: No se pudo leer el banco de palabras ({e}). Iniciando uno vacío.")
+        print(f"Note: Could not read word_bank.json ({e}). Starting a clean bank.")
         word_bank = []
 else:
     word_bank = []
@@ -62,7 +62,7 @@ if os.path.exists("spanish_vocab.txt"):
             sample_words = random.sample(words, min(len(words), 8))
             vocab_context = f"Para los retos de traducción y diálogos, puedes inspirarte en estos términos que el usuario ya conoce: {', '.join(sample_words)}."
     except Exception as e:
-        print(f"Nota: No se pudo leer spanish_vocab.txt ({e}).")
+        print(f"Note: Could not read spanish_vocab.txt ({e}).")
 
 # --- 4. SECRETS VALIDATION ---
 gemini_api_key = os.environ.get("GEMINI_API_KEY")
@@ -71,7 +71,7 @@ smtp_password = os.environ.get("SMTP_PASSWORD")
 to_email = os.environ.get("TO_EMAIL")
 
 if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
-    print("Error: Faltan variables de entorno esenciales.")
+    print("Error: Missing required environment variables.")
     exit(1)
 
 # --- 5. BUILD THE PROMPT FOR GEMINI ---
@@ -126,6 +126,7 @@ Estructura de diseño requerida:
       </div>
       <div class="content">
         
+        <!-- 1. WORD OF THE DAY & REVIEW -->
         <div class="card">
           <div class="card-title">1. 🌟 La Palabra del Día (Word of the Day)</div>
           <div class="highlight-box">
@@ -138,6 +139,7 @@ Estructura de diseño requerida:
           </div>
         </div>
 
+        <!-- 2. FRASE DEL DIA -->
         <div class="card">
           <div class="card-title">2. 🗣️ La Frase del Día (Common Phrase)</div>
           <div class="highlight-box" style="border-left-color: #a855f7;">
@@ -147,6 +149,7 @@ Estructura de diseño requerida:
           <div class="example-text"><strong>Ejemplo:</strong> "[Frase]" ([Traducción])</div>
         </div>
 
+        <!-- 3. BLURB DE LA CALLE -->
         <div class="card">
           <div class="card-title">3. 💬 El Blurb de la Calle (Conversational Snippet)</div>
           <div class="dialogue">
@@ -159,6 +162,7 @@ Estructura de diseño requerida:
           </div>
         </div>
 
+        <!-- 4. RETO 1 -->
         <div class="card">
           <div class="card-title">4. 🔀 Reto 1: Traducir al Español (English ➔ Spanish)</div>
           <div class="challenge-box">
@@ -166,6 +170,7 @@ Estructura de diseño requerida:
           </div>
         </div>
 
+        <!-- 5. RETO 2 -->
         <div class="card">
           <div class="card-title">5. 🔄 Reto 2: Traducir al Inglés (Spanish ➔ English)</div>
           <div class="challenge-box" style="background-color: #f0fdf4; border-color: #dcfce7; color: #14532d;">
@@ -173,6 +178,7 @@ Estructura de diseño requerida:
           </div>
         </div>
 
+        <!-- SPOILERS -->
         <div class="spoiler-section">
           <div class="spoiler-header">👇 CLAVE DE RESPUESTAS / ANSWER KEY</div>
           <div class="answer-key">
@@ -199,12 +205,62 @@ req = urllib.request.Request(url, data=json.dumps(data).encode("utf-8"), headers
 try:
     with urllib.request.urlopen(req) as response:
         workout_html = json.loads(response.read().decode("utf-8"))['candidates'][0]['content']['parts'][0]['text']
-        if workout_html.startswith("
-http://googleusercontent.com/immersive_entry_chip/0
-http://googleusercontent.com/immersive_entry_chip/1
+        if workout_html.startswith("```html"): 
+            workout_html = workout_html[7:]
+        if workout_html.endswith("```"): 
+            workout_html = workout_html[:-3]
+        workout_html = workout_html.strip()
+except Exception as e:
+    print(f"Error calling Gemini: {e}")
+    exit(1)
 
-### What to expect next:
-1. Save and commit both modifications.
-2. Trigger the action via the **Run workflow** button.
-3. You will receive an beautifully rendered email box where the large dark slate-blue card displays the exact localized calendar date and season. 
-4. Check your code folder a minute later: a new file called `word_bank.json` will automatically appear in your repository containing your very first tracked word! Every subsequent execution will block previously generated items while generating rolling context reviews seamlessly.
+# --- 6. PARSE THE TARGET TRACKING WORD AND SAVE BACK TO THE BANK ---
+extracted_word = "Desconocida"
+extracted_meaning = "Unknown"
+cleaned_lines = []
+
+for line in workout_html.split("\n"):
+    if "TRACK_WORD:" in line:
+        try:
+            parts = line.replace("TRACK_WORD:", "").strip().split("|")
+            if len(parts) == 2:
+                extracted_word = parts[0].strip()
+                extracted_meaning = parts[1].strip()
+        except:
+            pass
+    else:
+        cleaned_lines.append(line)
+
+workout_html = "\n".join(cleaned_lines).strip()
+
+if extracted_word != "Desconocida":
+    word_bank.append({
+        "word": extracted_word,
+        "meaning": extracted_meaning,
+        "date": datetime.now().strftime("%Y-%m-%d")
+    })
+    try:
+        with open(word_bank_file, "w", encoding="utf-8") as f:
+            json.dump(word_bank, f, ensure_ascii=False, indent=2)
+        print(f"Saved '{extracted_word}' to the word bank.")
+    except Exception as e:
+        print(f"Error saving word bank: {e}")
+
+# --- 7. DISPATCH THE EMAIL ---
+msg = MIMEMultipart()
+msg['From'] = smtp_user
+msg['To'] = to_email  
+msg['Subject'] = f"📅 Entrenamiento Diario: {date_header_string.split('—')[0].strip()}"
+msg.attach(MIMEText(workout_html, 'html'))
+
+print("Sending email...")
+try:
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(smtp_user, smtp_password)
+    server.sendmail(smtp_user, to_email, msg.as_string())
+    server.close()
+    print("Success! Spanish workout emailed.")
+except Exception as e:
+    print(f"SMTP Error: {e}")
+    exit(1)
