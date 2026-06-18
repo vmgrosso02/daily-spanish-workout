@@ -1,0 +1,32 @@
+=== STUDENT CAPABILITY RULE ===
+The student knows the following 4 grammatical tenses for EVERY verb listed in this document. The AI is fully allowed and expected to use and test any of these 4 patterns for any verb found below:
+1. Present Tense (e.g., como, comes, come...)
+2. Present Progressive (e.g., comiendo, hablando...)
+3. Preterite Past (e.g., comí, comiste, comió, comimos, comieron)
+4. Imperfect Past (e.g., comía, comías, comía, comíamos, comían)
+
+=== GRAMMAR & PRONOUNS ===
+- Ser vs Estar (Permanent traits vs Locations/States)
+- Direct & Indirect Object Pronouns (me, te, lo, la, nos, los, las, le, les)
+- Double Object Pronouns (e.g., "me lo trajiste")
+- Compound Past Tense / Present Perfect (he, has, ha, hemos, han + comido/hablado/recibido/ido)
+- Basic Imperative Commands: -an/-en endings (e.g., "hagan", "vayan")
+- Reflexive Pronouns (me veo, te ves, se ve / olvidarme, olvidarte)
+
+=== CORE VERB LIST ===
+comer, beber, hablar, querer, necesitar, tener, vivir, comprar, pagar, dormir, almorzar, poder, volver, empezar, entender, ir, ser, estar, hacer, traer, escribir, vender, dar (darme, darte, darnos, darle, darles), decir (decirme, decirte, decirle, decirnos, decirles), pasar, explicar, robar, descargar, copiar, ganar, nacer, caerse, reirse, patinar, compartir
+
+=== FOOD & RESTAURANT ===
+pan, agua, manzanas, leche, sandwich, carne, hamburguesa, naranja, café, vaso, taza, ensalada, tomate, la cuenta, pescado, queso, azúcar, sal, jugo, lata, cebolla, jamón, yogur, champiñones, pimienta, litros, kilogramo, medio, oferta, lista, variedad
+
+=== TRAVEL & PLACES ===
+baño, hotel, aeropuerto, restaurante, museo, banco, hospital, estación, tienda, calle, plaza, parque, aquí, allí, taxi, teléfono, maleta, reserva, autobús, tren, dinero, supermercado, cerrado, boleto, vacaciones, rompecabezas, cometa, hockey, drawing, pop, postal, estampilla, velero, maravilloso, a lo largo de, tantos, acampar, esquiar, coleccionar, navegar, prestar
+
+=== FAMILY & HOME ===
+padre, madre, carro, casa, inteligente, elegante, gato, perro, hermano, hermana, muy, grande, bonito, bonita, familia, esposa, esposo, abuelo, abuela, perfecto, apartamento, bicicleta, francia, hijo, hija, y, este, esta, ese, esa, regalo, barato, caro, diferente, cómodo, favorito, demasiado, ropa, abrigo, falda, vestido, chaqueta, camisa, camiseta, pantalones, zapatos, sombrero, botas, reloj, calcetines, cinturón, corbata, bufanda, suéter, uniforme, traje, peine, maquillaje, champú, diarios, suave, vestirse, reunir, billetera, gastar, estuche, regla, libro de ejercicios, mochila, calendario, compañeros, avanzada, nivel, diferencia, detalle, instrucciones, claramente, luego, mientras, habia, muerto, corto, castaño, liso, casi, ama de casa, adolescente, payaso, patín, scooter, batería, globo, zanahoria, armario
+
+=== OCCUPATIONS & WORK ===
+obrero, peligro, salvajes, extraño, terrible, nacional, policía, electricidad, fuego, raqueta, bádminton, bastante, todavía, staff, personal, ocupación, actriz, actor, cliente, recepcionista, conductor, fotógrafo, limpiador, cantante, piloto, impresora, teclando, departamento, pizarrón, correo, concejo municipal, física
+
+=== MEDICAL & HEALTH ===
+cerebro, sangre, pelo, vendaje, medicina, auxilio, estado, molesta, horrible, usual, alejado, fácilmente, rápidamente, gravemente, imprevistamente, llevar
