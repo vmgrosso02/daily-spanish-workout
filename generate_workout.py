@@ -18,22 +18,22 @@ def get_spanish_date_and_season():
     month_name = months[now.month - 1]
     year = now.year
     
-    # Season logic (Northern Hemisphere standard)
-    md = (now.month, now.day)
-    if (3, 21) <= md <= (6, 20):
+    # Meteorological Season Logic (June to August is Summer)
+    month = now.month
+    if 3 <= month <= 5:
         season = "Primavera 🌸"
-    elif (6, 21) <= md <= (9, 22):
+    elif 6 <= month <= 8:
         season = "Verano ☀️"
-    elif (9, 23) <= md <= (12, 20):
+    elif 9 <= month <= 11:
         season = "Otoño 🍂"
     else:
         season = "Invierno ❄️"
         
-    return f"{day_of_week}, {day} de {month_name} de {year} — {season}"
+    return f"{day_of_week}, {day} de {month_name} de {year} | {season}"
 
 date_header_string = get_spanish_date_and_season()
 
-# --- 2. MANAGE THE NEW WORD BANK PERSISTENCE ---
+# --- 2. MANAGE THE WORD BANK PERSISTENCE ---
 word_bank_file = "word_bank.json"
 already_learned = []
 previous_word_info = "Ninguna (¡Este es tu primer día con el nuevo sistema!)"
@@ -47,12 +47,31 @@ if os.path.exists(word_bank_file):
                 last_item = word_bank[-1]
                 previous_word_info = f"'{last_item['word']}' ({last_item['meaning']})"
     except Exception as e:
-        print(f"Note: Could not read word_bank.json ({e}). Starting a clean bank.")
+        print(f"Note: Could not read word_bank.json ({e}). Starting a clean word bank.")
         word_bank = []
 else:
     word_bank = []
 
-# --- 3. LOOK FOR CUSTOM VOCABULARY WORDS FROM YOUR TEXT FILE ---
+# --- 3. MANAGE THE PHRASE BANK PERSISTENCE ---
+phrase_bank_file = "phrase_bank.json"
+already_learned_phrases = []
+previous_phrase_info = "Ninguna (¡Este es tu primer día con el sistema de frases!)"
+
+if os.path.exists(phrase_bank_file):
+    try:
+        with open(phrase_bank_file, "r", encoding="utf-8") as f:
+            phrase_bank = json.load(f)
+            if phrase_bank:
+                already_learned_phrases = [item["phrase"].lower().strip() for item in phrase_bank]
+                last_phrase = phrase_bank[-1]
+                previous_phrase_info = f"'{last_phrase['phrase']}' ({last_phrase['meaning']})"
+    except Exception as e:
+        print(f"Note: Could not read phrase_bank.json ({e}). Starting a clean phrase bank.")
+        phrase_bank = []
+else:
+    phrase_bank = []
+
+# --- 4. LOOK FOR CUSTOM VOCABULARY WORDS FROM YOUR TEXT FILE ---
 vocab_context = ""
 if os.path.exists("spanish_vocab.txt"):
     try:
@@ -64,7 +83,7 @@ if os.path.exists("spanish_vocab.txt"):
     except Exception as e:
         print(f"Note: Could not read spanish_vocab.txt ({e}).")
 
-# --- 4. SECRETS VALIDATION ---
+# --- 5. SECRETS VALIDATION ---
 gemini_api_key = os.environ.get("GEMINI_API_KEY")
 smtp_user = os.environ.get("SMTP_USER")
 smtp_password = os.environ.get("SMTP_PASSWORD")
@@ -74,22 +93,26 @@ if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
     print("Error: Missing required environment variables.")
     exit(1)
 
-# --- 5. BUILD THE PROMPT FOR GEMINI ---
+# --- 6. BUILD THE PROMPT FOR GEMINI ---
 url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_api_key}"
 
-blacklist_str = ", ".join(already_learned) if already_learned else "Ninguna todavía"
+blacklist_words_str = ", ".join(already_learned) if already_learned else "Ninguna todavía"
+blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_phrases else "Ninguna todavía"
 
 prompt = f"""
-Eres un tutor experto de español. Tu tarea es generar el código HTML puro responsivo para el entrenamiento de hoy. 
+Eres un tutor experto de español. Tu tarea es generar el código HTML puro responsivo para el entrenamiento de hoy.
 
-Nivel gramatical: Presente (regulares/cambio de raíz), Ser/Estar básicos, Pretérito (regulares e irregulares: fui, estuve, dije, hice, traje, tuve), Imperfecto básico, mandatos directos y pronombres de objeto.
+Nivel gramatical del estudiante: Presente (regulares/cambio de raíz), Ser/Estar básicos, Pretérito (regulares e irregulares: fui, estuve, dije, hice, traje, tuve), Imperfecto básico, mandatos directos y pronombres de objeto.
 {vocab_context}
 
-REGLAS DE SELECCIÓN DE PALABRAS:
-1. Debes elegir una palabra o modismo completamente NUEVO que un estudiante de nivel intermedio-bajo no sabría de forma nativa.
-2. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas palabras ya aprendidas: [{blacklist_str}].
-3. Debes incluir un pequeño repaso de la palabra del día anterior: "{previous_word_info}". Puede ser una pregunta corta, una oración de ejemplo o una nota de traducción rápida dentro de la tarjeta de la sección 1.
+REGLAS DE SELECCIÓN DE PALABRAS Y FRASES:
+1. Debes elegir una palabra o modismo completamente NUEVO para la "Palabra del Día" y una frase completamente NUEVA para la "Frase del Día" que un estudiante de nivel intermedio-bajo no sabría de forma nativa.
+2. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas palabras ya aprendidas: [{blacklist_words_str}].
+3. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas frases ya aprendidas: [{blacklist_phrases_str}].
+4. En el apartado de Repaso de la sección 1, incluye una pregunta corta, traducción o recordatorio interactivo basado en la palabra anterior del estudiante: {previous_word_info}.
+5. En el apartado de Repaso de la sección 2, incluye una pregunta corta, traducción o recordatorio basado en la frase anterior del estudiante: {previous_phrase_info}.
 
+Estructura de diseño requerida (No uses em-dashes ni guiones largos "—" como separadores, usa barras verticales "|" o dos puntos):
 Entrega exclusivamente el código estructurado dentro de esta plantilla CSS. No uses bloques de código markdown (```html).
 
 Estructura de diseño requerida:
@@ -130,12 +153,12 @@ Estructura de diseño requerida:
         <div class="card">
           <div class="card-title">1. 🌟 La Palabra del Día (Word of the Day)</div>
           <div class="highlight-box">
-            <strong>Palabra:</strong> [Nueva palabra en español] ([Traducción]) — <span style="color: #ef4444; font-size: 12px; font-weight: bold;">[¡Nueva Palabra!]</span>
+            <strong>Palabra:</strong> [Nueva palabra en español] ([Traducción])
           </div>
           <div class="example-text"><strong>Ejemplo Práctico:</strong> "[Frase contextual]" ([Traducción])</div>
           
           <div class="review-box">
-            🔄 <strong>Repaso de ayer:</strong> [Pon aquí un minireto, traducción rápida o recordatorio usando la palabra previa: {previous_word_info}]
+            🔄 <strong>Repaso de ayer:</strong> [Pon aquí un minireto o recordatorio rápido usando la palabra previa: {previous_word_info}]
           </div>
         </div>
 
@@ -145,8 +168,12 @@ Estructura de diseño requerida:
           <div class="highlight-box" style="border-left-color: #a855f7;">
             <strong>Frase:</strong> [Frase útil] ([Traducción])
           </div>
-          <div style="font-size: 14px; margin-bottom: 6px;"><strong>Uso:</strong> [Cuándo se usa]</div>
+          <div style="font-size: 14px; margin-bottom: 6px;"><strong>When to use:</strong> [Explicación de uso en inglés]</div>
           <div class="example-text"><strong>Ejemplo:</strong> "[Frase]" ([Traducción])</div>
+          
+          <div class="review-box" style="background-color: #fdf2f8; border-color: #ec4899; color: #9d174d;">
+            🔄 <strong>Repaso de ayer:</strong> [Pon aquí un minireto o recordatorio rápido usando la frase previa: {previous_phrase_info}]
+          </div>
         </div>
 
         <!-- 3. BLURB DE LA CALLE -->
@@ -193,8 +220,9 @@ Estructura de diseño requerida:
 </body>
 </html>
 
-CRITICAL EXTRA INSTRUCTION: At the absolute bottom of your response, on a brand new line, output exactly this tracking text so the system script can save the progress:
+CRITICAL EXTRA INSTRUCTION: At the absolute bottom of your response, on a brand new line, output exactly these tracking lines so the system script can save the progress:
 TRACK_WORD: <word chosen> | <english translation>
+TRACK_PHRASE: <phrase chosen> | <english translation>
 """
 
 data = {"contents": [{"parts": [{"text": prompt}]}]}
@@ -214,9 +242,11 @@ except Exception as e:
     print(f"Error calling Gemini: {e}")
     exit(1)
 
-# --- 6. PARSE THE TARGET TRACKING WORD AND SAVE BACK TO THE BANK ---
+# --- 7. PARSE THE TARGET TRACKING DATA AND SAVE BACK TO THE BANKS ---
 extracted_word = "Desconocida"
 extracted_meaning = "Unknown"
+extracted_phrase = "Desconocida"
+extracted_phrase_meaning = "Unknown"
 cleaned_lines = []
 
 for line in workout_html.split("\n"):
@@ -228,11 +258,20 @@ for line in workout_html.split("\n"):
                 extracted_meaning = parts[1].strip()
         except:
             pass
+    elif "TRACK_PHRASE:" in line:
+        try:
+            parts = line.replace("TRACK_PHRASE:", "").strip().split("|")
+            if len(parts) == 2:
+                extracted_phrase = parts[0].strip()
+                extracted_phrase_meaning = parts[1].strip()
+        except:
+            pass
     else:
         cleaned_lines.append(line)
 
 workout_html = "\n".join(cleaned_lines).strip()
 
+# Save word to word_bank
 if extracted_word != "Desconocida":
     word_bank.append({
         "word": extracted_word,
@@ -242,15 +281,29 @@ if extracted_word != "Desconocida":
     try:
         with open(word_bank_file, "w", encoding="utf-8") as f:
             json.dump(word_bank, f, ensure_ascii=False, indent=2)
-        print(f"Saved '{extracted_word}' to the word bank.")
+        print(f"Saved word '{extracted_word}' to the word bank.")
     except Exception as e:
         print(f"Error saving word bank: {e}")
 
-# --- 7. DISPATCH THE EMAIL ---
+# Save phrase to phrase_bank
+if extracted_phrase != "Desconocida":
+    phrase_bank.append({
+        "phrase": extracted_phrase,
+        "meaning": extracted_phrase_meaning,
+        "date": datetime.now().strftime("%Y-%m-%d")
+    })
+    try:
+        with open(phrase_bank_file, "w", encoding="utf-8") as f:
+            json.dump(phrase_bank, f, ensure_ascii=False, indent=2)
+        print(f"Saved phrase '{extracted_phrase}' to the phrase bank.")
+    except Exception as e:
+        print(f"Error saving phrase bank: {e}")
+
+# --- 8. DISPATCH THE EMAIL ---
 msg = MIMEMultipart()
 msg['From'] = smtp_user
 msg['To'] = to_email  
-msg['Subject'] = f"📅 Entrenamiento Diario: {date_header_string.split('—')[0].strip()}"
+msg['Subject'] = f"📅 Entrenamiento Diario: {date_header_string.split('|')[0].strip()}"
 msg.attach(MIMEText(workout_html, 'html'))
 
 print("Sending email...")
