@@ -18,7 +18,7 @@ def get_spanish_date_and_season():
     month_name = months[now.month - 1]
     year = now.year
     
-    # Meteorological Season Logic (June to August is Summer)
+    # Meteorological Season Logic
     month = now.month
     if 3 <= month <= 5:
         season = "Primavera 🌸"
@@ -71,17 +71,15 @@ if os.path.exists(phrase_bank_file):
 else:
     phrase_bank = []
 
-# --- 4. LOOK FOR CUSTOM VOCABULARY WORDS FROM YOUR TEXT FILE ---
-vocab_context = ""
+# --- 4. LOAD THE ENTIRE VOCABULARY FILE FOR THE PROMPT ---
+vocab_content = ""
 if os.path.exists("spanish_vocab.txt"):
     try:
         with open("spanish_vocab.txt", "r", encoding="utf-8") as f:
-            words = [line.strip() for line in f if line.strip()]
-        if words:
-            sample_words = random.sample(words, min(len(words), 8))
-            vocab_context = f"Para los retos de traducción y diálogos, puedes inspirarte en estos términos que el usuario ya conoce: {', '.join(sample_words)}."
+            vocab_content = f.read().strip()
     except Exception as e:
-        print(f"Note: Could not read spanish_vocab.txt ({e}).")
+        print(f"Error reading spanish_vocab.txt: {e}")
+        vocab_content = "Default: comer, beber, hablar, tener, querer"
 
 # --- 5. SECRETS VALIDATION ---
 gemini_api_key = os.environ.get("GEMINI_API_KEY")
@@ -96,23 +94,27 @@ if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
 # --- 6. BUILD THE PROMPT FOR GEMINI ---
 url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_api_key}"
 
-blacklist_words_str = ", ".join(already_learned) if already_learned else "Ninguna todavía"
-blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_phrases else "Ninguna todavía"
+blacklist_words_str = ", ".join(already_learned) if already_learned else "None yet"
+blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_phrases else "None yet"
 
 prompt = f"""
 Eres un tutor experto de español. Tu tarea es generar el código HTML puro responsivo para el entrenamiento de hoy.
 
-Nivel gramatical del estudiante: Presente (regulares/cambio de raíz), Ser/Estar básicos, Pretérito (regulares e irregulares: fui, estuve, dije, hice, traje, tuve), Imperfecto básico, mandatos directos y pronombres de objeto.
-{vocab_context}
+CRITICAL INSTRUCTION (ABSOLUTE VOCABULARY CONSTRAINT):
+Except for the "Word of the Day" (Section 1) and "Phrase of the Day" (Section 2) which are meant to teach NEW concepts, ALL OTHER SECTIONS—including Section 3 (Conversational Snippet), Section 4 (Translate to Spanish), and Section 5 (Translate to English)—MUST ONLY USE words that are explicitly present in the Student's Vocabulary list below, or direct allowed conjugations of verbs. 
+You are STRICTLY FORBIDDEN from using any Spanish word, noun, adjective, or verb that is not in this document. Do not assume or guess. Stick 100% to this vocabulary:
 
-REGLAS DE SELECCIÓN DE PALABRAS Y FRASES:
-1. Debes elegir una palabra o modismo completamente NUEVO para la "Palabra del Día" y una frase completamente NUEVA para la "Frase del Día" que un estudiante de nivel intermedio-bajo no sabría de forma nativa.
-2. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas palabras ya aprendidas: [{blacklist_words_str}].
-3. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas frases ya aprendidas: [{blacklist_phrases_str}].
-4. En el apartado de Repaso de la sección 1, incluye una pregunta corta, traducción o recordatorio interactivo basado en la palabra anterior del estudiante: {previous_word_info}.
-5. En el apartado de Repaso de la sección 2, incluye una pregunta corta, traducción o recordatorio basado en la frase anterior del estudiante: {previous_phrase_info}.
+=== STUDENT ALLOWED VOCABULARY ===
+{vocab_content}
+==================================
 
-Estructura de diseño requerida (No uses em-dashes ni guiones largos "—" como separadores, usa barras verticales "|" o dos puntos):
+REGLAS DE SELECCIÓN DE PALABRAS Y FRASES NUEVAS:
+1. "Palabra del Día" (Section 1) and "Frase del Día" (Section 2) must introduce a completely NEW vocabulary term or spoken idiom that is NOT in the student's vocabulary sheet.
+2. DO NOT select any word present in this blacklist: [{blacklist_words_str}].
+3. DO NOT select any phrase present in this blacklist: [{blacklist_phrases_str}].
+4. In Section 1 (Review Box), write a quick micro-challenge or translation test using yesterday's word: {previous_word_info}.
+5. In Section 2 (Review Box), write a quick micro-challenge or translation test using yesterday's phrase: {previous_phrase_info}.
+
 Entrega exclusivamente el código estructurado dentro de esta plantilla CSS. No uses bloques de código markdown (```html).
 
 Estructura de diseño requerida:
@@ -128,192 +130,4 @@ Estructura de diseño requerida:
     .header {{ background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #ffffff; padding: 28px 24px; text-align: center; border-bottom: 4px solid #ef4444; }}
     .header h1 {{ margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }}
     .content {{ padding: 24px; }}
-    .card {{ background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 20px; }}
-    .card-title {{ font-size: 14px; font-weight: 700; color: #1e40af; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }}
-    .highlight-box {{ background-color: #f1f5f9; padding: 14px; border-left: 4px solid #3b82f6; margin: 12px 0; border-radius: 0 6px 6px 0; font-size: 15px; }}
-    .review-box {{ background-color: #f0fdfa; padding: 10px 14px; border: 1px dashed #0d9488; margin-top: 12px; border-radius: 6px; font-size: 13px; color: #0f766e; }}
-    .example-text {{ font-style: italic; color: #475569; margin-top: 6px; font-size: 14px; }}
-    .dialogue {{ background-color: #f8fafc; border-radius: 6px; padding: 14px; border: 1px solid #e2e8f0; font-size: 14px; }}
-    .dialogue-line {{ margin-bottom: 8px; line-height: 1.5; }}
-    .challenge-box {{ background-color: #fffbeb; border: 1px solid #fef3c7; padding: 16px; border-radius: 8px; color: #78350f; font-size: 15px; line-height: 1.5; }}
-    .spoiler-section {{ margin-top: 45px; border-top: 2px dashed #cbd5e1; padding-top: 25px; }}
-    .spoiler-header {{ font-size: 12px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; margin-bottom: 16px; }}
-    .answer-key {{ background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; font-size: 14px; color: #475569; }}
-  </style>
-</head>
-<body>
-  <div class="wrapper">
-    <div class="container">
-      <div class="header">
-        <h1>{date_header_string}</h1>
-      </div>
-      <div class="content">
-        
-        <!-- 1. WORD OF THE DAY & REVIEW -->
-        <div class="card">
-          <div class="card-title">1. 🌟 La Palabra del Día (Word of the Day)</div>
-          <div class="highlight-box">
-            <strong>Palabra:</strong> [Nueva palabra en español] ([Traducción])
-          </div>
-          <div class="example-text"><strong>Ejemplo Práctico:</strong> "[Frase contextual]" ([Traducción])</div>
-          
-          <div class="review-box">
-            🔄 <strong>Repaso de ayer:</strong> [Pon aquí un minireto o recordatorio rápido usando la palabra previa: {previous_word_info}]
-          </div>
-        </div>
-
-        <!-- 2. FRASE DEL DIA -->
-        <div class="card">
-          <div class="card-title">2. 🗣️ La Frase del Día (Common Phrase)</div>
-          <div class="highlight-box" style="border-left-color: #a855f7;">
-            <strong>Frase:</strong> [Frase útil] ([Traducción])
-          </div>
-          <div style="font-size: 14px; margin-bottom: 6px;"><strong>When to use:</strong> [Explicación de uso en inglés]</div>
-          <div class="example-text"><strong>Ejemplo:</strong> "[Frase]" ([Traducción])</div>
-          
-          <div class="review-box" style="background-color: #fdf2f8; border-color: #ec4899; color: #9d174d;">
-            🔄 <strong>Repaso de ayer:</strong> [Pon aquí un minireto o recordatorio rápido usando la frase previa: {previous_phrase_info}]
-          </div>
-        </div>
-
-        <!-- 3. BLURB DE LA CALLE -->
-        <div class="card">
-          <div class="card-title">3. 💬 El Blurb de la Calle (Conversational Snippet)</div>
-          <div class="dialogue">
-            <div class="dialogue-line"><strong>Persona A:</strong> "[Línea 1]"</div>
-            <div class="dialogue-line"><strong>Persona B:</strong> "[Línea 2]"</div>
-            <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 10px 0;">
-            <div class="dialogue-line" style="color: #64748b; font-style: italic;"><strong>English:</strong></div>
-            <div class="dialogue-line" style="color: #64748b;">Persona A: "[Traducción 1]"</div>
-            <div class="dialogue-line" style="color: #64748b;">Persona B: "[Traducción 2]"</div>
-          </div>
-        </div>
-
-        <!-- 4. RETO 1 -->
-        <div class="card">
-          <div class="card-title">4. 🔀 Reto 1: Traducir al Español (English ➔ Spanish)</div>
-          <div class="challenge-box">
-            <strong>Challenge:</strong> "[Frase en inglés]"
-          </div>
-        </div>
-
-        <!-- 5. RETO 2 -->
-        <div class="card">
-          <div class="card-title">5. 🔄 Reto 2: Traducir al Inglés (Spanish ➔ English)</div>
-          <div class="challenge-box" style="background-color: #f0fdf4; border-color: #dcfce7; color: #14532d;">
-            <strong>Challenge:</strong> "[Frase en español]"
-          </div>
-        </div>
-
-        <!-- SPOILERS -->
-        <div class="spoiler-section">
-          <div class="spoiler-header">👇 CLAVE DE RESPUESTAS / ANSWER KEY</div>
-          <div class="answer-key">
-            <p style="margin-top: 0;"><strong>Objetivo Reto 1:</strong><br>"[Traducción]"</p>
-            <p style="margin-bottom: 0;"><strong>Objetivo Reto 2:</strong><br>"[Traducción]"</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</body>
-</html>
-
-CRITICAL EXTRA INSTRUCTION: At the absolute bottom of your response, on a brand new line, output exactly these tracking lines so the system script can save the progress:
-TRACK_WORD: <word chosen> | <english translation>
-TRACK_PHRASE: <phrase chosen> | <english translation>
-"""
-
-data = {"contents": [{"parts": [{"text": prompt}]}]}
-
-print("Llamando a la API de Gemini...")
-req = urllib.request.Request(url, data=json.dumps(data).encode("utf-8"), headers={"Content-Type": "application/json"}, method="POST")
-
-try:
-    with urllib.request.urlopen(req) as response:
-        workout_html = json.loads(response.read().decode("utf-8"))['candidates'][0]['content']['parts'][0]['text']
-        if workout_html.startswith("```html"): 
-            workout_html = workout_html[7:]
-        if workout_html.endswith("```"): 
-            workout_html = workout_html[:-3]
-        workout_html = workout_html.strip()
-except Exception as e:
-    print(f"Error calling Gemini: {e}")
-    exit(1)
-
-# --- 7. PARSE THE TARGET TRACKING DATA AND SAVE BACK TO THE BANKS ---
-extracted_word = "Desconocida"
-extracted_meaning = "Unknown"
-extracted_phrase = "Desconocida"
-extracted_phrase_meaning = "Unknown"
-cleaned_lines = []
-
-for line in workout_html.split("\n"):
-    if "TRACK_WORD:" in line:
-        try:
-            parts = line.replace("TRACK_WORD:", "").strip().split("|")
-            if len(parts) == 2:
-                extracted_word = parts[0].strip()
-                extracted_meaning = parts[1].strip()
-        except:
-            pass
-    elif "TRACK_PHRASE:" in line:
-        try:
-            parts = line.replace("TRACK_PHRASE:", "").strip().split("|")
-            if len(parts) == 2:
-                extracted_phrase = parts[0].strip()
-                extracted_phrase_meaning = parts[1].strip()
-        except:
-            pass
-    else:
-        cleaned_lines.append(line)
-
-workout_html = "\n".join(cleaned_lines).strip()
-
-# Save word to word_bank
-if extracted_word != "Desconocida":
-    word_bank.append({
-        "word": extracted_word,
-        "meaning": extracted_meaning,
-        "date": datetime.now().strftime("%Y-%m-%d")
-    })
-    try:
-        with open(word_bank_file, "w", encoding="utf-8") as f:
-            json.dump(word_bank, f, ensure_ascii=False, indent=2)
-        print(f"Saved word '{extracted_word}' to the word bank.")
-    except Exception as e:
-        print(f"Error saving word bank: {e}")
-
-# Save phrase to phrase_bank
-if extracted_phrase != "Desconocida":
-    phrase_bank.append({
-        "phrase": extracted_phrase,
-        "meaning": extracted_phrase_meaning,
-        "date": datetime.now().strftime("%Y-%m-%d")
-    })
-    try:
-        with open(phrase_bank_file, "w", encoding="utf-8") as f:
-            json.dump(phrase_bank, f, ensure_ascii=False, indent=2)
-        print(f"Saved phrase '{extracted_phrase}' to the phrase bank.")
-    except Exception as e:
-        print(f"Error saving phrase bank: {e}")
-
-# --- 8. DISPATCH THE EMAIL ---
-msg = MIMEMultipart()
-msg['From'] = smtp_user
-msg['To'] = to_email  
-msg['Subject'] = f"📅 Entrenamiento Diario: {date_header_string.split('|')[0].strip()}"
-msg.attach(MIMEText(workout_html, 'html'))
-
-print("Sending email...")
-try:
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(smtp_user, smtp_password)
-    server.sendmail(smtp_user, to_email, msg.as_string())
-    server.close()
-    print("Success! Spanish workout emailed.")
-except Exception as e:
-    print(f"SMTP Error: {e}")
-    exit(1)
+    .card {{ background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin
