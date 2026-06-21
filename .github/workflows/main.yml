@@ -1,9 +1,13 @@
 name: Daily Spanish Workout
 
 on:
-  workflow_dispatch: # Allows you to run it manually with a button
+  workflow_dispatch:
   schedule:
-    - cron: '0 11 * * *' # Runs automatically every day
+    - cron: '0 11 * * *'
+
+# Grant permission to save file updates back to the repo
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -12,6 +16,9 @@ jobs:
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
+        with:
+          # Fetch full history to avoid push errors
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -25,3 +32,20 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python generate_workout.py
+
+      - name: Save Word & Phrase Banks Back to GitHub
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Pull latest changes to sync (prevents non-fast-forward push errors)
+          git pull origin main --rebase
+          
+          # Stage the files if they exist
+          git add word_bank.json phrase_bank.json || true
+          
+          # Commit only if there are modified staged files
+          git diff-index --quiet HEAD || git commit -m "Automated update of word & phrase banks [skip ci]"
+          
+          # Push changes
+          git push origin main
