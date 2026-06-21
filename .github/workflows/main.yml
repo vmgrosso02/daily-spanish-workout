@@ -1,50 +1,47 @@
 name: Daily Spanish Workout
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 11 * * *'
-
-# Grant permission to save file updates back to the repo
-permissions:
-  contents: write
+    - cron: '0 8 * * *' # Runs automatically every day at 8:00 AM UTC
+  workflow_dispatch: # Allows you to trigger it manually anytime
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    # 1. Download your repository files onto the runner
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
+    # 2. Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
 
-      - name: Run Python script
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-          TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python generate_workout.py
+    # 3. FIX 1: Install the missing Google Gemini package
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install google-generativeai
 
-      - name: Save Word & Phrase Banks Back to GitHub
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Pull latest changes to sync (prevents non-fast-forward push errors)
-          git pull origin main --rebase
-          
-          # Stage the files if they exist
-          git add word_bank.json phrase_bank.json || true
-          
-          # Commit only if there are modified staged files
-          git diff-index --quiet HEAD || git commit -m "Automated update of word & phrase banks [skip ci]"
-          
-          # Push changes
-          git push origin main
+    # 4. Run your python script to generate today's file
+    - name: Run workout generator
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: python generate_workout.py
+
+    # 5. FIX 2: Safely stage, commit, and sync your new file
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Stage and commit the changed workout file FIRST so git isn't confused
+        git add workout.md
+        git commit -m "Update daily workout [skip ci]" || echo "No changes to commit"
+        
+        # Safely pull down any remote adjustments and push up today's workout
+        git pull --rebase origin main || git pull --rebase origin master || echo "No remote changes to merge"
+        git push origin HEAD
