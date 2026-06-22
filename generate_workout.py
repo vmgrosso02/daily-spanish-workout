@@ -2,31 +2,29 @@ import os
 from google import genai
 
 def generate_workout():
-    # 1. Fetch the API key safely from environment secrets
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        raise ValueError("GEMINI_API_KEY environment variable not set")
+    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
-    # 2. Initialize the modern Google GenAI Client
-    client = genai.Client(api_key=api_key)
-
-    # 3. Request your tailored daily review
-    prompt = (
-        "You are my personal Spanish tutor. Based on my existing knowledge base of verbs, "
-        "tenses, and vocabulary, generate a comprehensive daily workout. Include a short "
-        "grammar review, 5 vocabulary flashcard pairs, 5 sentence translations (English to Spanish), "
-        "and a brief reading comprehension passage with a question. Keep the layout highly structured."
-    )
+    # Explicitly defining your 5-part structure
+    prompt = """
+    You are my Spanish tutor. Create a daily lesson. You MUST follow this exact 5-part structure:
+    
+    1. Grammar Review: A clear, concise explanation of one grammar rule.
+    2. Vocabulary: 5 new words with Spanish-to-English translations.
+    3. Sentences: 5 sentences to translate from English to Spanish.
+    4. Reading Passage: A short paragraph in Spanish.
+    5. Comprehension Question: One question based on the passage above.
+    
+    Use Markdown headers (##) for each section. Use bullet points for lists. 
+    Make the tone encouraging and academic.
+    """
 
     response = client.models.generate_content(
         model='gemini-2.5-flash',
         contents=prompt,
     )
 
-    # 4. Save the response exactly as markdown text
     with open("workout.md", "w", encoding="utf-8") as f:
         f.write(response.text)
-    print("Workout successfully generated and saved to workout.md!")
 
 if __name__ == "__main__":
     generate_workout()
