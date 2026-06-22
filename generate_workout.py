@@ -108,8 +108,7 @@ if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
     exit(1)
 
 # --- 6. BUILD THE PROMPT FOR GEMINI ---
-url = f"https://generativelanguage.googleapisurl = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_api_key}"com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_api_key}"
-
+url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_api_key}"
 blacklist_words_str = ", ".join(already_learned) if already_learned else "Ninguna todavía"
 blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_phrases else "Ninguna todavía"
 
