@@ -1,23 +1,23 @@
 # 🏋️‍♂️ Daily Spanish Workout
 
 ## 🔄 Repaso de Ayer (Yesterday's Review)
-*   **Palabra Anterior (Previous Word):** hilarante
-    *   *Ejemplo de ayer:* La película era tan hilarante que no pudimos dejar de reír.
-*   **Frase Anterior (Previous Phrase):** estar al tanto de
-    *   *Ejemplo de ayer:* Necesito estar al tanto de los nuevos desarrollos en tecnología.
+*   **Palabra Anterior (Previous Word):** perspicaz
+    *   *Ejemplo de ayer:* Su análisis de la situación fue muy perspicaz.
+*   **Frase Anterior (Previous Phrase):** tomar el pelo
+    *   *Ejemplo de ayer:* ¡No te lo creas, solo te estoy tomando el pelo!
 
 ## 🧠 Vocabulario de Hoy (Today's New Word)
-*   **Palabra Nueva (New Word):** perspicaz
-*   **Significado (Meaning):** keen, astute, perceptive, sharp-witted
-*   **Ejemplo de Hoy (Today's Example Sentence):** Su análisis de la situación fue muy perspicaz.
-*   **Traducción (Translation):** His analysis of the situation was very keen/perceptive.
+*   **Palabra Nueva (New Word):** efímero
+*   **Significado (Meaning):** ephemeral, fleeting, short-lived
+*   **Ejemplo de Hoy (Today's Example Sentence):** La belleza de las flores de cerezo es efímera.
+*   **Traducción (Translation):** The beauty of cherry blossoms is ephemeral.
 
 ## 🗣️ Frase de Hoy (Today's New Phrase)
-*   **Frase Nueva (New Phrase):** tomar el pelo
-*   **Significado (Meaning):** to pull someone's leg, to tease, to trick
-*   **Ejemplo de Hoy (Today's Example Sentence):** ¡No te lo creas, solo te estoy tomando el pelo!
-*   **Traducción (Translation):** Don't believe it, I'm just pulling your leg!
+*   **Frase Nueva (New Phrase):** no tener pelos en la lengua
+*   **Significado (Meaning):** to not mince words, to be blunt/outspoken (literally: to not have hairs on one's tongue)
+*   **Ejemplo de Hoy (Today's Example Sentence):** Mi abuela no tiene pelos en la lengua; siempre dice lo que piensa.
+*   **Traducción (Translation):** My grandmother doesn't mince words; she always says what she thinks.
 
 ## 📝 Práctica (Your Turn!)
-1.  Translate the following into Spanish, using today's new word: "She gave a very insightful answer to the complex question."
-2.  Imagine you're having a casual conversation with a friend. How would you say, "Are you serious, or are you pulling my leg?" using today's new phrase?
+1.  Translate the following into Spanish, using today's new word: "His fame was very short-lived despite his great talent."
+2.  Imagine your friend just made a comment that was very direct and unfiltered. How would you describe their style of communication using today's new phrase?
