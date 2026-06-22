@@ -1,5 +1,4 @@
 import os
-import random
 import smtplib
 import time
 from email.mime.text import MIMEText
@@ -100,15 +99,12 @@ if os.path.exists(phrase_bank_file):
 else:
     phrase_bank = []
 
-# --- 4. LOOK FOR CUSTOM VOCABULARY WORDS FROM YOUR TEXT FILE ---
-vocab_context = ""
+# --- 4. LOAD THE STUDENT'S FULL KNOWN-VOCABULARY / GRAMMAR BASE FROM YOUR TEXT FILE ---
+known_vocab_block = ""
 if os.path.exists("spanish_vocab.txt"):
     try:
         with open("spanish_vocab.txt", "r", encoding="utf-8") as f:
-            words = [line.strip() for line in f if line.strip()]
-        if words:
-            sample_words = random.sample(words, min(len(words), 8))
-            vocab_context = f"Para los retos de traducción y diálogos, puedes inspirarte en estos términos que el usuario ya conoce: {', '.join(sample_words)}."
+            known_vocab_block = f.read().strip()
     except Exception as e:
         print(f"Note: Could not read spanish_vocab.txt ({e}).")
 
@@ -129,15 +125,16 @@ blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_ph
 prompt = f"""
 Eres un tutor experto de español. Tu tarea es generar el código HTML puro responsivo para el entrenamiento de hoy.
 
-Nivel gramatical del estudiante: Presente (regulares/cambio de raíz), Ser/Estar básicos, Pretérito (regulares e irregulares: fui, estuve, dije, hice, traje, tuve), Imperfecto básico, mandatos directos y pronombres de objeto.
-{vocab_context}
+Nivel gramatical del estudiante: Presente, Presente Progresivo, Pretérito e Imperfecto para todos los verbos listados en la base de conocimiento; Ser vs Estar; pronombres de objeto directo e indirecto; pronombres de objeto dobles (ej. "me lo trajiste"); tiempo compuesto/Presente Perfecto (he, has, ha, hemos, han + participio); mandatos básicos con terminaciones -an/-en; y pronombres reflexivos.
+
+BASE DE CONOCIMIENTO DEL ESTUDIANTE (vocabulario, verbos y gramática que el estudiante YA conoce; esta es la fuente obligatoria de vocabulario para las secciones 3, 4 y 5):
+{known_vocab_block}
 
 REGLAS DE SELECCIÓN DE PALABRAS Y FRASES:
 1. Debes elegir una palabra o modismo completamente NUEVO para la "Palabra del Día" y una frase completamente NUEVA para la "Frase del Día" que un estudiante de nivel intermedio-bajo no sabría de forma nativa.
 2. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas palabras ya aprendidas: [{blacklist_words_str}].
 3. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas frases ya aprendidas: [{blacklist_phrases_str}].
-4. REGLA DE VOCABULARIO (MUY IMPORTANTE): En TODOS los ejemplos, diálogos y retos de traducción (secciones 1, 2, 3, 4 y 5), usa EXCLUSIVAMENTE vocabulario básico o intermedio-bajo, consistente con el nivel gramatical indicado arriba. La ÚNICA palabra o frase avanzada permitida en cada sección es la palabra/frase nueva que se está enseñando en esa sección. No introduzcas otro vocabulario avanzado, técnico o poco común.
-5. En el review-box de la sección 1 (Palabra del Día), escribe EXACTAMENTE y sin modificar, traducir, ni agregar nada más, el siguiente texto literal: PLACEHOLDER_PREV_WORD_REVIEW
+4. REGLA DE VOCABULARIO (MUY IMPORTANTE): Las secciones 3 (Blurb de la Calle), 4 (Reto 1) y 5 (Reto 2) son ejercicios de refuerzo y deben construirse ÚNICAMENTE con palabras, verbos, modismos y estructuras gramaticales que aparecen en la BASE DE CONOCIMIENTO DEL ESTUDIANTE indicada arriba (más palabras funcionales básicas como artículos, preposiciones, conjunciones y pronombres, aunque no estén listadas explícitamente). ESTÁ TERMINANTEMENTE PROHIBIDO usar en las secciones 3, 4 y 5 cualquier palabra o modismo que NO esté en esa base de conocimiento, incluyendo la palabra nueva del día y la frase nueva del día (que deben aparecer ÚNICAMENTE en las secciones 1 y 2). Si necesitas variar el vocabulario en los retos de traducción, elige otras palabras que SÍ estén en la base de conocimiento del estudiante.
 6. En el review-box de la sección 2 (Frase del Día), escribe EXACTAMENTE y sin modificar, traducir, ni agregar nada más, el siguiente texto literal: PLACEHOLDER_PREV_PHRASE_REVIEW
 
 Estructura de diseño requerida (No uses em-dashes ni guiones largos "—" como separadores, usa barras verticales "|" o dos puntos):
