@@ -1,8 +1,9 @@
 import os
-import google.generativeai as genai
+from google import genai
 
-# 1. Configure the Gemini API using your GitHub Secrets Token
-genai.configure(api_key=os.environ["GEMINI_API_KEY"])
+# 1. Initialize the new Gemini Client
+# It automatically reads your GEMINI_API_KEY from the environment variables
+client = genai.Client()
 
 # 2. Try to read yesterday's workout file so the AI has context for the review
 previous_workout_content = "No previous workout found."
@@ -10,10 +11,7 @@ if os.path.exists("workout.md"):
     with open("workout.md", "r", encoding="utf-8") as f:
         previous_workout_content = f.read()
 
-# 3. Initialize the model
-model = genai.GenerativeModel('gemini-1.5-flash')
-
-# 4. Strict instruction prompt forcing BOTH the target items and their examples
+# 3. Strict instruction prompt forcing BOTH the target items and their examples
 prompt = f"""
 You are an expert personal Spanish language tutor. Your job is to generate a customized Daily Spanish Workout based on the user's current knowledge and yesterday's layout.
 
@@ -54,11 +52,14 @@ Follow this EXACT template structure:
 [Provide 2 brief translation exercises or open-ended prompts testing today's new word and phrase]
 """
 
-# 5. Generate the content
-response = model.generate_content(prompt)
+# 4. Generate content using the new SDK and standard modern model
+response = client.models.generate_content(
+    model='gemini-2.5-flash',
+    contents=prompt,
+)
 
-# 6. Save today's updated workout over the old one
+# 5. Save today's updated workout over the old one
 with open("workout.md", "w", encoding="utf-8") as f:
     f.write(response.text)
 
-print("Workout updated successfully with explicit word and phrase review tracking!")
+print("Workout updated successfully with explicit word and phrase review tracking using the new Gemini SDK!")
