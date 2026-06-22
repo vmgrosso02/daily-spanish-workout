@@ -109,8 +109,8 @@ REGLAS DE SELECCIÓN DE PALABRAS Y FRASES:
 1. Debes elegir una palabra o modismo completamente NUEVO para la "Palabra del Día" y una frase completamente NUEVA para la "Frase del Día" que un estudiante de nivel intermedio-bajo no sabría de forma nativa.
 2. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas palabras ya aprendidas: [{blacklist_words_str}].
 3. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas frases ya aprendidas: [{blacklist_phrases_str}].
-4. En el apartado de Repaso de la sección 1, incluye una pregunta corta, traducción o recordatorio interactivo basado en la palabra anterior del estudiante: {previous_word_info}.
-5. En el apartado de Repaso de la sección 2, incluye una pregunta corta, traducción o recordatorio basado en la frase anterior del estudiante: {previous_phrase_info}.
+4. En el apartado de Repaso de la sección 1, debes mostrar explícitamente la palabra anterior y su significado, seguido de un mini-reto o ejemplo. Usa este formato exacto: "Anterior: [palabra] ([significado]) → [pregunta, traducción o ejemplo corto]". La palabra anterior es: {previous_word_info}.
+5. En el apartado de Repaso de la sección 2, debes mostrar explícitamente la frase anterior y su significado, seguido de un mini-reto o ejemplo. Usa este formato exacto: "Anterior: [frase] ([significado]) → [pregunta, traducción o ejemplo corto]". La frase anterior es: {previous_phrase_info}.
 
 Estructura de diseño requerida (No uses em-dashes ni guiones largos "—" como separadores, usa barras verticales "|" o dos puntos):
 Entrega exclusivamente el código estructurado dentro de esta plantilla CSS. No uses bloques de código markdown (```html).
@@ -157,11 +157,10 @@ Estructura de diseño requerida:
           </div>
           <div class="example-text"><strong>Ejemplo Práctico:</strong> "[Frase contextual]" ([Traducción])</div>
           
-          <div class="review-box">
-            🔄 <strong>Repaso de ayer:</strong> [Pon aquí un minireto o recordatorio rápido usando la palabra previa: {previous_word_info}]
+        <div class="review-box">
+            🔄 <strong>Repaso de ayer:</strong> [Escribe: "Anterior: " + la palabra previa + su significado, luego un mini-reto o ejemplo corto. Palabra previa: {previous_word_info}]
           </div>
-        </div>
-
+          
         <!-- 2. FRASE DEL DIA -->
         <div class="card">
           <div class="card-title">2. 🗣️ La Frase del Día (Common Phrase)</div>
