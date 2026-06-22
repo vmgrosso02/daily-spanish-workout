@@ -108,7 +108,7 @@ if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
     exit(1)
 
 # --- 6. BUILD THE PROMPT FOR GEMINI ---
-url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_api_key}"
+url = f"https://generativelanguage.googleapisurl = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_api_key}"com/v1beta/models/gemini-2.5-flash:generateContent?key={gemini_api_key}"
 
 blacklist_words_str = ", ".join(already_learned) if already_learned else "Ninguna todavía"
 blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_phrases else "Ninguna todavía"
@@ -246,31 +246,37 @@ import time
 
 data = {"contents": [{"parts": [{"text": prompt}]}]}
 
-req = urllib.request.Request(url, data=json.dumps(data).encode("utf-8"), headers={"Content-Type": "application/json"}, method="POST")
-
-max_retries = 4
+models_to_try = ["gemini-3.5-flash", "gemini-3.1-flash-lite"]
+max_retries_per_model = 2
 workout_html = None
 
-for attempt in range(1, max_retries + 1):
-    print(f"Llamando a la API de Gemini... (intento {attempt}/{max_retries})")
-    try:
-        with urllib.request.urlopen(req) as response:
-            workout_html = json.loads(response.read().decode("utf-8"))['candidates'][0]['content']['parts'][0]['text']
-            if workout_html.startswith("```html"):
-                workout_html = workout_html[7:]
-            if workout_html.endswith("```"):
-                workout_html = workout_html[:-3]
-            workout_html = workout_html.strip()
-        break  # success, stop retrying
-    except Exception as e:
-        print(f"Error calling Gemini (attempt {attempt}): {e}")
-        if attempt < max_retries:
-            wait_time = 15 * attempt  # 15s, 30s, 45s...
-            print(f"Retrying in {wait_time} seconds...")
-            time.sleep(wait_time)
-        else:
-            print("Max retries reached. Giving up.")
-            exit(1)
+for model_name in models_to_try:
+    model_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemini_api_key}"
+    req = urllib.request.Request(model_url, data=json.dumps(data).encode("utf-8"), headers={"Content-Type": "application/json"}, method="POST")
+
+    for attempt in range(1, max_retries_per_model + 1):
+        print(f"Llamando a la API de Gemini con {model_name}... (intento {attempt}/{max_retries_per_model})")
+        try:
+            with urllib.request.urlopen(req) as response:
+                workout_html = json.loads(response.read().decode("utf-8"))['candidates'][0]['content']['parts'][0]['text']
+                if workout_html.startswith("```html"):
+                    workout_html = workout_html[7:]
+                if workout_html.endswith("```"):
+                    workout_html = workout_html[:-3]
+                workout_html = workout_html.strip()
+            break  # success, stop retrying this model
+        except Exception as e:
+            print(f"Error calling Gemini with {model_name} (attempt {attempt}): {e}")
+            if attempt < max_retries_per_model:
+                wait_time = 15 * attempt
+                print(f"Retrying in {wait_time} seconds...")
+                time.sleep(wait_time)
+    if workout_html:
+        break  # success, stop trying other models
+
+if not workout_html:
+    print("All models and retries exhausted. Giving up.")
+    exit(1)
 
 # --- 7. PARSE THE TARGET TRACKING DATA AND SAVE BACK TO THE BANKS ---
 extracted_word = "Desconocida"
