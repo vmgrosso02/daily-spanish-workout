@@ -1,23 +1,22 @@
 name: Daily Spanish Workout
-
 on:
   workflow_dispatch: # Allows you to run it manually with a button
   schedule:
     - cron: '0 11 * * *' # Runs automatically every day
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-
       - name: Run Python script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -25,3 +24,11 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
         run: python generate_workout.py
+
+      - name: Commit updated word and phrase banks
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add word_bank.json phrase_bank.json
+          git diff --staged --quiet || git commit -m "Automated update of word & phrase banks [skip ci]"
+          git push
