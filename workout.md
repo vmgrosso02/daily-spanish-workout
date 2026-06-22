@@ -1,73 +1,69 @@
-¡Hola! ¡Es un placer ser tu tutor personal de español!
-
-Since I don't have access to your specific knowledge base yet, I'll generate this first daily workout assuming a **beginner/early-intermediate level**. Please let me know if it's too easy, too difficult, or if you'd like to focus on particular verbs, tenses, or vocabulary themes for future workouts! Your feedback will help me tailor subsequent lessons perfectly to your needs.
+¡Hola! ¡Qué gusto tenerte aquí para tu entrenamiento diario de español! Basándome en un nivel que abarca los fundamentos del presente y vocabulario común, he preparado un workout completo para hoy. ¡Vamos a ello!
 
 ---
 
-### **Daily Spanish Workout: Nivel Básico/Intermedio**
+### **Tu Workout de Español Diario**
 
 ---
 
-### **1. Repaso de Gramática: Ser vs. Estar**
+#### **1. Repaso de Gramática: Ser vs. Estar (Revisión Fundamental)**
 
-This is one of the most fundamental (and often tricky!) concepts for English speakers learning Spanish, as both translate to "to be."
+Hoy vamos a repasar uno de los desafíos más comunes para los estudiantes: la diferencia entre los verbos **SER** y **ESTAR**. Ambos significan "to be", pero se usan en contextos distintos.
 
-*   **SER (to be):** Used for inherent, permanent, or characteristic qualities. Think of "DOCTOR":
-    *   **D**escription (e.g., *Soy alto.* - I am tall.)
-    *   **O**ccupation (e.g., *Ella es doctora.* - She is a doctor.)
-    *   **C**haracteristic (e.g., *El coche es rojo.* - The car is red.)
-    *   **T**ime/Date (e.g., *Son las tres.* - It is three o'clock.)
-    *   **O**rigin (e.g., *Soy de México.* - I am from Mexico.)
-    *   **R**elationship (e.g., *Él es mi hermano.* - He is my brother.)
-    *   *Conjugation (Presente):* yo **soy**, tú **eres**, él/ella/usted **es**, nosotros/as **somos**, vosotros/as **sois**, ellos/ellas/ustedes **son**
+*   **SER** (Permanent or inherent qualities, origin, time, occupation, identity): Se usa para cosas que son permanentes o definitorias.
+    *   **Ejemplos:**
+        *   Yo **soy** estudiante. (Occupation)
+        *   Ella **es** alta. (Permanent characteristic)
+        *   Nosotros **somos** de España. (Origin)
+        *   Hoy **es** martes. (Time)
 
-*   **ESTAR (to be):** Used for temporary states, locations, conditions, or actions in progress. Think of "PLACE":
-    *   **P**osition (e.g., *El libro está en la mesa.* - The book is on the table.)
-    *   **L**ocation (e.g., *Estoy en casa.* - I am at home.)
-    *   **A**ction (e.g., *Estamos comiendo.* - We are eating.)
-    *   **C**ondition (e.g., *Ella está enferma.* - She is sick.)
-    *   **E**motion (e.g., *Estoy feliz.* - I am happy.)
-    *   *Conjugation (Presente):* yo **estoy**, tú **estás**, él/ella/usted **está**, nosotros/as **estamos**, vosotros/as **estáis**, ellos/ellas/ustedes **están**
+*   **ESTAR** (Temporary states, location, emotions, conditions): Se usa para cosas que son temporales, ubicación, o estados.
+    *   **Ejemplos:**
+        *   Yo **estoy** cansado. (Temporary condition)
+        *   Ella **está** en casa. (Location)
+        *   Nosotros **estamos** felices. (Temporary emotion)
+        *   ¿Cómo **estás**? (How are you? - Condition/well-being)
 
----
-
-### **2. Tarjetas de Vocabulario (Flashcards)**
-
-Memorize these five pairs. Practice saying them out loud!
-
-1.  **House** / **Casa** (f.)
-2.  **Dog** / **Perro** (m.)
-3.  **Big** / **Grande**
-4.  **To read** / **Leer**
-5.  **Always** / **Siempre**
+**Recuerda la regla mnemotécnica popular: "For how you feel and where you are, always use the verb ESTAR!"**
 
 ---
 
-### **3. Traducción de Oraciones (English to Spanish)**
+#### **2. Flashcards de Vocabulario (5 Pares)**
 
-Translate the following sentences. Pay close attention to *Ser* vs. *Estar* and use the vocabulary above.
+Aquí tienes 5 palabras nuevas o para reforzar. ¡Intenta memorizarlas!
 
-1.  The house is big.
-2.  I am always happy. (Remember: use *estar* for temporary emotions)
-3.  Where are you (informal singular) from?
-4.  My dog is in the kitchen.
-5.  We read a book every day.
-
----
-
-### **4. Comprensión de Lectura (Reading Comprehension)**
-
-Read the short passage below and then answer the question.
-
-**El Día de María**
-
-Hola, me llamo María. Soy de España y vivo en una ciudad pequeña. Mi casa es un poco grande y tiene un jardín bonito. Tengo un perro que se llama Lucas. Lucas es muy juguetón y siempre está feliz. Por la mañana, yo desayuno y leo el periódico. Después, voy a trabajar. Estoy un poco cansada hoy, pero estoy contenta porque esta noche voy a cenar con mis amigos. ¡Ellos son muy divertidos!
-
-**Pregunta:**
-
-¿Cómo está Lucas, el perro de María?
-*(How is Lucas, Maria's dog?)*
+1.  **La mesa** (the table)
+2.  **Sentado/a** (sitting / seated)
+3.  **Rápido/a** (fast / quick)
+4.  **Comer** (to eat)
+5.  **La comida** (the food)
 
 ---
 
-¡Excelente trabajo! Once you've completed this workout, feel free to share your answers with me for review, and tell me how it felt. This will help me immensely in crafting your next personalized Spanish lesson! ¡Ánimo!
+#### **3. Traducción de Oraciones (Inglés a Español - 5 Oraciones)**
+
+¡Es hora de practicar! Traduce estas oraciones al español, aplicando la gramática y el vocabulario de hoy (y tu conocimiento previo).
+
+1.  I am a student.
+2.  The food is good.
+3.  We are sitting at the table.
+4.  She is always fast.
+5.  Are you (informal singular) eating now?
+
+---
+
+#### **4. Comprensión Lectora (Pasaje Corto con Pregunta)**
+
+Lee el siguiente párrafo y luego responde la pregunta que lo acompaña.
+
+> "Hola, me llamo María. Yo soy de México y soy estudiante. Ahora, estoy en mi casa. Mi casa es grande y bonita. Tengo una mesa en la cocina donde siempre como mi comida. Mi perro, Max, está sentado debajo de la mesa. Él es muy tranquilo."
+
+**Pregunta:** ¿Dónde está el perro de María? (Where is María's dog?)
+
+---
+
+**¡Excelente trabajo!**
+
+Tómate tu tiempo para cada sección. Cuando hayas terminado, revisa tus respuestas. No te preocupes por los errores; son parte del proceso de aprendizaje.
+
+¡Nos vemos mañana para tu próximo entrenamiento! ¡Sigue así!
