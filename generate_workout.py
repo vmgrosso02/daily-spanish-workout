@@ -6,18 +6,19 @@ from email.mime.multipart import MIMEMultipart
 import json
 import urllib.request
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
-# --- 1. GENERATE DYNAMIC SPANISH DATE AND SEASON ---
+# --- 1. GENERATE DYNAMIC SPANISH DATE, TIME, AND SEASON ---
 def get_spanish_date_and_season():
-    now = datetime.now()
+    now = datetime.now(ZoneInfo("America/New_York"))  # Miami time, auto-adjusts for DST
     days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
-    
+
     day_of_week = days[now.weekday()]
     day = now.day
     month_name = months[now.month - 1]
     year = now.year
-    
+
     # Meteorological Season Logic (June to August is Summer)
     month = now.month
     if 3 <= month <= 5:
@@ -28,8 +29,21 @@ def get_spanish_date_and_season():
         season = "Otoño 🍂"
     else:
         season = "Invierno ❄️"
-        
-    return f"{day_of_week}, {day} de {month_name} de {year} | {season}"
+
+    hour_24 = now.hour
+    minute = now.minute
+    hour_12 = hour_24 % 12
+    if hour_12 == 0:
+        hour_12 = 12
+    if 0 <= hour_24 < 12:
+        period = "de la mañana"
+    elif 12 <= hour_24 < 19:
+        period = "de la tarde"
+    else:
+        period = "de la noche"
+    time_str = f"{hour_12}:{minute:02d} {period}"
+
+    return f"{day_of_week}, {day} de {month_name} de {year} | {season} | {time_str}"
 
 date_header_string = get_spanish_date_and_season()
 
@@ -109,8 +123,9 @@ REGLAS DE SELECCIÓN DE PALABRAS Y FRASES:
 1. Debes elegir una palabra o modismo completamente NUEVO para la "Palabra del Día" y una frase completamente NUEVA para la "Frase del Día" que un estudiante de nivel intermedio-bajo no sabría de forma nativa.
 2. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas palabras ya aprendidas: [{blacklist_words_str}].
 3. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas frases ya aprendidas: [{blacklist_phrases_str}].
-4. En el apartado de Repaso de la sección 1, debes mostrar explícitamente la palabra anterior y su significado, seguido de un mini-reto o ejemplo. Usa este formato exacto: "Anterior: [palabra] ([significado]) → [pregunta, traducción o ejemplo corto]". La palabra anterior es: {previous_word_info}.
-5. En el apartado de Repaso de la sección 2, debes mostrar explícitamente la frase anterior y su significado, seguido de un mini-reto o ejemplo. Usa este formato exacto: "Anterior: [frase] ([significado]) → [pregunta, traducción o ejemplo corto]". La frase anterior es: {previous_phrase_info}.
+4. REGLA DE VOCABULARIO (MUY IMPORTANTE): En TODOS los ejemplos, diálogos y retos de traducción (secciones 1, 2, 3, 4 y 5), usa EXCLUSIVAMENTE vocabulario básico o intermedio-bajo, consistente con el nivel gramatical indicado arriba. La ÚNICA palabra o frase avanzada permitida en cada sección es la palabra/frase nueva que se está enseñando en esa sección. No introduzcas otro vocabulario avanzado, técnico o poco común.
+5. En el apartado de Repaso de la sección 1, debes mostrar explícitamente la palabra anterior y su significado en una línea, y el mini-reto o ejemplo en una línea APARTE (usa <br><br> para separarlas). Usa este formato exacto: "Anterior: [palabra] ([significado])<br><br>→ [pregunta, traducción o ejemplo corto]". La palabra anterior es: {previous_word_info}.
+6. En el apartado de Repaso de la sección 2, debes mostrar explícitamente la frase anterior y su significado en una línea, y el mini-reto o ejemplo en una línea APARTE (usa <br><br> para separarlas). Usa este formato exacto: "Anterior: [frase] ([significado])<br><br>→ [pregunta, traducción o ejemplo corto]". La frase anterior es: {previous_phrase_info}.
 
 Estructura de diseño requerida (No uses em-dashes ni guiones largos "—" como separadores, usa barras verticales "|" o dos puntos):
 Entrega exclusivamente el código estructurado dentro de esta plantilla CSS. No uses bloques de código markdown (```html).
@@ -148,7 +163,7 @@ Estructura de diseño requerida:
         <h1>{date_header_string}</h1>
       </div>
       <div class="content">
-        
+
         <!-- 1. WORD OF THE DAY & REVIEW -->
         <div class="card">
           <div class="card-title">1. 🌟 La Palabra del Día (Word of the Day)</div>
@@ -156,11 +171,13 @@ Estructura de diseño requerida:
             <strong>Palabra:</strong> [Nueva palabra en español] ([Traducción])
           </div>
           <div class="example-text"><strong>Ejemplo Práctico:</strong> "[Frase contextual]" ([Traducción])</div>
-          
-        <div class="review-box">
-            🔄 <strong>Repaso de ayer:</strong> [Escribe: "Anterior: " + la palabra previa + su significado, luego un mini-reto o ejemplo corto. Palabra previa: {previous_word_info}]
+
+          <div class="review-box">
+            🔄 <strong>Repaso de ayer:</strong><br>
+            [Escribe: "Anterior: " + la palabra previa + " (" + su significado + ")". Luego, en línea aparte con <br><br> antes, escribe "→ " seguido de un mini-reto o ejemplo corto. Palabra previa: {previous_word_info}]
           </div>
-          
+        </div>
+
         <!-- 2. FRASE DEL DIA -->
         <div class="card">
           <div class="card-title">2. 🗣️ La Frase del Día (Common Phrase)</div>
@@ -169,9 +186,10 @@ Estructura de diseño requerida:
           </div>
           <div style="font-size: 14px; margin-bottom: 6px;"><strong>When to use:</strong> [Explicación de uso en inglés]</div>
           <div class="example-text"><strong>Ejemplo:</strong> "[Frase]" ([Traducción])</div>
-          
+
           <div class="review-box" style="background-color: #fdf2f8; border-color: #ec4899; color: #9d174d;">
-            🔄 <strong>Repaso de ayer:</strong> [Pon aquí un minireto o recordatorio rápido usando la frase previa: {previous_phrase_info}]
+            🔄 <strong>Repaso de ayer:</strong><br>
+            [Escribe: "Anterior: " + la frase previa + " (" + su significado + ")". Luego, en línea aparte con <br><br> antes, escribe "→ " seguido de un mini-reto o ejemplo corto. Frase previa: {previous_phrase_info}]
           </div>
         </div>
 
@@ -232,9 +250,9 @@ req = urllib.request.Request(url, data=json.dumps(data).encode("utf-8"), headers
 try:
     with urllib.request.urlopen(req) as response:
         workout_html = json.loads(response.read().decode("utf-8"))['candidates'][0]['content']['parts'][0]['text']
-        if workout_html.startswith("```html"): 
+        if workout_html.startswith("```html"):
             workout_html = workout_html[7:]
-        if workout_html.endswith("```"): 
+        if workout_html.endswith("```"):
             workout_html = workout_html[:-3]
         workout_html = workout_html.strip()
 except Exception as e:
@@ -301,7 +319,7 @@ if extracted_phrase != "Desconocida":
 # --- 8. DISPATCH THE EMAIL ---
 msg = MIMEMultipart()
 msg['From'] = smtp_user
-msg['To'] = to_email  
+msg['To'] = to_email
 msg['Subject'] = f"📅 Entrenamiento Diario: {date_header_string.split('|')[0].strip()}"
 msg.attach(MIMEText(workout_html, 'html'))
 
