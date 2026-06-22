@@ -1,82 +1,128 @@
-import os
-import time
-from google import genai
+name: Daily Spanish Workout
 
-# 1. Initialize the new Gemini Client
-# It automatically reads your GEMINI_API_KEY from the environment variables
-client = genai.Client()
+on:
+  schedule:
+    - cron: '0 8 * * *' # Runs automatically every day at 8:00 AM UTC
+  workflow_dispatch: # Allows you to trigger it manually anytime
 
-# 2. Try to read yesterday's workout file so the AI has context for the review
-previous_workout_content = "No previous workout found."
-if os.path.exists("workout.md"):
-    with open("workout.md", "r", encoding="utf-8") as f:
-        previous_workout_content = f.read()
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-# 3. Strict instruction prompt forcing BOTH the target items and their examples
-prompt = f"""
-You are an expert personal Spanish language tutor. Your job is to generate a customized Daily Spanish Workout based on the user's current knowledge and yesterday's layout.
+    steps:
+    # 1. Download your repository files onto the runner
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-CRITICAL ASSIGNMENT FOR THE REVIEW SECTION:
-Look closely at yesterday's workout content provided below. You must extract the exact "Target Word" and "Target Phrase" that were taught, along with the example sentences they were used in. You must list them explicitly in the 'Repaso de Ayer' section following the exact formatting tags.
+    # 2. Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
 
-Here is yesterday's workout content:
-\"\"\"
-{previous_workout_content}
-\"\"\"
+    # 3. Install dependencies (including the markdown styling translator)
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install google-genai markdown
 
-CRITICAL LAYOUT RULES:
-Output your entire response in clean Markdown. Do not include any intro conversational filler (like "Sure, here is your workout") or outro notes. Start immediately with the title header.
+    # 4. Run your python script to generate today's file
+    - name: Run workout generator
+      env:
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: python generate_workout.py
 
-Follow this EXACT template structure:
+    # 5. Convert the raw text file into a gorgeously styled HTML layout
+    - name: Convert Workout to Beautiful HTML
+      run: |
+        python -c '
+        import markdown
+        
+        # Read raw workout text
+        with open("workout.md", "r", encoding="utf-8") as f:
+            text = f.read()
+            
+        # Convert text formatting to HTML
+        html_body = markdown.markdown(text, extensions=["extra", "nl2br"])
+        
+        # Wrap it in premium email styling (clean fonts, padding, blockquotes)
+        full_html = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <style>
+                body {{
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                    color: #2d3748;
+                    line-height: 1.7;
+                    background-color: #f7fafc;
+                    margin: 0;
+                    padding: 20px;
+                }}
+                .container {{
+                    max-width: 600px;
+                    margin: 0 auto;
+                    background: #ffffff;
+                    padding: 30px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                    border: 1px solid #e2e8f0;
+                }}
+                h1, h2, h3 {{
+                    color: #1a202c;
+                    margin-top: 24px;
+                    margin-bottom: 12px;
+                }}
+                h1 {{ font-size: 24px; color: #2b6cb0; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }}
+                h2 {{ font-size: 20px; color: #2d3748; margin-top: 20px; }}
+                p, li {{ font-size: 16px; color: #4a5568; }}
+                ul, ol {{ padding-left: 20px; margin-bottom: 16px; }}
+                li {{ margin-bottom: 6px; }}
+                blockquote {{
+                    margin: 16px 0;
+                    padding: 12px 16px;
+                    color: #2c5282;
+                    border-left: 4px solid #3182ce;
+                    background-color: #ebf8ff;
+                    border-radius: 0 4px 4px 0;
+                }}
+                strong {{ color: #1a202c; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                {html_body}
+            </div>
+        </body>
+        </html>
+        """
+        
+        with open("workout.html", "w", encoding="utf-8") as f:
+            f.write(full_html)
+        '
 
-# 🏋️‍♂️ Daily Spanish Workout
+    # 6. Safely stage, commit, and sync your new markdown file to GitHub
+    - name: Commit and push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        git add workout.md
+        git commit -m "Update daily workout [skip ci]" || echo "No changes to commit"
+        
+        git pull --rebase origin main || git pull --rebase origin master || echo "No remote changes to merge"
+        git push origin HEAD
 
-## 🔄 Repaso de Ayer (Yesterday's Review)
-* **Palabra Anterior (Previous Word):** [Extract and insert the exact target vocabulary word from yesterday here]
-    * *Ejemplo de ayer:* [Insert the exact sentence that word was used in yesterday]
-* **Frase Anterior (Previous Phrase):** [Extract and insert the exact target phrase/idiom from yesterday here]
-    * *Ejemplo de ayer:* [Insert the exact sentence that phrase was used in yesterday]
-
-## 🧠 Vocabulario de Hoy (Today's New Word)
-* **Palabra Nueva (New Word):** [Insert one new intermediate/advanced Spanish word]
-* **Significado (Meaning):** [English definition]
-* **Ejemplo de Hoy (Today's Example Sentence):** [A practical Spanish sentence using this new word]
-* **Traducción (Translation):** [English translation of today's example sentence]
-
-## 🗣️ Frase de Hoy (Today's New Phrase)
-* **Frase Nueva (New Phrase):** [Insert one natural, useful everyday Spanish phrase or idiom]
-* **Significado (Meaning):** [English definition]
-* **Ejemplo de Hoy (Today's Example Sentence):** [A practical Spanish sentence using this new phrase]
-* **Traducción (Translation):** [English translation of today's example sentence]
-
-## 📝 Práctica (Your Turn!)
-[Provide 2 brief translation exercises or open-ended prompts testing today's new word and phrase]
-"""
-
-# 4. Generate content with an automatic retry loop for temporary 503 capacity spikes
-max_retries = 3
-retry_delay = 5  # Start by waiting 5 seconds if it fails
-
-for attempt in range(max_retries):
-    try:
-        print(f"Generating workout content (Attempt {attempt + 1}/{max_retries})...")
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-        )
-        break  # If successful, break out of the loop
-    except Exception as e:
-        print(f"Server was busy or encountered an error: {e}")
-        if attempt < max_retries - 1:
-            print(f"Waiting {retry_delay} seconds before retrying...")
-            time.sleep(retry_delay)
-            retry_delay *= 2  # Wait longer on the next try (exponential backoff)
-        else:
-            print("All retry attempts failed due to server capacity limits.")
-            raise e
-
-# 5. Save today's updated workout over the old one
-with open("workout.md", "w", encoding="utf-8") as f:
-    f.write(response.text)
-
-print("Workout updated successfully with explicit review tracking!")
+    # 7. Send the beautifully formatted HTML email directly to your inbox
+    - name: Send Daily Workout Email
+      uses: dawidd6/action-send-mail@v4
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: vmgrosso02@gmail.com
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "🏋️‍♂️ Tu Práctica de Español - Daily Workout"
+        to: vmgrosso02@gmail.com
+        from: "Gemini Spanish Tutor <vmgrosso02@gmail.com>"
+        html_body: file://workout.html
