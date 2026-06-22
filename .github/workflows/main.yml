@@ -8,10 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with: {python-version: '3.11'}
-    - run: pip install google-genai markdown
-    - name: Generate Workout
+      
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install google-genai markdown
+        
+    - name: Run workout generator
       env: {GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}}
       run: python generate_workout.py
     
@@ -21,10 +28,7 @@ jobs:
         import markdown
         with open("workout.md", "r", encoding="utf-8") as f:
             text = f.read()
-        
-        # Using 'extra' for better formatting
         html = markdown.markdown(text, extensions=["extra"])
-        
         styled_html = f"""
         <html>
         <head>
