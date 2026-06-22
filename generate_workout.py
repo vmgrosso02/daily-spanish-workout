@@ -15,7 +15,7 @@ def get_spanish_date_and_season():
     months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 
     day_of_week = days[now.weekday()]
-    day = now.dayR
+    day = now.day
     month_name = months[now.month - 1]
     year = now.year
 
