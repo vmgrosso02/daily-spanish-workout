@@ -53,6 +53,6 @@ jobs:
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: "🏋️‍♂️ Tu Práctica de Español - Daily Workout"
-        to: ${{ secrets.EMAIL_TO }}
+        to: vmgrosso02@gmail.com
         from: "Gemini Spanish Tutor <${{ secrets.EMAIL_USERNAME }}>"
         body: file://workout.md
