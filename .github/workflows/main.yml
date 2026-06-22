@@ -14,7 +14,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # 2. Set up Python environment (upgraded to 3.11 to support the modern library)
+    # 2. Set up Python environment
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -32,16 +32,27 @@ jobs:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       run: python generate_workout.py
 
-    # 5. Safely stage, commit, and sync your new file
+    # 5. Safely stage, commit, and sync your new file to GitHub
     - name: Commit and push changes
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
-        # Stage and commit the changed workout file FIRST so git isn't confused
         git add workout.md
         git commit -m "Update daily workout [skip ci]" || echo "No changes to commit"
         
-        # Safely pull down any remote adjustments and push up today's workout
         git pull --rebase origin main || git pull --rebase origin master || echo "No remote changes to merge"
         git push origin HEAD
+
+    # 6. Send the generated workout directly to your email inbox
+    - name: Send Daily Workout Email
+      uses: dawidd6/action-send-mail@v4
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "🏋️‍♂️ Tu Práctica de Español - Daily Workout"
+        to: ${{ secrets.EMAIL_TO }}
+        from: "Gemini Spanish Tutor <${{ secrets.EMAIL_USERNAME }}>"
+        body: file://workout.md
