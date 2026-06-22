@@ -1,23 +1,23 @@
 # 🏋️‍♂️ Daily Spanish Workout
 
 ## 🔄 Repaso de Ayer (Yesterday's Review)
-*   **Palabra Anterior (Previous Word):** N/A
-    *   *Ejemplo de ayer:* N/A
-*   **Frase Anterior (Previous Phrase):** N/A
-    *   *Ejemplo de ayer:* N/A
+*   **Palabra Anterior (Previous Word):** efímero
+    *   *Ejemplo de ayer:* La belleza de la flor es efímera, pero su recuerdo perdura.
+*   **Frase Anterior (Previous Phrase):** dar la lata
+    *   *Ejemplo de ayer:* Mi hermanito siempre me da la lata cuando intento estudiar.
 
 ## 🧠 Vocabulario de Hoy (Today's New Word)
-*   **Palabra Nueva (New Word):** efímero
-*   **Significado (Meaning):** ephemeral, fleeting
-*   **Ejemplo de Hoy (Today's Example Sentence):** La belleza de la flor es efímera, pero su recuerdo perdura.
-*   **Traducción (Translation):** The beauty of the flower is ephemeral, but its memory lingers.
+*   **Palabra Nueva (New Word):** hilarante
+*   **Significado (Meaning):** hilarious, side-splitting
+*   **Ejemplo de Hoy (Today's Example Sentence):** La película era tan hilarante que no pudimos dejar de reír.
+*   **Traducción (Translation):** The movie was so hilarious that we couldn't stop laughing.
 
 ## 🗣️ Frase de Hoy (Today's New Phrase)
-*   **Frase Nueva (New Phrase):** dar la lata
-*   **Significado (Meaning):** to bother, to annoy (literally: to give the tin can)
-*   **Ejemplo de Hoy (Today's Example Sentence):** Mi hermanito siempre me da la lata cuando intento estudiar.
-*   **Traducción (Translation):** My little brother always bothers me when I try to study.
+*   **Frase Nueva (New Phrase):** estar al tanto de
+*   **Significado (Meaning):** to be aware of, to keep up with, to be informed about
+*   **Ejemplo de Hoy (Today's Example Sentence):** Necesito estar al tanto de los nuevos desarrollos en tecnología.
+*   **Traducción (Translation):** I need to keep up with the new developments in technology.
 
 ## 📝 Práctica (Your Turn!)
-1.  Translate the following sentence into Spanish, using today's new word: "Life is short and often ephemeral, so enjoy every moment."
-2.  You're at a party and someone is being very annoying. How would you tell a friend, "That guy is really bothering me," using today's new phrase?
+1.  Translate the following into Spanish, using today's new word: "His comments at the meeting were truly hilarious."
+2.  You're talking to a friend about current events. How would you say, "Are you aware of what's happening in the world?" using today's new phrase?
