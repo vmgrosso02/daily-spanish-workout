@@ -1,6 +1,7 @@
 import os
 import random
 import smtplib
+import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import json
@@ -8,9 +9,11 @@ import urllib.request
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+# --- 0. SHARED LOCAL TIME (Miami, auto-adjusts for DST) ---
+now_local = datetime.now(ZoneInfo("America/New_York"))
+
 # --- 1. GENERATE DYNAMIC SPANISH DATE, TIME, AND SEASON ---
-def get_spanish_date_and_season():
-    now = datetime.now(ZoneInfo("America/New_York"))  # Miami time, auto-adjusts for DST
+def get_spanish_date_and_season(now):
     days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 
@@ -45,12 +48,12 @@ def get_spanish_date_and_season():
 
     return f"{day_of_week}, {day} de {month_name} de {year} | {season} | {time_str}"
 
-date_header_string = get_spanish_date_and_season()
+date_header_string = get_spanish_date_and_season(now_local)
 
 # --- 2. MANAGE THE WORD BANK PERSISTENCE ---
 word_bank_file = "word_bank.json"
 already_learned = []
-previous_word_info = "Ninguna (¡Este es tu primer día con el nuevo sistema!)"
+word_review_html = "¡Este es tu primer día con el nuevo sistema! Pronto aquí verás tu palabra anterior."
 
 if os.path.exists(word_bank_file):
     try:
@@ -59,7 +62,13 @@ if os.path.exists(word_bank_file):
             if word_bank:
                 already_learned = [item["word"].lower().strip() for item in word_bank]
                 last_item = word_bank[-1]
-                previous_word_info = f"'{last_item['word']}' ({last_item['meaning']})"
+                w = last_item.get("word", "")
+                wm = last_item.get("meaning", "")
+                we = last_item.get("example", "")
+                if we:
+                    word_review_html = f"Anterior: {w} ({wm})<br><br>Ejemplo: {we}"
+                else:
+                    word_review_html = f"Anterior: {w} ({wm})<br><br>(No se guardó un ejemplo para esta entrada.)"
     except Exception as e:
         print(f"Note: Could not read word_bank.json ({e}). Starting a clean word bank.")
         word_bank = []
@@ -69,7 +78,7 @@ else:
 # --- 3. MANAGE THE PHRASE BANK PERSISTENCE ---
 phrase_bank_file = "phrase_bank.json"
 already_learned_phrases = []
-previous_phrase_info = "Ninguna (¡Este es tu primer día con el sistema de frases!)"
+phrase_review_html = "¡Este es tu primer día con el sistema de frases! Pronto aquí verás tu frase anterior."
 
 if os.path.exists(phrase_bank_file):
     try:
@@ -78,7 +87,13 @@ if os.path.exists(phrase_bank_file):
             if phrase_bank:
                 already_learned_phrases = [item["phrase"].lower().strip() for item in phrase_bank]
                 last_phrase = phrase_bank[-1]
-                previous_phrase_info = f"'{last_phrase['phrase']}' ({last_phrase['meaning']})"
+                p = last_phrase.get("phrase", "")
+                pm = last_phrase.get("meaning", "")
+                pe = last_phrase.get("example", "")
+                if pe:
+                    phrase_review_html = f"Anterior: {p} ({pm})<br><br>Ejemplo: {pe}"
+                else:
+                    phrase_review_html = f"Anterior: {p} ({pm})<br><br>(No se guardó un ejemplo para esta entrada.)"
     except Exception as e:
         print(f"Note: Could not read phrase_bank.json ({e}). Starting a clean phrase bank.")
         phrase_bank = []
@@ -108,7 +123,6 @@ if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
     exit(1)
 
 # --- 6. BUILD THE PROMPT FOR GEMINI ---
-url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_api_key}"
 blacklist_words_str = ", ".join(already_learned) if already_learned else "Ninguna todavía"
 blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_phrases else "Ninguna todavía"
 
@@ -123,8 +137,8 @@ REGLAS DE SELECCIÓN DE PALABRAS Y FRASES:
 2. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas palabras ya aprendidas: [{blacklist_words_str}].
 3. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas frases ya aprendidas: [{blacklist_phrases_str}].
 4. REGLA DE VOCABULARIO (MUY IMPORTANTE): En TODOS los ejemplos, diálogos y retos de traducción (secciones 1, 2, 3, 4 y 5), usa EXCLUSIVAMENTE vocabulario básico o intermedio-bajo, consistente con el nivel gramatical indicado arriba. La ÚNICA palabra o frase avanzada permitida en cada sección es la palabra/frase nueva que se está enseñando en esa sección. No introduzcas otro vocabulario avanzado, técnico o poco común.
-5. En el apartado de Repaso de la sección 1, debes mostrar explícitamente la palabra anterior y su significado en una línea, y el mini-reto o ejemplo en una línea APARTE (usa <br><br> para separarlas). Usa este formato exacto: "Anterior: [palabra] ([significado])<br><br>→ [pregunta, traducción o ejemplo corto]". La palabra anterior es: {previous_word_info}.
-6. En el apartado de Repaso de la sección 2, debes mostrar explícitamente la frase anterior y su significado en una línea, y el mini-reto o ejemplo en una línea APARTE (usa <br><br> para separarlas). Usa este formato exacto: "Anterior: [frase] ([significado])<br><br>→ [pregunta, traducción o ejemplo corto]". La frase anterior es: {previous_phrase_info}.
+5. En el review-box de la sección 1 (Palabra del Día), escribe EXACTAMENTE y sin modificar, traducir, ni agregar nada más, el siguiente texto literal: PLACEHOLDER_PREV_WORD_REVIEW
+6. En el review-box de la sección 2 (Frase del Día), escribe EXACTAMENTE y sin modificar, traducir, ni agregar nada más, el siguiente texto literal: PLACEHOLDER_PREV_PHRASE_REVIEW
 
 Estructura de diseño requerida (No uses em-dashes ni guiones largos "—" como separadores, usa barras verticales "|" o dos puntos):
 Entrega exclusivamente el código estructurado dentro de esta plantilla CSS. No uses bloques de código markdown (```html).
@@ -173,7 +187,7 @@ Estructura de diseño requerida:
 
           <div class="review-box">
             🔄 <strong>Repaso de ayer:</strong><br>
-            [Escribe: "Anterior: " + la palabra previa + " (" + su significado + ")". Luego, en línea aparte con <br><br> antes, escribe "→ " seguido de un mini-reto o ejemplo corto. Palabra previa: {previous_word_info}]
+            PLACEHOLDER_PREV_WORD_REVIEW
           </div>
         </div>
 
@@ -188,7 +202,7 @@ Estructura de diseño requerida:
 
           <div class="review-box" style="background-color: #fdf2f8; border-color: #ec4899; color: #9d174d;">
             🔄 <strong>Repaso de ayer:</strong><br>
-            [Escribe: "Anterior: " + la frase previa + " (" + su significado + ")". Luego, en línea aparte con <br><br> antes, escribe "→ " seguido de un mini-reto o ejemplo corto. Frase previa: {previous_phrase_info}]
+            PLACEHOLDER_PREV_PHRASE_REVIEW
           </div>
         </div>
 
@@ -236,12 +250,10 @@ Estructura de diseño requerida:
 </body>
 </html>
 
-CRITICAL EXTRA INSTRUCTION: At the absolute bottom of your response, on a brand new line, output exactly these tracking lines so the system script can save the progress:
-TRACK_WORD: <word chosen> | <english translation>
-TRACK_PHRASE: <phrase chosen> | <english translation>
+CRITICAL EXTRA INSTRUCTION: At the absolute bottom of your response, on brand new lines after the closing </html> tag, output exactly these tracking lines so the system script can save your progress. Use the pipe character | to separate each field, exactly 2 pipes per line, no extra commentary:
+TRACK_WORD: <palabra elegida> | <traducción al inglés> | <el mismo Ejemplo Práctico que escribiste en la sección 1, en el formato: "frase en español" (traducción)>
+TRACK_PHRASE: <frase elegida> | <traducción al inglés> | <el mismo Ejemplo que escribiste en la sección 2, en el formato: "frase en español" (traducción)>
 """
-
-import time
 
 data = {"contents": [{"parts": [{"text": prompt}]}]}
 
@@ -277,28 +289,38 @@ if not workout_html:
     print("All models and retries exhausted. Giving up.")
     exit(1)
 
-# --- 7. PARSE THE TARGET TRACKING DATA AND SAVE BACK TO THE BANKS ---
+# --- 7. INJECT THE REAL PREVIOUS WORD/PHRASE REVIEW (replaces Gemini's placeholders) ---
+workout_html = workout_html.replace("PLACEHOLDER_PREV_WORD_REVIEW", word_review_html)
+workout_html = workout_html.replace("PLACEHOLDER_PREV_PHRASE_REVIEW", phrase_review_html)
+
+# --- 8. PARSE THE TARGET TRACKING DATA AND SAVE BACK TO THE BANKS ---
 extracted_word = "Desconocida"
 extracted_meaning = "Unknown"
+extracted_example = ""
 extracted_phrase = "Desconocida"
 extracted_phrase_meaning = "Unknown"
+extracted_phrase_example = ""
 cleaned_lines = []
 
 for line in workout_html.split("\n"):
     if "TRACK_WORD:" in line:
         try:
             parts = line.replace("TRACK_WORD:", "").strip().split("|")
-            if len(parts) == 2:
+            if len(parts) >= 2:
                 extracted_word = parts[0].strip()
                 extracted_meaning = parts[1].strip()
+            if len(parts) >= 3:
+                extracted_example = parts[2].strip()
         except:
             pass
     elif "TRACK_PHRASE:" in line:
         try:
             parts = line.replace("TRACK_PHRASE:", "").strip().split("|")
-            if len(parts) == 2:
+            if len(parts) >= 2:
                 extracted_phrase = parts[0].strip()
                 extracted_phrase_meaning = parts[1].strip()
+            if len(parts) >= 3:
+                extracted_phrase_example = parts[2].strip()
         except:
             pass
     else:
@@ -306,12 +328,15 @@ for line in workout_html.split("\n"):
 
 workout_html = "\n".join(cleaned_lines).strip()
 
+today_str = now_local.strftime("%Y-%m-%d")
+
 # Save word to word_bank
 if extracted_word != "Desconocida":
     word_bank.append({
         "word": extracted_word,
         "meaning": extracted_meaning,
-        "date": datetime.now().strftime("%Y-%m-%d")
+        "example": extracted_example,
+        "date": today_str
     })
     try:
         with open(word_bank_file, "w", encoding="utf-8") as f:
@@ -325,7 +350,8 @@ if extracted_phrase != "Desconocida":
     phrase_bank.append({
         "phrase": extracted_phrase,
         "meaning": extracted_phrase_meaning,
-        "date": datetime.now().strftime("%Y-%m-%d")
+        "example": extracted_phrase_example,
+        "date": today_str
     })
     try:
         with open(phrase_bank_file, "w", encoding="utf-8") as f:
@@ -334,7 +360,26 @@ if extracted_phrase != "Desconocida":
     except Exception as e:
         print(f"Error saving phrase bank: {e}")
 
-# --- 8. DISPATCH THE EMAIL ---
+# --- 9. WRITE HUMAN-READABLE .TXT MIRRORS OF EACH BANK ---
+def write_readable_bank(filepath, bank, item_key, label):
+    try:
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(f"{label}\n")
+            f.write("=" * len(label) + "\n\n")
+            for i, item in enumerate(bank, 1):
+                f.write(f"{i}. {item.get(item_key, '')} — {item.get('meaning', '')}\n")
+                f.write(f"   Fecha: {item.get('date', '')}\n")
+                example = item.get("example")
+                if example:
+                    f.write(f"   Ejemplo: {example}\n")
+                f.write("\n")
+    except Exception as e:
+        print(f"Error writing {filepath}: {e}")
+
+write_readable_bank("word_bank.txt", word_bank, "word", "📚 Banco de Palabras Aprendidas")
+write_readable_bank("phrase_bank.txt", phrase_bank, "phrase", "🗣️ Banco de Frases Aprendidas")
+
+# --- 10. DISPATCH THE EMAIL ---
 msg = MIMEMultipart()
 msg['From'] = smtp_user
 msg['To'] = to_email
