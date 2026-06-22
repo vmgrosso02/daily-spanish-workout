@@ -1,4 +1,5 @@
 import os
+import time
 from google import genai
 
 # 1. Initialize the new Gemini Client
@@ -52,14 +53,30 @@ Follow this EXACT template structure:
 [Provide 2 brief translation exercises or open-ended prompts testing today's new word and phrase]
 """
 
-# 4. Generate content using the new SDK and standard modern model
-response = client.models.generate_content(
-    model='gemini-2.5-flash',
-    contents=prompt,
-)
+# 4. Generate content with an automatic retry loop for temporary 503 capacity spikes
+max_retries = 3
+retry_delay = 5  # Start by waiting 5 seconds if it fails
+
+for attempt in range(max_retries):
+    try:
+        print(f"Generating workout content (Attempt {attempt + 1}/{max_retries})...")
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt,
+        )
+        break  # If successful, break out of the loop
+    except Exception as e:
+        print(f"Server was busy or encountered an error: {e}")
+        if attempt < max_retries - 1:
+            print(f"Waiting {retry_delay} seconds before retrying...")
+            time.sleep(retry_delay)
+            retry_delay *= 2  # Wait longer on the next try (exponential backoff)
+        else:
+            print("All retry attempts failed due to server capacity limits.")
+            raise e
 
 # 5. Save today's updated workout over the old one
 with open("workout.md", "w", encoding="utf-8") as f:
     f.write(response.text)
 
-print("Workout updated successfully with explicit word and phrase review tracking using the new Gemini SDK!")
+print("Workout updated successfully with explicit review tracking!")
