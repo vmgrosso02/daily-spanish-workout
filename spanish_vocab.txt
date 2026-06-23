@@ -1,32 +1,107 @@
 === STUDENT CAPABILITY RULE ===
-The student knows the following 4 grammatical tenses for EVERY verb listed in this document. The AI is fully allowed and expected to use and test any of these 4 patterns for any verb found below:
-1. Present Tense (e.g., como, comes, come...)
-2. Present Progressive (e.g., comiendo, hablando...)
-3. Preterite Past (e.g., comí, comiste, comió, comimos, comieron)
-4. Imperfect Past (e.g., comía, comías, comía, comíamos, comían)
+The student knows the following grammatical patterns for EVERY verb listed in this document. The AI is fully allowed and expected to use and test any of these patterns for any verb found below:
+1. Present Tense (e.g., como, comes, come, comemos, comen)
+2. Present Progressive / Gerund (e.g., comiendo, hablando) including irregular gerunds: diciendo, pidiendo, durmiendo, muriendo, yendo, oyendo, trayendo
+3. Preterite Past (regular: -é/-aste/-ó/-amos/-aron for -AR verbs; -í/-iste/-ió/-imos/-ieron for -ER/-IR verbs; plus the irregulars listed below)
+4. Imperfect Past (regular: -aba/-abas/-aba/-ábamos/-aban for -AR; -ía/-ías/-ía/-íamos/-ían for -ER/-IR; plus irregulars: iba, era, veía, había)
+5. Present Perfect (he, has, ha, hemos, han + past participle, e.g., hablado, comido, vivido, hecho, dicho, ido, puesto, traído, roto, recibido, estudiado, aprendido)
+6. Basic Commands: tú affirmative, usted/ustedes formal commands (-e/-en or -a/-an endings from the yo-stem), and irregulars: haz, pon, ve, sé, haga, ponga, vaya, hagan, vayan
+
+=== IRREGULAR PRETERITE VERBS (student knows these stems) ===
+ser/ir: fui, fuiste, fue, fuimos, fueron
+estar: estuve, estuviste, estuvo, estuvimos, estuvieron
+hacer: hice, hiciste, hizo, hicimos, hicieron
+traer: traje, trajiste, trajo, trajimos, trajeron
+decir: dije, dijiste, dijo, dijimos, dijeron
+tener: tuve, tuviste, tuvo, tuvimos, tuvieron
+poder: pude, pudiste, pudo, pudimos, pudieron
+poner: puse, pusiste, puso, pusimos, pusieron
+saber: supe, supiste, supo, supimos, supieron
 
 === GRAMMAR & PRONOUNS ===
-- Ser vs Estar (Permanent traits vs Locations/States)
-- Direct & Indirect Object Pronouns (me, te, lo, la, nos, los, las, le, les)
-- Double Object Pronouns (e.g., "me lo trajiste")
-- Compound Past Tense / Present Perfect (he, has, ha, hemos, han + comido/hablado/recibido/ido)
-- Basic Imperative Commands: -an/-en endings (e.g., "hagan", "vayan")
-- Reflexive Pronouns (me veo, te ves, se ve / olvidarme, olvidarte)
+- Ser vs Estar (permanent traits/identity vs. locations/temporary states)
+- Gustar-type construction: a mí me gusta/encanta/interesa, a ti te gusta, a él/ella le gusta, a nosotros nos gusta, a ellos/ellas les gusta (also encantan, interesan when plural)
+- Direct & Indirect Object Pronouns: me, te, lo, la, nos, los, las, le, les
+- Double Object Pronouns (e.g., "me lo trajiste", "te lo doy")
+- Reflexive Pronouns & reflexive verbs: ducharse, levantarse, vestirse, sentarse, despertarse, acostarse, cepillarse, probarse, llamarse, encontrarse, olvidarse, verse (me veo, te ves, se ve)
+- Possessives: mi/mis, tu/tus, su/sus, nuestro/nuestra
+- Comparatives: más/menos + adjetivo + que; tan + adjetivo + como
+- Superlatives with -ísimo: grandísimo, facilísimo, dificilísimo, aburridísimo, divertidísimo, bellísimo, carísimo
+- Obligation/possibility: tener que, hay que, deber/debería/deberías/deberíamos/deberían, poder/podría/podrías/podríamos/podrían
+- Time expressions: en punto, y media, y cuarto, menos cuarto, ¿a qué hora?
+- Weather expressions: hace sol/viento/frío/calor/buen tiempo/mal tiempo/niebla; está nublado/oscuro/soleado; llueve; nieva
 
-=== CORE VERB LIST ===
-comer, beber, hablar, querer, necesitar, tener, vivir, comprar, pagar, dormir, almorzar, poder, volver, empezar, entender, ir, ser, estar, hacer, traer, escribir, vender, dar (darme, darte, darnos, darle, darles), decir (decirme, decirte, decirle, decirnos, decirles), pasar, explicar, robar, descargar, copiar, ganar, nacer, caerse, reirse, patinar, compartir
+=== CORE VERB LIST (infinitives the student can conjugate in all patterns above) ===
+ser, estar, tener, ir, hacer, decir, traer, poder, poner, saber, querer, necesitar, vivir, comprar, pagar, dormir, almorzar, volver, empezar, entender, perder, escribir, vender, dar, pasar, explicar, robar, descargar, copiar, ganar, nacer, caerse, reírse, patinar, compartir, comer, beber, hablar, leer, estudiar, usar, ayudar, llegar, llevar, lavar, viajar, tomar, caminar, abrir, salir, correr, nadar, dibujar, jugar, creer, ducharse, levantarse, mirar, pintar, buscar, cerrar, probarse, montar, conocer, llamar, llamarse, ver, amar, enseñar, visitar, bailar, ponerse, probar, interesar, practicar, preferir, manejar, conducir, cocinar, cantar, quedarse, venir, invitar, cambiar, pensar, desayunar, cenar, volar, recordar, encontrar, esperar, girar, seguir, olvidar, elegir, comenzar, encontrarse, haber, llover, nevar, sentarse, coger, mandar, preguntar, despertarse, oír, acabar, acordarse, sonar, acostarse, pedir, servir, entrar, pescar, reparar, asar, repetir, completar, planear, reservar, regresar, romper, aprobar, vestirse, reunirse, gastar
 
-=== FOOD & RESTAURANT ===
-pan, agua, manzanas, leche, sandwich, carne, hamburguesa, naranja, café, vaso, taza, ensalada, tomate, la cuenta, pescado, queso, azúcar, sal, jugo, lata, cebolla, jamón, yogur, champiñones, pimienta, litros, kilogramo, medio, oferta, lista, variedad
+=== FOOD & DRINK ===
+pan, agua, manzanas, leche, sándwich, carne, hamburguesa, naranja, café, vaso, taza, ensalada, tomate, la cuenta, pescado, queso, azúcar, sal, jugo, lata, cebolla, jamón, yogur, champiñones, pimienta, litros, kilogramo, medio, oferta, lista, variedad, frijoles, sopa, papa, papas fritas, postre, frito, frita, cerveza, vino tinto, vino blanco, bebida, comida, botella, menú, plato, tenedor, cuchara, cuchillo, desayuno, almuerzo, cena, otra, quisiera, pizza, pasta, tostada, mermelada, asada, aceite, los panes, el hielo, alcohol, champán, vegetariano, saludable, excelente, el especial del día, estupendo, lleno, llena, chef, chocolate, pastel, algo más
+
+=== FRUITS & VEGETABLES ===
+manzana, plátano, banana, naranja, uvas, fresa, mango, arándano, piña, sandía, pera, limón, lima, tomate, cebolla, zanahoria, papa, vegetales, verduras
 
 === TRAVEL & PLACES ===
-baño, hotel, aeropuerto, restaurante, museo, banco, hospital, estación, tienda, calle, plaza, parque, aquí, allí, taxi, teléfono, maleta, reserva, autobús, tren, dinero, supermercado, cerrado, boleto, vacaciones, rompecabezas, cometa, hockey, drawing, pop, postal, estampilla, velero, maravilloso, a lo largo de, tantos, acampar, esquiar, coleccionar, navegar, prestar
+baño, hotel, aeropuerto, restaurante, museo, banco, hospital, estación, tienda, calle, plaza, parque, aquí, allí, acá, allá, taxi, teléfono, maleta, reserva, autobús, tren, dinero, supermercado, cerrado, boleto, vacaciones, isla, catedral, ópera, estadio, capital, turista, pasajero, equipaje, identificación, vuelo, coche, tranvía, helicóptero, asiento, bienvenido, internacional, agradable, en todas partes, servicio, avión, próximo, cámara, adónde, metro, parada, puerta, izquierda, derecha, cerca de, lejos de, al lado de, enfrente, detrás, derecho, entre, atrás, dentro, fuera, al final de, carretera, arriba, abajo
 
-=== FAMILY & HOME ===
-padre, madre, carro, casa, inteligente, elegante, gato, perro, hermano, hermana, muy, grande, bonito, bonita, familia, esposa, esposo, abuelo, abuela, perfecto, apartamento, bicicleta, francia, hijo, hija, y, este, esta, ese, esa, regalo, barato, caro, diferente, cómodo, favorito, demasiado, ropa, abrigo, falda, vestido, chaqueta, camisa, camiseta, pantalones, zapatos, sombrero, botas, reloj, calcetines, cinturón, corbata, bufanda, suéter, uniforme, traje, peine, maquillaje, champú, diarios, suave, vestirse, reunir, billetera, gastar, estuche, regla, libro de ejercicios, mochila, calendario, compañeros, avanzada, nivel, diferencia, detalle, instrucciones, claramente, luego, mientras, habia, muerto, corto, castaño, liso, casi, ama de casa, adolescente, payaso, patín, scooter, batería, globo, zanahoria, armario
+=== HOME & FURNITURE ===
+casa, apartamento, cocina, cama, nevera, refrigerador, habitación, dormitorio, sala, jardín, ventana, silla, estantería, planta, sobre, debajo, lámpara, la luz, luces, cafetera, televisor, alfombra, sofá, estufa, espejo, lavadora, mueble, sillones, cómoda, apagado, apagada, encendido, jabón, césped, ducha, cuarto, pared, piso, caja, armario
 
-=== OCCUPATIONS & WORK ===
-obrero, peligro, salvajes, extraño, terrible, nacional, policía, electricidad, fuego, raqueta, bádminton, bastante, todavía, staff, personal, ocupación, actriz, actor, cliente, recepcionista, conductor, fotógrafo, limpiador, cantante, piloto, impresora, teclando, departamento, pizarrón, correo, concejo municipal, física
+=== FAMILY ===
+padre, madre, hermano, hermana, abuelo, abuela, esposa, esposo, hijo, hija, familia, primo, prima, abuelito, abuelita, nieto, marido, padres, abuelos, mayor, menor, novia, novio, matrimonio
 
-=== MEDICAL & HEALTH ===
-cerebro, sangre, pelo, vendaje, medicina, auxilio, estado, molesta, horrible, usual, alejado, fácilmente, rápidamente, gravemente, imprevistamente, llevar
+=== CLOTHING & ACCESSORIES ===
+ropa, camisa, chaqueta, camiseta, vestido, falda, abrigo, sombrero, cartera, cinturón, reloj, calcetines, corbata, bufanda, suéter, uniforme, traje, zapatos, pantalones, botas, vaqueros, blusa, gorro, lentes, traje de baño, paraguas, gafas de sol, pijama, aretes, brazalete, talla, precio
+
+=== PERSONAL CARE ===
+peine, maquillaje, champú, cepillo de dientes, diarios, suave
+
+=== BODY PARTS ===
+cuerpo, cabeza, boca, brazo, pierna, barba, hombro, dedo, lengua, cuello, espalda, cara, frente, cintura, talón, pecho, estómago, piel, rodilla, tobillo, muñeca, cadera, codo, ceja, pulmón, músculo, uña, cerebro, hueso, costilla, manos, dientes, cabello, pelo, ojo, sangre, vendaje
+
+=== COLORS ===
+rojo, naranja, amarillo, verde, azul, índigo, violeta, gris, negro, rosa, blanco
+
+=== NUMBERS ===
+cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez, once, doce, trece, catorce, quince, dieciséis, diecisiete, dieciocho, diecinueve, veinte, veintiuno, veintidós, treinta, cuarenta, cincuenta, sesenta, setenta, ochenta, noventa, cien, ciento veintidós, doscientos, trescientos, mil, dos mil, millones
+
+=== DAYS, MONTHS, SEASONS ===
+lunes, martes, miércoles, jueves, viernes, sábado, domingo, enero, febrero, marzo, abril, junio, julio, agosto, septiembre, octubre, noviembre, diciembre, primavera, verano, otoño, invierno
+
+=== WEATHER ===
+hace sol, hace viento, hace frío, hace calor, hace buen tiempo, hace mal tiempo, hace niebla, está nublado, está oscuro, está soleado, llueve, nieva, el clima, caluroso, calurosa, frío, fría, la lluvia, el árbol, la nieve
+
+=== SCHOOL ===
+maestro, maestra, libro, bolígrafo, examen, estudiante, problema, profesor, escuela, clase, pregunta, computadora, universidad, lápiz, lápices, página, cuaderno, diccionario, lección, aula, nota, libro de texto, equipo, regla, mochila, calendario, compañeros, instrucciones, estuche, libro de ejercicios, claramente
+
+=== PEOPLE & SOCIETY ===
+amigo, señor, señora, señorita, caballero, trabajador, ciudadano, vecino, compañero, individuo, enemigo, chico, chica, campesino, testigo, adulto, turista, persona, gente, población, cultura, audiencia, pareja, víctima, humanidad, costumbre, feria, chino, china, español, española, americano, mexicano, mexicana, usted
+
+=== EMOTIONS & PERSONALITY ===
+triste, emocionado, enfermo, preocupado, aburrido, enojado, feliz, sorprendido, cansado, cansada, nervioso, simpático, simpática, perezoso, responsable, serio, limpio, sucio, abierto, rubio, moreno, morena, guapo, guapa, inteligente, elegante, divertido, divertida, alto, alta, bajo, baja, grande, bonito, bonita, gordo, gorda, delgado, delgada, popular, famoso, famosa, hermoso, hermosa, satisfecha, interesado, interesada, enfadada, mojado, mojada, seco, seca, fresco, casado, soleado
+
+=== OCCUPATIONS ===
+jefe, jefa, secretaria, médico, médica, doctor, doctora, camarero, camarera, recepcionista, conductor, fotógrafo, limpiador, cantante, piloto, gerente, trabajador, empresario, presidente, director, pintor, obrero, policía, enfermero, dentista, actriz, actor, cliente, vendedor, chef, agricultor, ingeniero
+
+=== ANIMALS & NATURE ===
+gato, perro, vaca, cerdo, burro, pez, mono, pájaro, río, mar, océano, montaña, campo, desierto, isla, puente, naturaleza, playa
+
+=== HOLIDAYS & TRADITIONS ===
+día de acción de gracias, nochebuena, navidad, feliz navidad, nochevieja, año nuevo, tradiciones
+
+=== TIME EXPRESSIONS ===
+hoy, mañana, ayer, anoche, esta noche, y media, y cuarto, menos cuarto, en punto, a menudo, todos los días, siempre, a veces, nunca, temprano, tarde, luego, mientras, antes, después, cada, otra vez, también, de vez en cuando, frecuentemente, generalmente
+
+=== TECH & OFFICE ===
+computadora, impresora, teclando, correo electrónico, mensajes, archivo, documento, departamento, pizarrón, programa, llamada, oficina, fábrica, revista, canal, anuncio, noticia
+
+=== SPORTS & HOBBIES ===
+fútbol, béisbol, baloncesto, básquetbol, voleibol, tenis, golf, ajedrez, gimnasio, ciclismo, excursión, hobby, patín, scooter, bicicleta, hockey, bádminton, rugby, jugador, deporte, motocicleta
+
+=== MUSIC & ARTS ===
+piano, guitarra, violín, tambor, batería, clarinete, canciones, arte, pintura, dibujo, dibujos animados, foto, cómics, hip hop, jazz, baile, teatro, obra de teatro, espectáculo
+
+=== QUESTION WORDS ===
+qué, quién, quiénes, cuándo, dónde, adónde, cuál, cuáles, cuánto, cuánta, cómo, por qué, para qué
+
+=== COMMON PHRASES ===
+hola, adiós, buenos días, buenas noches, gracias, mucho gusto, por favor, de nada, lo siento, perdón, disculpe, me llamo, mi nombre es, y tú, de dónde eres, cómo estás, estoy bien, hasta mañana, hasta luego, hasta pronto, cómo te llamas, cómo se llama usted, tengo sed, tengo hambre, tengo frío, tengo calor, tengo sueño, tengo miedo, tengo ganas de, tengo que, a qué hora, me gustaría, creo que sí, creo que no, qué tal, qué te parece, qué sorpresa, qué pena, bienvenido, buen provecho, había una vez, sin duda, por supuesto, a lo mejor, desafortunadamente, cuánto cuesta, en efectivo, tarjeta de crédito
