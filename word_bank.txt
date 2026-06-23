@@ -33,3 +33,7 @@
    Fecha: 2026-06-23
    Ejemplo: "Tienes que apresurarte para llegar al aeropuerto a tiempo." (You have to hurry up to get to the airport on time.)
 
+10. Apagar — To turn off / extinguish
+   Fecha: 2026-06-23
+   Ejemplo: "Por favor, apaga la luz antes de salir" (Please turn off the light before leaving)
+
