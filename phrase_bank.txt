@@ -25,3 +25,7 @@
    Fecha: 2026-06-23
    Ejemplo: "No hay vino tinto, pero aquí tienes vino blanco. A falta de pan, buenas son tortas" (There is no red wine, but here you have white wine. Half a loaf is better than none)
 
+7. Darse cuenta — To realize
+   Fecha: 2026-06-24
+   Ejemplo: "Me di cuenta de que olvidé la maleta en el taxi" (I realized that I forgot the suitcase in the taxi)
+
