@@ -9,113 +9,7 @@ import urllib.request
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-# --- 1. SHARED LOCAL TIME (Miami, auto-adjusts for DST) ---
-now_local = datetime.now(ZoneInfo("America/New_York"))
-today_str = now_local.strftime("%Y-%m-%d")
-
-# --- 2. GENERATE DYNAMIC SPANISH DATE, TIME, AND SEASON ---
-def get_spanish_date_and_season(now):
-    days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-    months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
-
-    day_of_week = days[now.weekday()]
-    day = now.day
-    month_name = months[now.month - 1]
-    year = now.year
-
-    # Meteorological Season Logic (June to August is Summer)
-    month = now.month
-    if 3 <= month <= 5:
-        season = "Primavera 🌸"
-    elif 6 <= month <= 8:
-        season = "Verano ☀️"
-    elif 9 <= month <= 11:
-        season = "Otoño 🍂"
-    else:
-        season = "Invierno ❄️"
-
-    hour_24 = now.hour
-    minute = now.minute
-    hour_12 = hour_24 % 12
-    if hour_12 == 0:
-        hour_12 = 12
-    if 0 <= hour_24 < 12:
-        period = "de la mañana"
-    elif 12 <= hour_24 < 19:
-        period = "de la tarde"
-    else:
-        period = "de la noche"
-    time_str = f"{hour_12}:{minute:02d} {period}"
-
-    return f"{day_of_week}, {day} de {month_name} de {year} | {season} | {time_str}"
-
-date_header_string = get_spanish_date_and_season(now_local)
-
-# --- 3. MANAGE THE WORD BANK PERSISTENCE ---
-word_bank_file = "word_bank.json"
-already_learned = []
-word_review_html = "¡Este es tu primer día con el nuevo sistema! Pronto aquí verás tu palabra anterior."
-
-if os.path.exists(word_bank_file):
-    try:
-        with open(word_bank_file, "r", encoding="utf-8") as f:
-            word_bank = json.load(f)
-            if word_bank:
-                already_learned = [item["word"].lower().strip() for item in word_bank]
-                last_item = word_bank[-1]
-                w = last_item.get("word", "")
-                wm = last_item.get("meaning", "")
-                we = last_item.get("example", "")
-                if we:
-                    word_review_html = f"Anterior: {w} ({wm})<br><br>Ejemplo: {we}"
-                else:
-                    word_review_html = f"Anterior: {w} ({wm})<br><br>(No se guardó un ejemplo para esta entrada.)"
-    except Exception as e:
-        print(f"Note: Could not read word_bank.json ({e}). Starting a clean word bank.")
-        word_bank = []
-else:
-    word_bank = []
-
-# --- 4. MANAGE THE PHRASE BANK PERSISTENCE ---
-phrase_bank_file = "phrase_bank.json"
-already_learned_phrases = []
-phrase_review_html = "¡Este es tu primer día con el sistema de frases! Pronto aquí verás tu frase anterior."
-
-if os.path.exists(phrase_bank_file):
-    try:
-        with open(phrase_bank_file, "r", encoding="utf-8") as f:
-            phrase_bank = json.load(f)
-            if phrase_bank:
-                already_learned_phrases = [item["phrase"].lower().strip() for item in phrase_bank]
-                last_phrase = phrase_bank[-1]
-                p = last_phrase.get("phrase", "")
-                pm = last_phrase.get("meaning", "")
-                pe = last_phrase.get("example", "")
-                if pe:
-                    phrase_review_html = f"Anterior: {p} ({pm})<br><br>Ejemplo: {pe}"
-                else:
-                    phrase_review_html = f"Anterior: {p} ({pm})<br><br>(No se guardó un ejemplo para esta entrada.)"
-    except Exception as e:
-        print(f"Note: Could not read phrase_bank.json ({e}). Starting a clean phrase bank.")
-        phrase_bank = []
-else:
-    phrase_bank = []
-
-# --- 5. MANAGE THE NUMBER BANK PERSISTENCE & HELPER FUNCTIONS ---
-number_bank_file = "number_bank.json"
-used_numbers = set()
-
-if os.path.exists(number_bank_file):
-    try:
-        with open(number_bank_file, "r", encoding="utf-8") as f:
-            number_bank = json.load(f)
-            used_numbers = {item["number"] for item in number_bank}
-    except Exception as e:
-        print(f"Note: Could not read number_bank.json ({e}). Starting a clean number bank.")
-        number_bank = []
-else:
-    number_bank = []
-
+# --- 1. NUMBER-TO-SPANISH-WORDS CONVERTER (used for the date header AND Number of the Day) ---
 def numero_a_palabras(n):
     if n == 0:
         return "cero"
@@ -185,6 +79,125 @@ def numero_a_palabras(n):
         partes.append(tres_digitos(unidades_resto))
 
     return " ".join(partes)
+
+# --- 2. SHARED LOCAL TIME (Miami, auto-adjusts for DST) ---
+now_local = datetime.now(ZoneInfo("America/New_York"))
+today_str = now_local.strftime("%Y-%m-%d")
+
+# --- 3. GENERATE DYNAMIC SPANISH DATE, TIME, AND SEASON (fully spelled out) ---
+def get_spanish_date_and_season(now):
+    days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+    months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+
+    day_of_week = days[now.weekday()]
+    day = now.day
+    day_word = "primero" if day == 1 else numero_a_palabras(day)
+    month_name = months[now.month - 1]
+    year = now.year
+    year_word = numero_a_palabras(year)
+
+    # Meteorological Season Logic (June to August is Summer)
+    month = now.month
+    if 3 <= month <= 5:
+        season = "Primavera 🌸"
+    elif 6 <= month <= 8:
+        season = "Verano ☀️"
+    elif 9 <= month <= 11:
+        season = "Otoño 🍂"
+    else:
+        season = "Invierno ❄️"
+
+    hour_24 = now.hour
+    minute = now.minute
+    hour_12 = hour_24 % 12
+    if hour_12 == 0:
+        hour_12 = 12
+    if 0 <= hour_24 < 12:
+        period = "de la mañana"
+    elif 12 <= hour_24 < 19:
+        period = "de la tarde"
+    else:
+        period = "de la noche"
+
+    hour_word = "una" if hour_12 == 1 else numero_a_palabras(hour_12)
+    if minute == 0:
+        time_words = f"{hour_word} en punto {period}"
+    else:
+        minute_word = numero_a_palabras(minute)
+        time_words = f"{hour_word} y {minute_word} {period}"
+
+    return f"{day_of_week}, {day_word} de {month_name} de {year_word} | {season} | {time_words}"
+
+date_header_string = get_spanish_date_and_season(now_local)
+
+
+
+
+
+# --- 3. MANAGE THE WORD BANK PERSISTENCE ---
+word_bank_file = "word_bank.json"
+already_learned = []
+word_review_html = "¡Este es tu primer día con el nuevo sistema! Pronto aquí verás tu palabra anterior."
+
+if os.path.exists(word_bank_file):
+    try:
+        with open(word_bank_file, "r", encoding="utf-8") as f:
+            word_bank = json.load(f)
+            if word_bank:
+                already_learned = [item["word"].lower().strip() for item in word_bank]
+                last_item = word_bank[-1]
+                w = last_item.get("word", "")
+                wm = last_item.get("meaning", "")
+                we = last_item.get("example", "")
+                if we:
+                    word_review_html = f"Anterior: {w} ({wm})<br><br>Ejemplo: {we}"
+                else:
+                    word_review_html = f"Anterior: {w} ({wm})<br><br>(No se guardó un ejemplo para esta entrada.)"
+    except Exception as e:
+        print(f"Note: Could not read word_bank.json ({e}). Starting a clean word bank.")
+        word_bank = []
+else:
+    word_bank = []
+
+# --- 4. MANAGE THE PHRASE BANK PERSISTENCE ---
+phrase_bank_file = "phrase_bank.json"
+already_learned_phrases = []
+phrase_review_html = "¡Este es tu primer día con el sistema de frases! Pronto aquí verás tu frase anterior."
+
+if os.path.exists(phrase_bank_file):
+    try:
+        with open(phrase_bank_file, "r", encoding="utf-8") as f:
+            phrase_bank = json.load(f)
+            if phrase_bank:
+                already_learned_phrases = [item["phrase"].lower().strip() for item in phrase_bank]
+                last_phrase = phrase_bank[-1]
+                p = last_phrase.get("phrase", "")
+                pm = last_phrase.get("meaning", "")
+                pe = last_phrase.get("example", "")
+                if pe:
+                    phrase_review_html = f"Anterior: {p} ({pm})<br><br>Ejemplo: {pe}"
+                else:
+                    phrase_review_html = f"Anterior: {p} ({pm})<br><br>(No se guardó un ejemplo para esta entrada.)"
+    except Exception as e:
+        print(f"Note: Could not read phrase_bank.json ({e}). Starting a clean phrase bank.")
+        phrase_bank = []
+else:
+    phrase_bank = []
+
+# --- 5. MANAGE THE NUMBER BANK PERSISTENCE & HELPER FUNCTIONS ---
+number_bank_file = "number_bank.json"
+used_numbers = set()
+
+if os.path.exists(number_bank_file):
+    try:
+        with open(number_bank_file, "r", encoding="utf-8") as f:
+            number_bank = json.load(f)
+            used_numbers = {item["number"] for item in number_bank}
+    except Exception as e:
+        print(f"Note: Could not read number_bank.json ({e}). Starting a clean number bank.")
+        number_bank = []
+else:
+    number_bank = []
 
 def elegir_numero_aleatorio():
     # Weighted so MOST numbers feel everyday/relatable, with occasional big ones
