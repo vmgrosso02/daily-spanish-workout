@@ -2,7 +2,8 @@ name: Daily Spanish Workout
 on:
   workflow_dispatch: # Allows you to run it manually with a button
   schedule:
-    - cron: '0 11 * * *' # Runs automatically every day
+    - cron: '0 11 * 3,4,5,6,7,8,9,10 *'   # 7:00 AM Miami time (EDT, UTC-4) — Mar through Oct
+    - cron: '0 12 * 1,2,11,12 *'          # 7:00 AM Miami time (EST, UTC-5) — Nov, Dec, Jan, Feb
 
 permissions:
   contents: write
