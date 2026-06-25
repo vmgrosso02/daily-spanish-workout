@@ -1,4 +1,5 @@
 import os
+import random
 import smtplib
 import time
 from email.mime.text import MIMEText
@@ -8,10 +9,11 @@ import urllib.request
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-# --- 0. SHARED LOCAL TIME (Miami, auto-adjusts for DST) ---
+# --- 1. SHARED LOCAL TIME (Miami, auto-adjusts for DST) ---
 now_local = datetime.now(ZoneInfo("America/New_York"))
+today_str = now_local.strftime("%Y-%m-%d")
 
-# --- 1. GENERATE DYNAMIC SPANISH DATE, TIME, AND SEASON ---
+# --- 2. GENERATE DYNAMIC SPANISH DATE, TIME, AND SEASON ---
 def get_spanish_date_and_season(now):
     days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
     months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
@@ -49,7 +51,7 @@ def get_spanish_date_and_season(now):
 
 date_header_string = get_spanish_date_and_season(now_local)
 
-# --- 2. MANAGE THE WORD BANK PERSISTENCE ---
+# --- 3. MANAGE THE WORD BANK PERSISTENCE ---
 word_bank_file = "word_bank.json"
 already_learned = []
 word_review_html = "¡Este es tu primer día con el nuevo sistema! Pronto aquí verás tu palabra anterior."
@@ -74,7 +76,7 @@ if os.path.exists(word_bank_file):
 else:
     word_bank = []
 
-# --- 3. MANAGE THE PHRASE BANK PERSISTENCE ---
+# --- 4. MANAGE THE PHRASE BANK PERSISTENCE ---
 phrase_bank_file = "phrase_bank.json"
 already_learned_phrases = []
 phrase_review_html = "¡Este es tu primer día con el sistema de frases! Pronto aquí verás tu frase anterior."
@@ -99,7 +101,115 @@ if os.path.exists(phrase_bank_file):
 else:
     phrase_bank = []
 
-# --- 4. LOAD THE STUDENT'S FULL KNOWN-VOCABULARY / GRAMMAR BASE FROM YOUR TEXT FILE ---
+# --- 5. MANAGE THE NUMBER BANK PERSISTENCE & HELPER FUNCTIONS ---
+number_bank_file = "number_bank.json"
+used_numbers = set()
+
+if os.path.exists(number_bank_file):
+    try:
+        with open(number_bank_file, "r", encoding="utf-8") as f:
+            number_bank = json.load(f)
+            used_numbers = {item["number"] for item in number_bank}
+    except Exception as e:
+        print(f"Note: Could not read number_bank.json ({e}). Starting a clean number bank.")
+        number_bank = []
+else:
+    number_bank = []
+
+def numero_a_palabras(n):
+    if n == 0:
+        return "cero"
+    if n == 1_000_000_000:
+        return "mil millones"
+
+    unidades = ["", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"]
+    especiales = {
+        10: "diez", 11: "once", 12: "doce", 13: "trece", 14: "catorce", 15: "quince",
+        16: "dieciséis", 17: "diecisiete", 18: "dieciocho", 19: "diecinueve",
+        20: "veinte", 21: "veintiuno", 22: "veintidós", 23: "veintitrés", 24: "veinticuatro",
+        25: "veinticinco", 26: "veintiséis", 27: "veintisiete", 28: "veintiocho", 29: "veintinueve"
+    }
+    decenas = {30: "treinta", 40: "cuarenta", 50: "cincuenta", 60: "sesenta", 70: "setenta", 80: "ochenta", 90: "noventa"}
+    centenas = {1: "ciento", 2: "doscientos", 3: "trescientos", 4: "cuatrocientos", 5: "quinientos", 6: "seiscientos", 7: "setecientos", 8: "ochocientos", 9: "novecientos"}
+
+    def dos_digitos(num):
+        if num == 0:
+            return ""
+        if num < 10:
+            return unidades[num]
+        if num in especiales:
+            return especiales[num]
+        decena = (num // 10) * 10
+        resto = num % 10
+        if resto == 0:
+            return decenas[decena]
+        return f"{decenas[decena]} y {unidades[resto]}"
+
+    def tres_digitos(num):
+        if num == 0:
+            return ""
+        if num == 100:
+            return "cien"
+        c, resto = divmod(num, 100)
+        partes = []
+        if c > 0:
+            partes.append(centenas[c])
+        if resto > 0:
+            partes.append(dos_digitos(resto))
+        return " ".join(partes)
+
+    def apocopar(palabras):
+        if palabras == "uno":
+            return "un"
+        if palabras.endswith("veintiuno"):
+            return palabras[: -len("veintiuno")] + "veintiún"
+        if palabras.endswith(" y uno"):
+            return palabras[: -len("uno")] + "un"
+        return palabras
+
+    millones, resto1 = divmod(n, 1_000_000)
+    miles, unidades_resto = divmod(resto1, 1000)
+
+    partes = []
+    if millones > 0:
+        if millones == 1:
+            partes.append("un millón")
+        else:
+            partes.append(f"{apocopar(tres_digitos(millones))} millones")
+    if miles > 0:
+        if miles == 1:
+            partes.append("mil")
+        else:
+            partes.append(f"{apocopar(tres_digitos(miles))} mil")
+    if unidades_resto > 0:
+        partes.append(tres_digitos(unidades_resto))
+
+    return " ".join(partes)
+
+def elegir_numero_aleatorio():
+    # Weighted so MOST numbers feel everyday/relatable, with occasional big ones
+    roll = random.random()
+    if roll < 0.55:
+        return random.randint(1, 999)
+    elif roll < 0.80:
+        return random.randint(1000, 99999)
+    elif roll < 0.93:
+        return random.randint(100000, 9999999)
+    else:
+        return random.randint(10000000, 1000000000)
+
+def write_readable_numbers(filepath, bank):
+    try:
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write("🔢 Banco de Números Usados\n")
+            f.write("==========================\n\n")
+            for i, item in enumerate(bank, 1):
+                f.write(f"{i}. {item.get('number', 0):,} — {item.get('words', '')}\n")
+                f.write(f"   Fecha: {item.get('date', '')}\n\n")
+    except Exception as e:
+        print(f"Error writing {filepath}: {e}")
+
+# --- 6. LOAD THE STUDENT'S FULL KNOWN-VOCABULARY / GRAMMAR BASE FROM YOUR TEXT FILE ---
 known_vocab_block = ""
 if os.path.exists("spanish_vocab.txt"):
     try:
@@ -108,7 +218,7 @@ if os.path.exists("spanish_vocab.txt"):
     except Exception as e:
         print(f"Note: Could not read spanish_vocab.txt ({e}).")
 
-# --- 5. SECRETS VALIDATION ---
+# --- 7. SECRETS VALIDATION ---
 gemini_api_key = os.environ.get("GEMINI_API_KEY")
 smtp_user = os.environ.get("SMTP_USER")
 smtp_password = os.environ.get("SMTP_PASSWORD")
@@ -118,7 +228,7 @@ if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
     print("Error: Missing required environment variables.")
     exit(1)
 
-# --- 6. BUILD THE PROMPT FOR GEMINI ---
+# --- 8. BUILD THE PROMPT FOR GEMINI ---
 blacklist_words_str = ", ".join(already_learned) if already_learned else "Ninguna todavía"
 blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_phrases else "Ninguna todavía"
 
@@ -135,7 +245,10 @@ REGLAS DE SELECCIÓN DE PALABRAS Y FRASES:
 2. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas palabras ya aprendidas: [{blacklist_words_str}].
 3. Está TERMINANTEMENTE PROHIBIDO usar cualquiera de estas frases ya aprendidas: [{blacklist_phrases_str}].
 4. REGLA DE VOCABULARIO (MUY IMPORTANTE): Las secciones 3 (Blurb de la Calle), 4 (Reto 1) y 5 (Reto 2) son ejercicios de refuerzo y deben construirse ÚNICAMENTE con palabras, verbos, modismos y estructuras gramaticales que aparecen en la BASE DE CONOCIMIENTO DEL ESTUDIANTE indicada arriba (más palabras funcionales básicas como artículos, preposiciones, conjunciones y pronombres, aunque no estén listadas explícitamente). ESTÁ TERMINANTEMENTE PROHIBIDO usar en las secciones 3, 4 y 5 cualquier palabra o modismo que NO esté en esa base de conocimiento, incluyendo la palabra nueva del día y la frase nueva del día (que deben aparecer ÚNICAMENTE en las secciones 1 y 2). Si necesitas variar el vocabulario en los retos de traducción, elige otras palabras que SÍ estén en la base de conocimiento del estudiante.
+5. En el review-box de la sección 1 (Palabra del Día), escribe EXACTAMENTE y sin modificar, traducir, ni agregar nada más, el siguiente texto literal: PLACEHOLDER_PREV_WORD_REVIEW
 6. En el review-box de la sección 2 (Frase del Día), escribe EXACTAMENTE y sin modificar, traducir, ni agregar nada más, el siguiente texto literal: PLACEHOLDER_PREV_PHRASE_REVIEW
+7. En la sección 6 (Número del Día), escribe EXACTAMENTE y sin modificar el siguiente texto literal: PLACEHOLDER_NUMBER_DISPLAY
+8. En la Clave de Respuestas, para "Objetivo Número del Día", escribe EXACTAMENTE y sin modificar el siguiente texto literal: PLACEHOLDER_NUMBER_WORDS
 
 Estructura de diseño requerida (No uses em-dashes ni guiones largos "—" como separadores, usa barras verticales "|" o dos puntos):
 Entrega exclusivamente el código estructurado dentro de esta plantilla CSS. No uses bloques de código markdown (```html).
@@ -232,12 +345,22 @@ Estructura de diseño requerida:
           </div>
         </div>
 
+        <!-- 6. NUMERO DEL DIA -->
+        <div class="card">
+          <div class="card-title">6. 🔢 Número del Día (Number of the Day)</div>
+          <div class="challenge-box" style="background-color: #eef2ff; border-color: #c7d2fe; color: #312e81;">
+            <strong>Escribe este número en palabras (en español):</strong><br>
+            PLACEHOLDER_NUMBER_DISPLAY
+          </div>
+        </div>
+
         <!-- SPOILERS -->
         <div class="spoiler-section">
           <div class="spoiler-header">👇 CLAVE DE RESPUESTAS / ANSWER KEY</div>
           <div class="answer-key">
             <p style="margin-top: 0;"><strong>Objetivo Reto 1:</strong><br>"[Traducción]"</p>
-            <p style="margin-bottom: 0;"><strong>Objetivo Reto 2:</strong><br>"[Traducción]"</p>
+            <p><strong>Objetivo Reto 2:</strong><br>"[Traducción]"</p>
+            <p style="margin-bottom: 0;"><strong>Objetivo Número del Día:</strong><br>PLACEHOLDER_NUMBER_WORDS</p>
           </div>
         </div>
 
@@ -286,11 +409,32 @@ if not workout_html:
     print("All models and retries exhausted. Giving up.")
     exit(1)
 
-# --- 7. INJECT THE REAL PREVIOUS WORD/PHRASE REVIEW (replaces Gemini's placeholders) ---
+# --- 9. INJECT THE REAL PREVIOUS WORD/PHRASE REVIEW (replaces Gemini's placeholders) ---
 workout_html = workout_html.replace("PLACEHOLDER_PREV_WORD_REVIEW", word_review_html)
 workout_html = workout_html.replace("PLACEHOLDER_PREV_PHRASE_REVIEW", phrase_review_html)
 
-# --- 8. PARSE THE TARGET TRACKING DATA AND SAVE BACK TO THE BANKS ---
+# --- 10. GENERATE TODAY'S NUMBER (never repeats a previously used number) AND INJECT IT ---
+today_number = None
+for _ in range(50):
+    candidate = elegir_numero_aleatorio()
+    if candidate not in used_numbers:
+        today_number = candidate
+        break
+
+if today_number is None:
+    # Extremely unlikely fallback: scan for any unused number at all
+    for candidate in range(1, 1_000_000_001):
+        if candidate not in used_numbers:
+            today_number = candidate
+            break
+
+today_number_words = numero_a_palabras(today_number)
+today_number_display = f"{today_number:,}"
+
+workout_html = workout_html.replace("PLACEHOLDER_NUMBER_DISPLAY", today_number_display)
+workout_html = workout_html.replace("PLACEHOLDER_NUMBER_WORDS", today_number_words)
+
+# --- 11. PARSE THE TARGET TRACKING DATA AND SAVE BACK TO THE BANKS ---
 extracted_word = "Desconocida"
 extracted_meaning = "Unknown"
 extracted_example = ""
@@ -325,8 +469,6 @@ for line in workout_html.split("\n"):
 
 workout_html = "\n".join(cleaned_lines).strip()
 
-today_str = now_local.strftime("%Y-%m-%d")
-
 # Save word to word_bank
 if extracted_word != "Desconocida":
     word_bank.append({
@@ -357,7 +499,20 @@ if extracted_phrase != "Desconocida":
     except Exception as e:
         print(f"Error saving phrase bank: {e}")
 
-# --- 9. WRITE HUMAN-READABLE .TXT MIRRORS OF EACH BANK ---
+# Save number to number_bank
+number_bank.append({
+    "number": today_number,
+    "words": today_number_words,
+    "date": today_str
+})
+try:
+    with open(number_bank_file, "w", encoding="utf-8") as f:
+        json.dump(number_bank, f, ensure_ascii=False, indent=2)
+    print(f"Saved number '{today_number}' to the number bank.")
+except Exception as e:
+    print(f"Error saving number bank: {e}")
+
+# --- 12. WRITE HUMAN-READABLE .TXT MIRRORS OF EACH BANK ---
 def write_readable_bank(filepath, bank, item_key, label):
     try:
         with open(filepath, "w", encoding="utf-8") as f:
@@ -365,18 +520,19 @@ def write_readable_bank(filepath, bank, item_key, label):
             f.write("=" * len(label) + "\n\n")
             for i, item in enumerate(bank, 1):
                 f.write(f"{i}. {item.get(item_key, '')} — {item.get('meaning', '')}\n")
-                f.write(f"   Fecha: {item.get('date', '')}\n")
                 example = item.get("example")
                 if example:
                     f.write(f"   Ejemplo: {example}\n")
+                f.write(f"   Fecha: {item.get('date', '')}\n")
                 f.write("\n")
     except Exception as e:
         print(f"Error writing {filepath}: {e}")
 
 write_readable_bank("word_bank.txt", word_bank, "word", "📚 Banco de Palabras Aprendidas")
 write_readable_bank("phrase_bank.txt", phrase_bank, "phrase", "🗣️ Banco de Frases Aprendidas")
+write_readable_numbers("number_bank.txt", number_bank)
 
-# --- 10. DISPATCH THE EMAIL ---
+# --- 13. DISPATCH THE EMAIL ---
 msg = MIMEMultipart()
 msg['From'] = smtp_user
 msg['To'] = to_email
