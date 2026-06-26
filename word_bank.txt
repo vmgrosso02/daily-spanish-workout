@@ -57,3 +57,7 @@
    Ejemplo: "El equipo pudo derrotar a los campeones ayer" (The team was able to defeat the champions yesterday)
    Fecha: 2026-06-25
 
+16. esquivar — to dodge / to avoid
+   Ejemplo: "El coche pudo esquivar el perro en la carretera." (The car was able to dodge the dog on the highway.)
+   Fecha: 2026-06-26
+
