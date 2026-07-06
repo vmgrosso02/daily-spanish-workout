@@ -97,3 +97,7 @@
    Ejemplo: "Ella no puede parar de bostezar durante la película." (She cannot stop yawning during the movie.)
    Fecha: 2026-07-05
 
+26. el susurro — whisper
+   Ejemplo: "Escuché un susurro en la habitación oscura." (I heard a whisper in the dark room.)
+   Fecha: 2026-07-06
+
