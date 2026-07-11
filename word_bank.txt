@@ -117,3 +117,7 @@
    Ejemplo: "El atleta tiene el aliento corto porque corre mucho" (The athlete has short breath because he runs a lot)
    Fecha: 2026-07-10
 
+31. el atajo — shortcut
+   Ejemplo: "Tomamos un atajo para llegar más rápido al hotel." (We took a shortcut to arrive faster at the hotel.)
+   Fecha: 2026-07-11
+
