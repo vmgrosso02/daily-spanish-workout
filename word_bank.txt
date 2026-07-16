@@ -137,3 +137,7 @@
    Ejemplo: "Prueba un bocado de este pastel, está delicioso." ("Try a bite of this cake, it is delicious.")
    Fecha: 2026-07-15
 
+36. la mudanza — the move
+   Ejemplo: "La mudanza a nuestra nueva casa fue muy difícil." (The move to our new house was very difficult.)
+   Fecha: 2026-07-16
+
