@@ -145,3 +145,7 @@
    Ejemplo: "El padre intenta apaciguar al niño después de la película" (The father tries to calm the child down after the movie)
    Fecha: 2026-07-17
 
+38. el presupuesto — budget
+   Ejemplo: "Tenemos que hacer un presupuesto para las vacaciones." (We have to make a budget for the vacation.)
+   Fecha: 2026-07-18
+
