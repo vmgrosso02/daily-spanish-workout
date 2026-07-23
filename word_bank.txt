@@ -165,3 +165,7 @@
    Ejemplo: "Voy a colocar el libro sobre la mesa" (I am going to place the book on the table)
    Fecha: 2026-07-22
 
+43. titubear — to hesitate
+   Ejemplo: "Ella no quería titubear antes de comprar el coche nuevo." (She did not want to hesitate before buying the new car.)
+   Fecha: 2026-07-23
+
