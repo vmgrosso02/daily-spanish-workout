@@ -213,3 +213,7 @@
    Ejemplo: "El pronóstico del tiempo para mañana dice que va a llover." (The weather forecast for tomorrow says it is going to rain.)
    Fecha: 2026-08-03
 
+55. El propósito — The purpose
+   Ejemplo: "El propósito de mi viaje es visitar a mi familia." (The purpose of my trip is to visit my family.)
+   Fecha: 2026-08-04
+
