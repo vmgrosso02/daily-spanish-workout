@@ -229,3 +229,7 @@
    Ejemplo: "Ayer mi abuelo y yo terminamos un rompecabezas de mil piezas." (Yesterday my grandfather and I finished a thousand-piece puzzle.)
    Fecha: 2026-08-07
 
+59. el mostrador — the counter
+   Ejemplo: "Por favor, deja las llaves en el mostrador antes de salir." (Please, leave the keys on the counter before going out.)
+   Fecha: 2026-08-08
+
