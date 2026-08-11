@@ -241,3 +241,7 @@
    Ejemplo: "Por favor, cierra el grifo de la cocina porque el agua está corriendo." (Please, close the kitchen faucet because the water is running.)
    Fecha: 2026-08-10
 
+62. el relámpago — lightning bolt
+   Ejemplo: "Un relámpago iluminó el cielo oscuro durante la tormenta." (A flash of lightning illuminated the dark sky during the storm.)
+   Fecha: 2026-08-11
+
