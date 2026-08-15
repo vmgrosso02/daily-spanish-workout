@@ -257,3 +257,7 @@
    Ejemplo: "El banco me dio un préstamo para comprar el coche." (The bank gave me a loan to buy the car.)
    Fecha: 2026-08-14
 
+66. El peldaño — Step of a staircase
+   Ejemplo: "El gato subió por el peldaño de madera" (The cat went up the wooden step)
+   Fecha: 2026-08-15
+
