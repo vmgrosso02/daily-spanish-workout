@@ -261,3 +261,7 @@
    Ejemplo: "El gato subió por el peldaño de madera" (The cat went up the wooden step)
    Fecha: 2026-08-15
 
+67. el rastro — the trail / trace
+   Ejemplo: "El perro sigue el rastro del gato." (The dog follows the trail of the cat.)
+   Fecha: 2026-08-16
+
