@@ -265,3 +265,7 @@
    Ejemplo: "El perro sigue el rastro del gato." (The dog follows the trail of the cat.)
    Fecha: 2026-08-16
 
+68. el parachoques — the bumper
+   Ejemplo: "El coche rojo tiene el parachoques roto." (The red car has a broken bumper.)
+   Fecha: 2026-08-17
+
