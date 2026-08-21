@@ -281,3 +281,7 @@
    Ejemplo: "Mi nuevo vecindario es muy tranquilo y tiene un parque grande." (My new neighborhood is very quiet and has a big park.)
    Fecha: 2026-08-20
 
+72. el folleto — brochure
+   Ejemplo: "Leí el folleto del hotel para ver las actividades." (I read the hotel brochure to see the activities.)
+   Fecha: 2026-08-21
+
