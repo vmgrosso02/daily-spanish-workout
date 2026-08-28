@@ -309,3 +309,7 @@
    Ejemplo: "No te apresures, el tren llega tarde hoy" (Don't rush, the train is arriving late today)
    Fecha: 2026-08-27
 
+79. el laberinto — the labyrinth, the maze
+   Ejemplo: "Perdimos el mapa y ahora estamos en un laberinto." (We lost the map and now we are in a maze.)
+   Fecha: 2026-08-28
+
