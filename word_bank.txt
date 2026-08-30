@@ -317,3 +317,7 @@
    Ejemplo: "Siento un hormigueo extraño en el brazo derecho." (I feel a strange tingling sensation in my right arm.)
    Fecha: 2026-08-29
 
+81. el corcho — cork
+   Ejemplo: "El camarero abrió la botella de vino pero rompió el corcho." (The waiter opened the wine bottle but broke the cork.)
+   Fecha: 2026-08-30
+
