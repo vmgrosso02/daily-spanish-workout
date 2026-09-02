@@ -329,3 +329,7 @@
    Ejemplo: "En verano, mi abuela siempre usa un abanico para el calor." (In summer, my grandmother always uses a hand fan for the heat.)
    Fecha: 2026-09-01
 
+84. el despertador — alarm clock
+   Ejemplo: "Mi despertador no sonó esta mañana y llegué tarde a la oficina." (My alarm clock did not ring this morning and I arrived late at the office.)
+   Fecha: 2026-09-02
+
