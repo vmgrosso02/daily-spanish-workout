@@ -341,3 +341,7 @@
    Ejemplo: "El faro brilla en la noche para ayudar a los barcos." (The lighthouse shines in the night to help the ships.)
    Fecha: 2026-09-04
 
+87. el candado — the padlock
+   Ejemplo: "Cierra la puerta del garaje con el candado." (Close the garage door with the padlock.)
+   Fecha: 2026-09-05
+
