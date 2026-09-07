@@ -349,3 +349,7 @@
    Ejemplo: "Guardamos las cajas viejas en el sótano de la casa." (We keep the old boxes in the basement of the house.)
    Fecha: 2026-09-06
 
+89. amanecer — dawn
+   Ejemplo: "Nosotros vimos el amanecer en la playa." (We saw the sunrise on the beach.)
+   Fecha: 2026-09-07
+
