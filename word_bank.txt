@@ -369,3 +369,7 @@
    Ejemplo: "Perdimos el camino en el desierto, pero usamos la brújula para ir al norte." (We lost the way in the desert, but we used the compass to go north.)
    Fecha: 2026-09-11
 
+94. el paradero — whereabouts
+   Ejemplo: "La policía todavía no sabe el paradero del ladrón." (The police still do not know the whereabouts of the thief.)
+   Fecha: 2026-09-12
+
