@@ -373,3 +373,7 @@
    Ejemplo: "La policía todavía no sabe el paradero del ladrón." (The police still do not know the whereabouts of the thief.)
    Fecha: 2026-09-12
 
+95. la llovizna — the drizzle
+   Ejemplo: "No necesitas el paraguas, solo es una pequeña llovizna." ("You don't need the umbrella, it is only a light drizzle.")
+   Fecha: 2026-09-13
+
