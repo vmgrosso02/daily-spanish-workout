@@ -377,3 +377,7 @@
    Ejemplo: "No necesitas el paraguas, solo es una pequeña llovizna." ("You don't need the umbrella, it is only a light drizzle.")
    Fecha: 2026-09-13
 
+96. Apresurado — Hasty
+   Ejemplo: "El estudiante salió apresurado de la escuela." (The student left the school in a hurry.)
+   Fecha: 2026-09-14
+
