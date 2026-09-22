@@ -1,13 +1,14 @@
+import json
 import os
 import random
 import smtplib
 import time
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import json
 import urllib.request
 from datetime import datetime
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from zoneinfo import ZoneInfo
+
 
 # --- 1. NUMBER-TO-SPANISH-WORDS CONVERTER (used for the date header AND Number of the Day) ---
 def numero_a_palabras(n):
@@ -16,15 +17,60 @@ def numero_a_palabras(n):
     if n == 1_000_000_000:
         return "mil millones"
 
-    unidades = ["", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve"]
+    unidades = [
+        "",
+        "uno",
+        "dos",
+        "tres",
+        "cuatro",
+        "cinco",
+        "seis",
+        "siete",
+        "ocho",
+        "nueve",
+    ]
     especiales = {
-        10: "diez", 11: "once", 12: "doce", 13: "trece", 14: "catorce", 15: "quince",
-        16: "dieciséis", 17: "diecisiete", 18: "dieciocho", 19: "diecinueve",
-        20: "veinte", 21: "veintiuno", 22: "veintidós", 23: "veintitrés", 24: "veinticuatro",
-        25: "veinticinco", 26: "veintiséis", 27: "veintisiete", 28: "veintiocho", 29: "veintinueve"
+        10: "diez",
+        11: "once",
+        12: "doce",
+        13: "trece",
+        14: "catorce",
+        15: "quince",
+        16: "dieciséis",
+        17: "diecisiete",
+        18: "dieciocho",
+        19: "diecinueve",
+        20: "veinte",
+        21: "veintiuno",
+        22: "veintidós",
+        23: "veintitrés",
+        24: "veinticuatro",
+        25: "veinticinco",
+        26: "veintiséis",
+        27: "veintisiete",
+        28: "veintiocho",
+        29: "veintinueve",
     }
-    decenas = {30: "treinta", 40: "cuarenta", 50: "cincuenta", 60: "sesenta", 70: "setenta", 80: "ochenta", 90: "noventa"}
-    centenas = {1: "ciento", 2: "doscientos", 3: "trescientos", 4: "cuatrocientos", 5: "quinientos", 6: "seiscientos", 7: "setecientos", 8: "ochocientos", 9: "novecientos"}
+    decenas = {
+        30: "treinta",
+        40: "cuarenta",
+        50: "cincuenta",
+        60: "sesenta",
+        70: "setenta",
+        80: "ochenta",
+        90: "noventa",
+    }
+    centenas = {
+        1: "ciento",
+        2: "doscientos",
+        3: "trescientos",
+        4: "cuatrocientos",
+        5: "quinientos",
+        6: "seiscientos",
+        7: "setecientos",
+        8: "ochocientos",
+        9: "novecientos",
+    }
 
     def dos_digitos(num):
         if num == 0:
@@ -56,9 +102,9 @@ def numero_a_palabras(n):
         if palabras == "uno":
             return "un"
         if palabras.endswith("veintiuno"):
-            return palabras[: -len("veintiuno")] + "veintiún"
+            return palabras[:-len("veintiuno")] + "veintiún"
         if palabras.endswith(" y uno"):
-            return palabras[: -len("uno")] + "un"
+            return palabras[:-len("uno")] + "un"
         return palabras
 
     millones, resto1 = divmod(n, 1_000_000)
@@ -80,14 +126,37 @@ def numero_a_palabras(n):
 
     return " ".join(partes)
 
+
 # --- 2. SHARED LOCAL TIME (Miami, auto-adjusts for DST) ---
 now_local = datetime.now(ZoneInfo("America/New_York"))
 today_str = now_local.strftime("%Y-%m-%d")
 
+
 # --- 3. GENERATE DYNAMIC SPANISH DATE, TIME, AND SEASON (fully spelled out) ---
 def get_spanish_date_and_season(now):
-    days = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-    months = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    days = [
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado",
+        "Domingo",
+    ]
+    months = [
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio",
+        "agosto",
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre",
+    ]
 
     day_of_week = days[now.weekday()]
     day = now.day
@@ -128,10 +197,8 @@ def get_spanish_date_and_season(now):
 
     return f"{day_of_week}, {day_word} de {month_name} de {year_word} | {season} | {time_words}"
 
+
 date_header_string = get_spanish_date_and_season(now_local)
-
-
-
 
 
 # --- 3. MANAGE THE WORD BANK PERSISTENCE ---
@@ -144,7 +211,9 @@ if os.path.exists(word_bank_file):
         with open(word_bank_file, "r", encoding="utf-8") as f:
             word_bank = json.load(f)
             if word_bank:
-                already_learned = [item["word"].lower().strip() for item in word_bank]
+                already_learned = [
+                    item["word"].lower().strip() for item in word_bank
+                ]
                 last_item = word_bank[-1]
                 w = last_item.get("word", "")
                 wm = last_item.get("meaning", "")
@@ -154,7 +223,9 @@ if os.path.exists(word_bank_file):
                 else:
                     word_review_html = f"Anterior: {w} ({wm})<br><br>(No se guardó un ejemplo para esta entrada.)"
     except Exception as e:
-        print(f"Note: Could not read word_bank.json ({e}). Starting a clean word bank.")
+        print(
+            f"Note: Could not read word_bank.json ({e}). Starting a clean word bank."
+        )
         word_bank = []
 else:
     word_bank = []
@@ -169,17 +240,23 @@ if os.path.exists(phrase_bank_file):
         with open(phrase_bank_file, "r", encoding="utf-8") as f:
             phrase_bank = json.load(f)
             if phrase_bank:
-                already_learned_phrases = [item["phrase"].lower().strip() for item in phrase_bank]
+                already_learned_phrases = [
+                    item["phrase"].lower().strip() for item in phrase_bank
+                ]
                 last_phrase = phrase_bank[-1]
                 p = last_phrase.get("phrase", "")
                 pm = last_phrase.get("meaning", "")
                 pe = last_phrase.get("example", "")
                 if pe:
-                    phrase_review_html = f"Anterior: {p} ({pm})<br><br>Ejemplo: {pe}"
+                    phrase_review_html = (
+                        f"Anterior: {p} ({pm})<br><br>Ejemplo: {pe}"
+                    )
                 else:
                     phrase_review_html = f"Anterior: {p} ({pm})<br><br>(No se guardó un ejemplo para esta entrada.)"
     except Exception as e:
-        print(f"Note: Could not read phrase_bank.json ({e}). Starting a clean phrase bank.")
+        print(
+            f"Note: Could not read phrase_bank.json ({e}). Starting a clean phrase bank."
+        )
         phrase_bank = []
 else:
     phrase_bank = []
@@ -194,10 +271,13 @@ if os.path.exists(number_bank_file):
             number_bank = json.load(f)
             used_numbers = {item["number"] for item in number_bank}
     except Exception as e:
-        print(f"Note: Could not read number_bank.json ({e}). Starting a clean number bank.")
+        print(
+            f"Note: Could not read number_bank.json ({e}). Starting a clean number bank."
+        )
         number_bank = []
 else:
     number_bank = []
+
 
 def elegir_numero_aleatorio():
     # Weighted so MOST numbers feel everyday/relatable, with occasional big ones
@@ -211,16 +291,20 @@ def elegir_numero_aleatorio():
     else:
         return random.randint(10000000, 1000000000)
 
+
 def write_readable_numbers(filepath, bank):
     try:
         with open(filepath, "w", encoding="utf-8") as f:
             f.write("🔢 Banco de Números Usados\n")
             f.write("==========================\n\n")
             for i, item in enumerate(bank, 1):
-                f.write(f"{i}. {item.get('number', 0):,} — {item.get('words', '')}\n")
-                f.write(f"   Fecha: {item.get('date', '')}\n\n")
+                f.write(
+                    f"{i}. {item.get('number', 0):,} — {item.get('words', '')}\n"
+                )
+                f.write(f"    Fecha: {item.get('date', '')}\n\n")
     except Exception as e:
         print(f"Error writing {filepath}: {e}")
+
 
 # --- 6. LOAD THE STUDENT'S FULL KNOWN-VOCABULARY / GRAMMAR BASE FROM YOUR TEXT FILE ---
 known_vocab_block = ""
@@ -242,8 +326,14 @@ if not gemini_api_key or not smtp_user or not smtp_password or not to_email:
     exit(1)
 
 # --- 8. BUILD THE PROMPT FOR GEMINI ---
-blacklist_words_str = ", ".join(already_learned) if already_learned else "Ninguna todavía"
-blacklist_phrases_str = ", ".join(already_learned_phrases) if already_learned_phrases else "Ninguna todavía"
+blacklist_words_str = (
+    ", ".join(already_learned) if already_learned else "Ninguna todavía"
+)
+blacklist_phrases_str = (
+    ", ".join(already_learned_phrases)
+    if already_learned_phrases
+    else "Ninguna todavía"
+)
 
 prompt = f"""
 Eres un tutor experto de español. Tu tarea es generar el código HTML puro responsivo para el entrenamiento de hoy.
@@ -395,14 +485,23 @@ max_retries_per_model = 2
 workout_html = None
 
 for model_name in models_to_try:
-    model_url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemini_api_key}"
-    req = urllib.request.Request(model_url, data=json.dumps(data).encode("utf-8"), headers={"Content-Type": "application/json"}, method="POST")
+    model_url = f"[https://generativelanguage.googleapis.com/v1beta/models/](https://generativelanguage.googleapis.com/v1beta/models/){model_name}:generateContent?key={gemini_api_key}"
+    req = urllib.request.Request(
+        model_url,
+        data=json.dumps(data).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
 
     for attempt in range(1, max_retries_per_model + 1):
-        print(f"Llamando a la API de Gemini con {model_name}... (intento {attempt}/{max_retries_per_model})")
+        print(
+            f"Llamando a la API de Gemini con {model_name}... (intento {attempt}/{max_retries_per_model})"
+        )
         try:
             with urllib.request.urlopen(req) as response:
-                workout_html = json.loads(response.read().decode("utf-8"))['candidates'][0]['content']['parts'][0]['text']
+                workout_html = json.loads(response.read().decode("utf-8"))[
+                    "candidates"
+                ][0]["content"]["parts"][0]["text"]
                 if workout_html.startswith("```html"):
                     workout_html = workout_html[7:]
                 if workout_html.endswith("```"):
@@ -410,7 +509,9 @@ for model_name in models_to_try:
                 workout_html = workout_html.strip()
             break  # success, stop retrying this model
         except Exception as e:
-            print(f"Error calling Gemini with {model_name} (attempt {attempt}): {e}")
+            print(
+                f"Error calling Gemini with {model_name} (attempt {attempt}): {e}"
+            )
             if attempt < max_retries_per_model:
                 wait_time = 15 * attempt
                 print(f"Retrying in {wait_time} seconds...")
@@ -423,8 +524,12 @@ if not workout_html:
     exit(1)
 
 # --- 9. INJECT THE REAL PREVIOUS WORD/PHRASE REVIEW (replaces Gemini's placeholders) ---
-workout_html = workout_html.replace("PLACEHOLDER_PREV_WORD_REVIEW", word_review_html)
-workout_html = workout_html.replace("PLACEHOLDER_PREV_PHRASE_REVIEW", phrase_review_html)
+workout_html = workout_html.replace(
+    "PLACEHOLDER_PREV_WORD_REVIEW", word_review_html
+)
+workout_html = workout_html.replace(
+    "PLACEHOLDER_PREV_PHRASE_REVIEW", phrase_review_html
+)
 
 # --- 10. GENERATE TODAY'S NUMBER (never repeats a previously used number) AND INJECT IT ---
 today_number = None
@@ -444,8 +549,12 @@ if today_number is None:
 today_number_words = numero_a_palabras(today_number)
 today_number_display = f"{today_number:,}"
 
-workout_html = workout_html.replace("PLACEHOLDER_NUMBER_DISPLAY", today_number_display)
-workout_html = workout_html.replace("PLACEHOLDER_NUMBER_WORDS", today_number_words)
+workout_html = workout_html.replace(
+    "PLACEHOLDER_NUMBER_DISPLAY", today_number_display
+)
+workout_html = workout_html.replace(
+    "PLACEHOLDER_NUMBER_WORDS", today_number_words
+)
 
 # --- 11. PARSE THE TARGET TRACKING DATA AND SAVE BACK TO THE BANKS ---
 extracted_word = "Desconocida"
@@ -488,7 +597,7 @@ if extracted_word != "Desconocida":
         "word": extracted_word,
         "meaning": extracted_meaning,
         "example": extracted_example,
-        "date": today_str
+        "date": today_str,
     })
     try:
         with open(word_bank_file, "w", encoding="utf-8") as f:
@@ -503,7 +612,7 @@ if extracted_phrase != "Desconocida":
         "phrase": extracted_phrase,
         "meaning": extracted_phrase_meaning,
         "example": extracted_phrase_example,
-        "date": today_str
+        "date": today_str,
     })
     try:
         with open(phrase_bank_file, "w", encoding="utf-8") as f:
@@ -513,17 +622,16 @@ if extracted_phrase != "Desconocida":
         print(f"Error saving phrase bank: {e}")
 
 # Save number to number_bank
-number_bank.append({
-    "number": today_number,
-    "words": today_number_words,
-    "date": today_str
-})
+number_bank.append(
+    {"number": today_number, "words": today_number_words, "date": today_str}
+)
 try:
     with open(number_bank_file, "w", encoding="utf-8") as f:
         json.dump(number_bank, f, ensure_ascii=False, indent=2)
     print(f"Saved number '{today_number}' to the number bank.")
 except Exception as e:
     print(f"Error saving number bank: {e}")
+
 
 # --- 12. WRITE HUMAN-READABLE .TXT MIRRORS OF EACH BANK ---
 def write_readable_bank(filepath, bank, item_key, label):
@@ -532,7 +640,9 @@ def write_readable_bank(filepath, bank, item_key, label):
             f.write(f"{label}\n")
             f.write("=" * len(label) + "\n\n")
             for i, item in enumerate(bank, 1):
-                f.write(f"{i}. {item.get(item_key, '')} — {item.get('meaning', '')}\n")
+                f.write(
+                    f"{i}. {item.get(item_key, '')} — {item.get('meaning', '')}\n"
+                )
                 example = item.get("example")
                 if example:
                     f.write(f"   Ejemplo: {example}\n")
@@ -541,20 +651,27 @@ def write_readable_bank(filepath, bank, item_key, label):
     except Exception as e:
         print(f"Error writing {filepath}: {e}")
 
-write_readable_bank("word_bank.txt", word_bank, "word", "📚 Banco de Palabras Aprendidas")
-write_readable_bank("phrase_bank.txt", phrase_bank, "phrase", "🗣️ Banco de Frases Aprendidas")
+
+write_readable_bank(
+    "word_bank.txt", word_bank, "word", "📚 Banco de Palabras Aprendidas"
+)
+write_readable_bank(
+    "phrase_bank.txt", phrase_bank, "phrase", "🗣️ Banco de Frases Aprendidas"
+)
 write_readable_numbers("number_bank.txt", number_bank)
 
 # --- 13. DISPATCH THE EMAIL ---
 msg = MIMEMultipart()
-msg['From'] = smtp_user
-msg['To'] = to_email
-msg['Subject'] = f"📅 Entrenamiento Diario: {date_header_string.split('|')[0].strip()}"
-msg.attach(MIMEText(workout_html, 'html'))
+msg["From"] = smtp_user
+msg["To"] = to_email
+msg["Subject"] = (
+    f"📅 Entrenamiento Diario: {date_header_string.split('|')[0].strip()}"
+)
+msg.attach(MIMEText(workout_html, "html"))
 
 print("Sending email...")
 try:
-    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
     server.login(smtp_user, smtp_password)
     server.sendmail(smtp_user, to_email, msg.as_string())
