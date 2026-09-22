@@ -1,387 +1,98 @@
-📚 Banco de Palabras Aprendidas
-==============================
-
-1. Ventana — Window
-   Fecha: 2026-06-21
-
-2. Cajón — Drawer
-   Fecha: 2026-06-22
-
-3. Estrenar — To wear or use for the first time
-   Fecha: 2026-06-22
-
-4. madrugar — to wake up early
-   Fecha: 2026-06-22
-
-5. el antojo — the craving
-   Ejemplo: "Tengo un antojo de chocolate esta noche." (I have a craving for chocolate tonight.)
-   Fecha: 2026-06-22
-
-6. el rincón — the corner / nook
-   Ejemplo: "El gato duerme en el rincón de mi casa." (The cat sleeps in the corner of my house.)
-   Fecha: 2026-06-22
-
-7. el jarabe — cough syrup
-   Ejemplo: "Toma el jarabe con un poco de agua." (Take the syrup with a little bit of water.)
-   Fecha: 2026-06-22
-
-8. la pesadilla — the nightmare
-   Ejemplo: "Tuve una pesadilla anoche y no pude dormir." (I had a nightmare last night and couldn't sleep.)
-   Fecha: 2026-06-22
-
-9. Apresurarse — To hurry up
-   Ejemplo: "Tienes que apresurarte para llegar al aeropuerto a tiempo." (You have to hurry up to get to the airport on time.)
-   Fecha: 2026-06-23
-
-10. Apagar — To turn off / extinguish
-   Ejemplo: "Por favor, apaga la luz antes de salir" (Please turn off the light before leaving)
-   Fecha: 2026-06-23
-
-11. apuntar — to aim / to take notes / to jot down
-   Ejemplo: "El estudiante siempre apunta las instrucciones en su cuaderno" (The student always writes down the instructions in his notebook)
-   Fecha: 2026-06-23
-
-12. Apacible — Peaceful/Gentle
-   Ejemplo: "El campo está muy apacible esta tarde de verano" (The countryside is very peaceful this summer afternoon)
-   Fecha: 2026-06-23
-
-13. Agotador — Exhausting
-   Ejemplo: "El viaje en autobús ha sido agotador" (The bus trip has been exhausting)
-   Fecha: 2026-06-24
-
-14. Colmar — To fulfill/to fill to the brim
-   Ejemplo: "Sus palabras me colmaron de alegría" (His words filled me with joy)
-   Fecha: 2026-06-25
-
-15. Derrotar — To defeat / To beat
-   Ejemplo: "El equipo pudo derrotar a los campeones ayer" (The team was able to defeat the champions yesterday)
-   Fecha: 2026-06-25
-
-16. esquivar — to dodge / to avoid
-   Ejemplo: "El coche pudo esquivar el perro en la carretera." (The car was able to dodge the dog on the highway.)
-   Fecha: 2026-06-26
-
-17. El alboroto — The racket / commotion
-   Ejemplo: "Los niños hicieron un gran alboroto en el parque" (The children made a big racket in the park)
-   Fecha: 2026-06-27
-
-18. Apenas — Barely/Hardly
-   Ejemplo: "Apenas tengo dinero para comprar comida" (I barely have money to buy food)
-   Fecha: 2026-06-28
-
-19. Coloquial — Colloquial
-   Ejemplo: "Usamos un lenguaje coloquial con los amigos" (We use colloquial language with friends)
-   Fecha: 2026-06-29
-
-20. el alojamiento — accommodation
-   Ejemplo: "El alojamiento en este hotel es muy caro." (The accommodation in this hotel is very expensive.)
-   Fecha: 2026-06-30
-
-21. Desafiar — To challenge/defy
-   Ejemplo: "No quiero desafiar a mi jefe hoy." (I don't want to challenge my boss today.)
-   Fecha: 2026-07-01
-
-22. el atardecer — sunset
-   Ejemplo: "Nosotros miramos el hermoso atardecer desde la playa." (We watch the beautiful sunset from the beach.)
-   Fecha: 2026-07-02
-
-23. el semáforo — traffic light
-   Ejemplo: "El semáforo está en rojo, por eso el taxi tiene que parar." (The traffic light is red, that's why the taxi has to stop.)
-   Fecha: 2026-07-03
-
-24. el hallazgo — the discovery / the find
-   Ejemplo: "El hallazgo de la carta vieja cambió mi vida." (The discovery of the old letter changed my life.)
-   Fecha: 2026-07-04
-
-25. bostezar — to yawn
-   Ejemplo: "Ella no puede parar de bostezar durante la película." (She cannot stop yawning during the movie.)
-   Fecha: 2026-07-05
-
-26. el susurro — whisper
-   Ejemplo: "Escuché un susurro en la habitación oscura." (I heard a whisper in the dark room.)
-   Fecha: 2026-07-06
-
-27. desafortunadamente — unfortunately
-   Ejemplo: "Desafortunadamente, olvidé mi cartera en el restaurante." (Unfortunately, I forgot my wallet at the restaurant.)
-   Fecha: 2026-07-07
-
-28. el contratiempo — setback
-   Ejemplo: "Tuvimos un pequeño contratiempo con el coche, pero ya llegamos." (We had a small setback with the car, but we have arrived.)
-   Fecha: 2026-07-08
-
-29. El peldaño — Step / Rung
-   Ejemplo: "Sube el peldaño con cuidado." (Go up the step carefully.)
-   Fecha: 2026-07-09
-
-30. El aliento — Breath
-   Ejemplo: "El atleta tiene el aliento corto porque corre mucho" (The athlete has short breath because he runs a lot)
-   Fecha: 2026-07-10
-
-31. el atajo — shortcut
-   Ejemplo: "Tomamos un atajo para llegar más rápido al hotel." (We took a shortcut to arrive faster at the hotel.)
-   Fecha: 2026-07-11
-
-32. el rascacielos — skyscraper
-   Ejemplo: "Ese rascacielos es el edificio más alto de la ciudad." (That skyscraper is the tallest building in the city.)
-   Fecha: 2026-07-12
-
-33. El peluche — Stuffed animal
-   Ejemplo: "Compré un peluche para mi hija" (I bought a stuffed animal for my daughter)
-   Fecha: 2026-07-13
-
-34. trasnochar — to stay up late / stay up all night
-   Ejemplo: "No me gusta trasnochar porque al día siguiente siempre tengo mucho sueño." (I don't like to stay up late because the next day I am always very sleepy.)
-   Fecha: 2026-07-14
-
-35. el bocado — bite / mouthful
-   Ejemplo: "Prueba un bocado de este pastel, está delicioso." ("Try a bite of this cake, it is delicious.")
-   Fecha: 2026-07-15
-
-36. la mudanza — the move
-   Ejemplo: "La mudanza a nuestra nueva casa fue muy difícil." (The move to our new house was very difficult.)
-   Fecha: 2026-07-16
-
-37. Apaciguar — To appease/calm down
-   Ejemplo: "El padre intenta apaciguar al niño después de la película" (The father tries to calm the child down after the movie)
-   Fecha: 2026-07-17
-
-38. el presupuesto — budget
-   Ejemplo: "Tenemos que hacer un presupuesto para las vacaciones." (We have to make a budget for the vacation.)
-   Fecha: 2026-07-18
-
-39. el calambre — cramp
-   Ejemplo: "Tengo un calambre en la pierna después de correr." (I have a cramp in my leg after running.)
-   Fecha: 2026-07-19
-
-40. la caminata — the hike
-   Ejemplo: "Ayer hice una caminata por el parque." (Yesterday I went for a hike in the park.)
-   Fecha: 2026-07-20
-
-41. Apresuradamente — Hastily
-   Ejemplo: "El estudiante escribió su examen apresuradamente" (The student wrote his exam hastily)
-   Fecha: 2026-07-21
-
-42. Colocar — To place/put
-   Ejemplo: "Voy a colocar el libro sobre la mesa" (I am going to place the book on the table)
-   Fecha: 2026-07-22
-
-43. titubear — to hesitate
-   Ejemplo: "Ella no quería titubear antes de comprar el coche nuevo." (She did not want to hesitate before buying the new car.)
-   Fecha: 2026-07-23
-
-44. El peluquero — The hairdresser
-   Ejemplo: "El peluquero ha cortado el pelo de mi hermano." (The hairdresser has cut my brother's hair.)
-   Fecha: 2026-07-24
-
-45. el escalofrío — the shiver / chill
-   Ejemplo: "Sentí un escalofrío cuando entré en la vieja casa." (I felt a shiver when I entered the old house.)
-   Fecha: 2026-07-25
-
-46. el impermeable — the raincoat
-   Ejemplo: "Lleva el impermeable porque hoy va a llover mucho." (Wear the raincoat because today it is going to rain a lot.)
-   Fecha: 2026-07-26
-
-47. El albergue — The shelter/hostel
-   Ejemplo: "Ellos han buscado un albergue para pasar la noche" (They have looked for a shelter to spend the night)
-   Fecha: 2026-07-27
-
-48. Soler — To usually do something
-   Ejemplo: "Yo suelo comer fruta a las ocho" (I usually eat fruit at eight)
-   Fecha: 2026-07-28
-
-49. Sobresaliente — Outstanding/Excellent
-   Ejemplo: "El trabajo del estudiante fue sobresaliente" (The student's work was outstanding)
-   Fecha: 2026-07-29
-
-50. El aliento — Breath
-   Ejemplo: "Después de correr en el parque, él tomó aliento" (After running in the park, he caught his breath)
-   Fecha: 2026-07-30
-
-51. Distraído — Distracted/Absent-minded
-   Ejemplo: "Él estaba muy distraído durante la clase." (He was very distracted during the class.)
-   Fecha: 2026-07-31
-
-52. el huerto — vegetable garden
-   Ejemplo: "Mi abuelo pasa todas las mañanas trabajando en su huerto." (My grandfather spends every morning working in his vegetable garden.)
-   Fecha: 2026-08-01
-
-53. el malentendido — misunderstanding
-   Ejemplo: "Todo fue un malentendido entre nosotros." (Everything was a misunderstanding between us.)
-   Fecha: 2026-08-02
-
-54. el pronóstico — the forecast
-   Ejemplo: "El pronóstico del tiempo para mañana dice que va a llover." (The weather forecast for tomorrow says it is going to rain.)
-   Fecha: 2026-08-03
-
-55. El propósito — The purpose
-   Ejemplo: "El propósito de mi viaje es visitar a mi familia." (The purpose of my trip is to visit my family.)
-   Fecha: 2026-08-04
-
-56. El peldaño — Step of a staircase
-   Ejemplo: "Subí el último peldaño con mucho esfuerzo" (I climbed the last step with a lot of effort)
-   Fecha: 2026-08-05
-
-57. el suspiro — the sigh
-   Ejemplo: "Ella dio un profundo suspiro al terminar el examen." (She gave a deep sigh upon finishing the exam.)
-   Fecha: 2026-08-06
-
-58. el rompecabezas — the puzzle / jigsaw puzzle
-   Ejemplo: "Ayer mi abuelo y yo terminamos un rompecabezas de mil piezas." (Yesterday my grandfather and I finished a thousand-piece puzzle.)
-   Fecha: 2026-08-07
-
-59. el mostrador — the counter
-   Ejemplo: "Por favor, deja las llaves en el mostrador antes de salir." (Please, leave the keys on the counter before going out.)
-   Fecha: 2026-08-08
-
-60. el bache — pothole / rough patch
-   Ejemplo: "El coche se dañó porque caímos en un bache profundo." (The car was damaged because we fell into a deep pothole.)
-   Fecha: 2026-08-09
-
-61. el grifo — the faucet / the tap
-   Ejemplo: "Por favor, cierra el grifo de la cocina porque el agua está corriendo." (Please, close the kitchen faucet because the water is running.)
-   Fecha: 2026-08-10
-
-62. el relámpago — lightning bolt
-   Ejemplo: "Un relámpago iluminó el cielo oscuro durante la tormenta." (A flash of lightning illuminated the dark sky during the storm.)
-   Fecha: 2026-08-11
-
-63. callejón — the alleyway
-   Ejemplo: "Caminamos por el callejón oscuro para llegar rápido al restaurante." (We walked through the dark alley to get to the restaurant quickly.)
-   Fecha: 2026-08-12
-
-64. desprevenido — unprepared or caught off guard
-   Ejemplo: "El examen de español me tomó desprevenido." (The Spanish exam caught me unprepared.)
-   Fecha: 2026-08-13
-
-65. el préstamo — the loan
-   Ejemplo: "El banco me dio un préstamo para comprar el coche." (The bank gave me a loan to buy the car.)
-   Fecha: 2026-08-14
-
-66. El peldaño — Step of a staircase
-   Ejemplo: "El gato subió por el peldaño de madera" (The cat went up the wooden step)
-   Fecha: 2026-08-15
-
-67. el rastro — the trail / trace
-   Ejemplo: "El perro sigue el rastro del gato." (The dog follows the trail of the cat.)
-   Fecha: 2026-08-16
-
-68. el parachoques — the bumper
-   Ejemplo: "El coche rojo tiene el parachoques roto." (The red car has a broken bumper.)
-   Fecha: 2026-08-17
-
-69. cicatriz — scar
-   Ejemplo: "Él tiene una cicatriz en el brazo por un accidente." (He has a scar on his arm from an accident.)
-   Fecha: 2026-08-18
-
-70. el anhelo — longing or yearning
-   Ejemplo: "Ella tiene el anhelo de viajar por todo el mundo." (She has the yearning to travel all over the world.)
-   Fecha: 2026-08-19
-
-71. el vecindario — the neighborhood
-   Ejemplo: "Mi nuevo vecindario es muy tranquilo y tiene un parque grande." (My new neighborhood is very quiet and has a big park.)
-   Fecha: 2026-08-20
-
-72. el folleto — brochure
-   Ejemplo: "Leí el folleto del hotel para ver las actividades." (I read the hotel brochure to see the activities.)
-   Fecha: 2026-08-21
-
-73. el parabrisas — the windshield
-   Ejemplo: "El parabrisas de mi coche está muy sucio por la lluvia." (The windshield of my car is very dirty because of the rain.)
-   Fecha: 2026-08-22
-
-74. el atasco — traffic jam
-   Ejemplo: "Llegué tarde al trabajo por un gran atasco en la carretera." (I arrived late to work due to a big traffic jam on the road.)
-   Fecha: 2026-08-23
-
-75. El sendero — The path / trail
-   Ejemplo: "Caminamos por un sendero hermoso en las montañas." (We walked along a beautiful path in the mountains.)
-   Fecha: 2026-08-24
-
-76. añorar — to long for
-   Ejemplo: "Ellos añoran su tierra natal cuando están lejos." (They long for their homeland when they are far away.)
-   Fecha: 2026-08-25
-
-77. el bolsillo — pocket
-   Ejemplo: "Tengo un teléfono y algo de dinero en mi bolsillo." (I have a phone and some money in my pocket.)
-   Fecha: 2026-08-26
-
-78. Apresurarse — To hurry up / To rush
-   Ejemplo: "No te apresures, el tren llega tarde hoy" (Don't rush, the train is arriving late today)
-   Fecha: 2026-08-27
-
-79. el laberinto — the labyrinth, the maze
-   Ejemplo: "Perdimos el mapa y ahora estamos en un laberinto." (We lost the map and now we are in a maze.)
-   Fecha: 2026-08-28
-
-80. el hormigueo — tingling sensation
-   Ejemplo: "Siento un hormigueo extraño en el brazo derecho." (I feel a strange tingling sensation in my right arm.)
-   Fecha: 2026-08-29
-
-81. el corcho — cork
-   Ejemplo: "El camarero abrió la botella de vino pero rompió el corcho." (The waiter opened the wine bottle but broke the cork.)
-   Fecha: 2026-08-30
-
-82. el desvelo — sleeplessness / state of being unable to sleep
-   Ejemplo: "Mi desvelo comenzó después de tomar tanto café por la tarde." (My sleeplessness started after drinking so much coffee in the afternoon.)
-   Fecha: 2026-08-31
-
-83. el abanico — hand fan
-   Ejemplo: "En verano, mi abuela siempre usa un abanico para el calor." (In summer, my grandmother always uses a hand fan for the heat.)
-   Fecha: 2026-09-01
-
-84. el despertador — alarm clock
-   Ejemplo: "Mi despertador no sonó esta mañana y llegué tarde a la oficina." (My alarm clock did not ring this morning and I arrived late at the office.)
-   Fecha: 2026-09-02
-
-85. la cordillera — mountain range
-   Ejemplo: "Vimos la hermosa cordillera desde el avión." (We saw the beautiful mountain range from the plane.)
-   Fecha: 2026-09-03
-
-86. el faro — the lighthouse
-   Ejemplo: "El faro brilla en la noche para ayudar a los barcos." (The lighthouse shines in the night to help the ships.)
-   Fecha: 2026-09-04
-
-87. el candado — the padlock
-   Ejemplo: "Cierra la puerta del garaje con el candado." (Close the garage door with the padlock.)
-   Fecha: 2026-09-05
-
-88. el sótano — basement
-   Ejemplo: "Guardamos las cajas viejas en el sótano de la casa." (We keep the old boxes in the basement of the house.)
-   Fecha: 2026-09-06
-
-89. amanecer — dawn
-   Ejemplo: "Nosotros vimos el amanecer en la playa." (We saw the sunrise on the beach.)
-   Fecha: 2026-09-07
-
-90. el invernadero — greenhouse
-   Ejemplo: "Mi abuela cultiva tomates deliciosos en su invernadero." (My grandmother grows delicious tomatoes in her greenhouse.)
-   Fecha: 2026-09-08
-
-91. el acertijo — riddle / puzzle
-   Ejemplo: "Ella no pudo resolver el acertijo difícil." (She couldn't solve the difficult riddle.)
-   Fecha: 2026-09-09
-
-92. el remordimiento — remorse / regret
-   Ejemplo: "Siento un gran remordimiento por no haber ido a su fiesta." (I feel great remorse for not having gone to his party.)
-   Fecha: 2026-09-10
-
-93. la brújula — the compass
-   Ejemplo: "Perdimos el camino en el desierto, pero usamos la brújula para ir al norte." (We lost the way in the desert, but we used the compass to go north.)
-   Fecha: 2026-09-11
-
-94. el paradero — whereabouts
-   Ejemplo: "La policía todavía no sabe el paradero del ladrón." (The police still do not know the whereabouts of the thief.)
-   Fecha: 2026-09-12
-
-95. la llovizna — the drizzle
-   Ejemplo: "No necesitas el paraguas, solo es una pequeña llovizna." ("You don't need the umbrella, it is only a light drizzle.")
-   Fecha: 2026-09-13
-
-96. Apresurado — Hasty
-   Ejemplo: "El estudiante salió apresurado de la escuela." (The student left the school in a hurry.)
-   Fecha: 2026-09-14
-
-97. aguantar — to tolerate or endure
-   Ejemplo: "No aguanto el calor del verano" (I cannot tolerate the summer heat)
-   Fecha: 2026-09-15
-
+{'word': 'Ventana', 'meaning': 'Window', 'date': '2026-06-21'}
+{'word': 'Cajón', 'meaning': 'Drawer', 'date': '2026-06-22'}
+{'word': 'Estrenar', 'meaning': 'To wear or use for the first time', 'date': '2026-06-22'}
+{'word': 'madrugar', 'meaning': 'to wake up early', 'date': '2026-06-22'}
+{'word': 'el antojo', 'meaning': 'the craving', 'example': '"Tengo un antojo de chocolate esta noche." (I have a craving for chocolate tonight.)', 'date': '2026-06-22'}
+{'word': 'el rincón', 'meaning': 'the corner / nook', 'example': '"El gato duerme en el rincón de mi casa." (The cat sleeps in the corner of my house.)', 'date': '2026-06-22'}
+{'word': 'el jarabe', 'meaning': 'cough syrup', 'example': '"Toma el jarabe con un poco de agua." (Take the syrup with a little bit of water.)', 'date': '2026-06-22'}
+{'word': 'la pesadilla', 'meaning': 'the nightmare', 'example': '"Tuve una pesadilla anoche y no pude dormir." (I had a nightmare last night and couldn\'t sleep.)', 'date': '2026-06-22'}
+{'word': 'Apresurarse', 'meaning': 'To hurry up', 'example': '"Tienes que apresurarte para llegar al aeropuerto a tiempo." (You have to hurry up to get to the airport on time.)', 'date': '2026-06-23'}
+{'word': 'Apagar', 'meaning': 'To turn off / extinguish', 'example': '"Por favor, apaga la luz antes de salir" (Please turn off the light before leaving)', 'date': '2026-06-23'}
+{'word': 'apuntar', 'meaning': 'to aim / to take notes / to jot down', 'example': '"El estudiante siempre apunta las instrucciones en su cuaderno" (The student always writes down the instructions in his notebook)', 'date': '2026-06-23'}
+{'word': 'Apacible', 'meaning': 'Peaceful/Gentle', 'example': '"El campo está muy apacible esta tarde de verano" (The countryside is very peaceful this summer afternoon)', 'date': '2026-06-23'}
+{'word': 'Agotador', 'meaning': 'Exhausting', 'example': '"El viaje en autobús ha sido agotador" (The bus trip has been exhausting)', 'date': '2026-06-24'}
+{'word': 'Colmar', 'meaning': 'To fulfill/to fill to the brim', 'example': '"Sus palabras me colmaron de alegría" (His words filled me with joy)', 'date': '2026-06-25'}
+{'word': 'Derrotar', 'meaning': 'To defeat / To beat', 'example': '"El equipo pudo derrotar a los campeones ayer" (The team was able to defeat the champions yesterday)', 'date': '2026-06-25'}
+{'word': 'esquivar', 'meaning': 'to dodge / to avoid', 'example': '"El coche pudo esquivar el perro en la carretera." (The car was able to dodge the dog on the highway.)', 'date': '2026-06-26'}
+{'word': 'El alboroto', 'meaning': 'The racket / commotion', 'example': '"Los niños hicieron un gran alboroto en el parque" (The children made a big racket in the park)', 'date': '2026-06-27'}
+{'word': 'Apenas', 'meaning': 'Barely/Hardly', 'example': '"Apenas tengo dinero para comprar comida" (I barely have money to buy food)', 'date': '2026-06-28'}
+{'word': 'Coloquial', 'meaning': 'Colloquial', 'example': '"Usamos un lenguaje coloquial con los amigos" (We use colloquial language with friends)', 'date': '2026-06-29'}
+{'word': 'el alojamiento', 'meaning': 'accommodation', 'example': '"El alojamiento en este hotel es muy caro." (The accommodation in this hotel is very expensive.)', 'date': '2026-06-30'}
+{'word': 'Desafiar', 'meaning': 'To challenge/defy', 'example': '"No quiero desafiar a mi jefe hoy." (I don\'t want to challenge my boss today.)', 'date': '2026-07-01'}
+{'word': 'el atardecer', 'meaning': 'sunset', 'example': '"Nosotros miramos el hermoso atardecer desde la playa." (We watch the beautiful sunset from the beach.)', 'date': '2026-07-02'}
+{'word': 'el semáforo', 'meaning': 'traffic light', 'example': '"El semáforo está en rojo, por eso el taxi tiene que parar." (The traffic light is red, that\'s why the taxi has to stop.)', 'date': '2026-07-03'}
+{'word': 'el hallazgo', 'meaning': 'the discovery / the find', 'example': '"El hallazgo de la carta vieja cambió mi vida." (The discovery of the old letter changed my life.)', 'date': '2026-07-04'}
+{'word': 'bostezar', 'meaning': 'to yawn', 'example': '"Ella no puede parar de bostezar durante la película." (She cannot stop yawning during the movie.)', 'date': '2026-07-05'}
+{'word': 'el susurro', 'meaning': 'whisper', 'example': '"Escuché un susurro en la habitación oscura." (I heard a whisper in the dark room.)', 'date': '2026-07-06'}
+{'word': 'desafortunadamente', 'meaning': 'unfortunately', 'example': '"Desafortunadamente, olvidé mi cartera en el restaurante." (Unfortunately, I forgot my wallet at the restaurant.)', 'date': '2026-07-07'}
+{'word': 'el contratiempo', 'meaning': 'setback', 'example': '"Tuvimos un pequeño contratiempo con el coche, pero ya llegamos." (We had a small setback with the car, but we have arrived.)', 'date': '2026-07-08'}
+{'word': 'El peldaño', 'meaning': 'Step / Rung', 'example': '"Sube el peldaño con cuidado." (Go up the step carefully.)', 'date': '2026-07-09'}
+{'word': 'El aliento', 'meaning': 'Breath', 'example': '"El atleta tiene el aliento corto porque corre mucho" (The athlete has short breath because he runs a lot)', 'date': '2026-07-10'}
+{'word': 'el atajo', 'meaning': 'shortcut', 'example': '"Tomamos un atajo para llegar más rápido al hotel." (We took a shortcut to arrive faster at the hotel.)', 'date': '2026-07-11'}
+{'word': 'el rascacielos', 'meaning': 'skyscraper', 'example': '"Ese rascacielos es el edificio más alto de la ciudad." (That skyscraper is the tallest building in the city.)', 'date': '2026-07-12'}
+{'word': 'El peluche', 'meaning': 'Stuffed animal', 'example': '"Compré un peluche para mi hija" (I bought a stuffed animal for my daughter)', 'date': '2026-07-13'}
+{'word': 'trasnochar', 'meaning': 'to stay up late / stay up all night', 'example': '"No me gusta trasnochar porque al día siguiente siempre tengo mucho sueño." (I don\'t like to stay up late because the next day I am always very sleepy.)', 'date': '2026-07-14'}
+{'word': 'el bocado', 'meaning': 'bite / mouthful', 'example': '"Prueba un bocado de este pastel, está delicioso." ("Try a bite of this cake, it is delicious.")', 'date': '2026-07-15'}
+{'word': 'la mudanza', 'meaning': 'the move', 'example': '"La mudanza a nuestra nueva casa fue muy difícil." (The move to our new house was very difficult.)', 'date': '2026-07-16'}
+{'word': 'Apaciguar', 'meaning': 'To appease/calm down', 'example': '"El padre intenta apaciguar al niño después de la película" (The father tries to calm the child down after the movie)', 'date': '2026-07-17'}
+{'word': 'el presupuesto', 'meaning': 'budget', 'example': '"Tenemos que hacer un presupuesto para las vacaciones." (We have to make a budget for the vacation.)', 'date': '2026-07-18'}
+{'word': 'el calambre', 'meaning': 'cramp', 'example': '"Tengo un calambre en la pierna después de correr." (I have a cramp in my leg after running.)', 'date': '2026-07-19'}
+{'word': 'la caminata', 'meaning': 'the hike', 'example': '"Ayer hice una caminata por el parque." (Yesterday I went for a hike in the park.)', 'date': '2026-07-20'}
+{'word': 'Apresuradamente', 'meaning': 'Hastily', 'example': '"El estudiante escribió su examen apresuradamente" (The student wrote his exam hastily)', 'date': '2026-07-21'}
+{'word': 'Colocar', 'meaning': 'To place/put', 'example': '"Voy a colocar el libro sobre la mesa" (I am going to place the book on the table)', 'date': '2026-07-22'}
+{'word': 'titubear', 'meaning': 'to hesitate', 'example': '"Ella no quería titubear antes de comprar el coche nuevo." (She did not want to hesitate before buying the new car.)', 'date': '2026-07-23'}
+{'word': 'El peluquero', 'meaning': 'The hairdresser', 'example': '"El peluquero ha cortado el pelo de mi hermano." (The hairdresser has cut my brother\'s hair.)', 'date': '2026-07-24'}
+{'word': 'el escalofrío', 'meaning': 'the shiver / chill', 'example': '"Sentí un escalofrío cuando entré en la vieja casa." (I felt a shiver when I entered the old house.)', 'date': '2026-07-25'}
+{'word': 'el impermeable', 'meaning': 'the raincoat', 'example': '"Lleva el impermeable porque hoy va a llover mucho." (Wear the raincoat because today it is going to rain a lot.)', 'date': '2026-07-26'}
+{'word': 'El albergue', 'meaning': 'The shelter/hostel', 'example': '"Ellos han buscado un albergue para pasar la noche" (They have looked for a shelter to spend the night)', 'date': '2026-07-27'}
+{'word': 'Soler', 'meaning': 'To usually do something', 'example': '"Yo suelo comer fruta a las ocho" (I usually eat fruit at eight)', 'date': '2026-07-28'}
+{'word': 'Sobresaliente', 'meaning': 'Outstanding/Excellent', 'example': '"El trabajo del estudiante fue sobresaliente" (The student\'s work was outstanding)', 'date': '2026-07-29'}
+{'word': 'El aliento', 'meaning': 'Breath', 'example': '"Después de correr en el parque, él tomó aliento" (After running in the park, he caught his breath)', 'date': '2026-07-30'}
+{'word': 'Distraído', 'meaning': 'Distracted/Absent-minded', 'example': '"Él estaba muy distraído durante la clase." (He was very distracted during the class.)', 'date': '2026-07-31'}
+{'word': 'el huerto', 'meaning': 'vegetable garden', 'example': '"Mi abuelo pasa todas las mañanas trabajando en su huerto." (My grandfather spends every morning working in his vegetable garden.)', 'date': '2026-08-01'}
+{'word': 'el malentendido', 'meaning': 'misunderstanding', 'example': '"Todo fue un malentendido entre nosotros." (Everything was a misunderstanding between us.)', 'date': '2026-08-02'}
+{'word': 'el pronóstico', 'meaning': 'the forecast', 'example': '"El pronóstico del tiempo para mañana dice que va a llover." (The weather forecast for tomorrow says it is going to rain.)', 'date': '2026-08-03'}
+{'word': 'El propósito', 'meaning': 'The purpose', 'example': '"El propósito de mi viaje es visitar a mi familia." (The purpose of my trip is to visit my family.)', 'date': '2026-08-04'}
+{'word': 'El peldaño', 'meaning': 'Step of a staircase', 'example': '"Subí el último peldaño con mucho esfuerzo" (I climbed the last step with a lot of effort)', 'date': '2026-08-05'}
+{'word': 'el suspiro', 'meaning': 'the sigh', 'example': '"Ella dio un profundo suspiro al terminar el examen." (She gave a deep sigh upon finishing the exam.)', 'date': '2026-08-06'}
+{'word': 'el rompecabezas', 'meaning': 'the puzzle / jigsaw puzzle', 'example': '"Ayer mi abuelo y yo terminamos un rompecabezas de mil piezas." (Yesterday my grandfather and I finished a thousand-piece puzzle.)', 'date': '2026-08-07'}
+{'word': 'el mostrador', 'meaning': 'the counter', 'example': '"Por favor, deja las llaves en el mostrador antes de salir." (Please, leave the keys on the counter before going out.)', 'date': '2026-08-08'}
+{'word': 'el bache', 'meaning': 'pothole / rough patch', 'example': '"El coche se dañó porque caímos en un bache profundo." (The car was damaged because we fell into a deep pothole.)', 'date': '2026-08-09'}
+{'word': 'el grifo', 'meaning': 'the faucet / the tap', 'example': '"Por favor, cierra el grifo de la cocina porque el agua está corriendo." (Please, close the kitchen faucet because the water is running.)', 'date': '2026-08-10'}
+{'word': 'el relámpago', 'meaning': 'lightning bolt', 'example': '"Un relámpago iluminó el cielo oscuro durante la tormenta." (A flash of lightning illuminated the dark sky during the storm.)', 'date': '2026-08-11'}
+{'word': 'callejón', 'meaning': 'the alleyway', 'example': '"Caminamos por el callejón oscuro para llegar rápido al restaurante." (We walked through the dark alley to get to the restaurant quickly.)', 'date': '2026-08-12'}
+{'word': 'desprevenido', 'meaning': 'unprepared or caught off guard', 'example': '"El examen de español me tomó desprevenido." (The Spanish exam caught me unprepared.)', 'date': '2026-08-13'}
+{'word': 'el préstamo', 'meaning': 'the loan', 'example': '"El banco me dio un préstamo para comprar el coche." (The bank gave me a loan to buy the car.)', 'date': '2026-08-14'}
+{'word': 'El peldaño', 'meaning': 'Step of a staircase', 'example': '"El gato subió por el peldaño de madera" (The cat went up the wooden step)', 'date': '2026-08-15'}
+{'word': 'el rastro', 'meaning': 'the trail / trace', 'example': '"El perro sigue el rastro del gato." (The dog follows the trail of the cat.)', 'date': '2026-08-16'}
+{'word': 'el parachoques', 'meaning': 'the bumper', 'example': '"El coche rojo tiene el parachoques roto." (The red car has a broken bumper.)', 'date': '2026-08-17'}
+{'word': 'cicatriz', 'meaning': 'scar', 'example': '"Él tiene una cicatriz en el brazo por un accidente." (He has a scar on his arm from an accident.)', 'date': '2026-08-18'}
+{'word': 'el anhelo', 'meaning': 'longing or yearning', 'example': '"Ella tiene el anhelo de viajar por todo el mundo." (She has the yearning to travel all over the world.)', 'date': '2026-08-19'}
+{'word': 'el vecindario', 'meaning': 'the neighborhood', 'example': '"Mi nuevo vecindario es muy tranquilo y tiene un parque grande." (My new neighborhood is very quiet and has a big park.)', 'date': '2026-08-20'}
+{'word': 'el folleto', 'meaning': 'brochure', 'example': '"Leí el folleto del hotel para ver las actividades." (I read the hotel brochure to see the activities.)', 'date': '2026-08-21'}
+{'word': 'el parabrisas', 'meaning': 'the windshield', 'example': '"El parabrisas de mi coche está muy sucio por la lluvia." (The windshield of my car is very dirty because of the rain.)', 'date': '2026-08-22'}
+{'word': 'el atasco', 'meaning': 'traffic jam', 'example': '"Llegué tarde al trabajo por un gran atasco en la carretera." (I arrived late to work due to a big traffic jam on the road.)', 'date': '2026-08-23'}
+{'word': 'El sendero', 'meaning': 'The path / trail', 'example': '"Caminamos por un sendero hermoso en las montañas." (We walked along a beautiful path in the mountains.)', 'date': '2026-08-24'}
+{'word': 'añorar', 'meaning': 'to long for', 'example': '"Ellos añoran su tierra natal cuando están lejos." (They long for their homeland when they are far away.)', 'date': '2026-08-25'}
+{'word': 'el bolsillo', 'meaning': 'pocket', 'example': '"Tengo un teléfono y algo de dinero en mi bolsillo." (I have a phone and some money in my pocket.)', 'date': '2026-08-26'}
+{'word': 'Apresurarse', 'meaning': 'To hurry up / To rush', 'example': '"No te apresures, el tren llega tarde hoy" (Don\'t rush, the train is arriving late today)', 'date': '2026-08-27'}
+{'word': 'el laberinto', 'meaning': 'the labyrinth, the maze', 'example': '"Perdimos el mapa y ahora estamos en un laberinto." (We lost the map and now we are in a maze.)', 'date': '2026-08-28'}
+{'word': 'el hormigueo', 'meaning': 'tingling sensation', 'example': '"Siento un hormigueo extraño en el brazo derecho." (I feel a strange tingling sensation in my right arm.)', 'date': '2026-08-29'}
+{'word': 'el corcho', 'meaning': 'cork', 'example': '"El camarero abrió la botella de vino pero rompió el corcho." (The waiter opened the wine bottle but broke the cork.)', 'date': '2026-08-30'}
+{'word': 'el desvelo', 'meaning': 'sleeplessness / state of being unable to sleep', 'example': '"Mi desvelo comenzó después de tomar tanto café por la tarde." (My sleeplessness started after drinking so much coffee in the afternoon.)', 'date': '2026-08-31'}
+{'word': 'el abanico', 'meaning': 'hand fan', 'example': '"En verano, mi abuela siempre usa un abanico para el calor." (In summer, my grandmother always uses a hand fan for the heat.)', 'date': '2026-09-01'}
+{'word': 'el despertador', 'meaning': 'alarm clock', 'example': '"Mi despertador no sonó esta mañana y llegué tarde a la oficina." (My alarm clock did not ring this morning and I arrived late at the office.)', 'date': '2026-09-02'}
+{'word': 'la cordillera', 'meaning': 'mountain range', 'example': '"Vimos la hermosa cordillera desde el avión." (We saw the beautiful mountain range from the plane.)', 'date': '2026-09-03'}
+{'word': 'el faro', 'meaning': 'the lighthouse', 'example': '"El faro brilla en la noche para ayudar a los barcos." (The lighthouse shines in the night to help the ships.)', 'date': '2026-09-04'}
+{'word': 'el candado', 'meaning': 'the padlock', 'example': '"Cierra la puerta del garaje con el candado." (Close the garage door with the padlock.)', 'date': '2026-09-05'}
+{'word': 'el sótano', 'meaning': 'basement', 'example': '"Guardamos las cajas viejas en el sótano de la casa." (We keep the old boxes in the basement of the house.)', 'date': '2026-09-06'}
+{'word': 'amanecer', 'meaning': 'dawn', 'example': '"Nosotros vimos el amanecer en la playa." (We saw the sunrise on the beach.)', 'date': '2026-09-07'}
+{'word': 'el invernadero', 'meaning': 'greenhouse', 'example': '"Mi abuela cultiva tomates deliciosos en su invernadero." (My grandmother grows delicious tomatoes in her greenhouse.)', 'date': '2026-09-08'}
+{'word': 'el acertijo', 'meaning': 'riddle / puzzle', 'example': '"Ella no pudo resolver el acertijo difícil." (She couldn\'t solve the difficult riddle.)', 'date': '2026-09-09'}
+{'word': 'el remordimiento', 'meaning': 'remorse / regret', 'example': '"Siento un gran remordimiento por no haber ido a su fiesta." (I feel great remorse for not having gone to his party.)', 'date': '2026-09-10'}
+{'word': 'la brújula', 'meaning': 'the compass', 'example': '"Perdimos el camino en el desierto, pero usamos la brújula para ir al norte." (We lost the way in the desert, but we used the compass to go north.)', 'date': '2026-09-11'}
+{'word': 'el paradero', 'meaning': 'whereabouts', 'example': '"La policía todavía no sabe el paradero del ladrón." (The police still do not know the whereabouts of the thief.)', 'date': '2026-09-12'}
+{'word': 'la llovizna', 'meaning': 'the drizzle', 'example': '"No necesitas el paraguas, solo es una pequeña llovizna." ("You don\'t need the umbrella, it is only a light drizzle.")', 'date': '2026-09-13'}
+{'word': 'Apresurado', 'meaning': 'Hasty', 'example': '"El estudiante salió apresurado de la escuela." (The student left the school in a hurry.)', 'date': '2026-09-14'}
+{'word': 'aguantar', 'meaning': 'to tolerate or endure', 'example': '"No aguanto el calor del verano" (I cannot tolerate the summer heat)', 'date': '2026-09-15'}
+advertir
