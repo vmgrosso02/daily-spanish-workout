@@ -3,10 +3,10 @@ name: Daily Spanish Workout
 on:
   workflow_dispatch: # Allows manual triggers
   schedule:
-    # Triggers ~5:17 AM EDT (9:17 UTC) — Mar through Oct
-    - cron: '17 9 * 3,4,5,6,7,8,9,10 *'
-    # Triggers ~5:17 AM EST (10:17 UTC) — Nov, Dec, Jan, Feb
-    - cron: '17 10 * 1,2,11,12 *'
+    # Triggers ~1:00 AM EDT (5:00 UTC) — Mar through Oct
+    - cron: '0 5 * 3,4,5,6,7,8,9,10 *'
+    # Triggers ~1:00 AM EST (6:00 UTC) — Nov, Dec, Jan, Feb
+    - cron: '0 6 * 1,2,11,12 *'
 
 permissions:
   contents: write
