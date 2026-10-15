@@ -2,74 +2,78 @@
 ==============================
 
 1. Apacible — Peaceful/Gentle
-   Ejemplo: "El campo es muy apacible hoy" (The countryside is very peaceful today)
-   Fecha: 2026-09-22
+    Ejemplo: "El campo es muy apacible hoy" (The countryside is very peaceful today)
+    Fecha: 2026-09-22
 
 2. Inquieto — Restless/Anxious
-   Ejemplo: "El niño estaba muy inquieto antes del examen" (The boy was very restless before the exam)
-   Fecha: 2026-09-22
+    Ejemplo: "El niño estaba muy inquieto antes del examen" (The boy was very restless before the exam)
+    Fecha: 2026-09-22
 
 3. melancolía — melancholy
-   Ejemplo: "Siento una gran melancolía al ver las fotos antiguas" (I feel a great melancholy when looking at the old photos)
-   Fecha: 2026-09-25
+    Ejemplo: "Siento una gran melancolía al ver las fotos antiguas" (I feel a great melancholy when looking at the old photos)
+    Fecha: 2026-09-25
 
 4. Cotidiano — Daily/Everyday
-   Ejemplo: "Mi vida cotidiana es muy activa" (My daily life is very active)
-   Fecha: 2026-09-26
+    Ejemplo: "Mi vida cotidiana es muy activa" (My daily life is very active)
+    Fecha: 2026-09-26
 
 5. Apresurarse — To hurry up / To rush
-   Ejemplo: "No te apresures, tenemos tiempo" (Don't rush, we have time)
-   Fecha: 2026-09-27
+    Ejemplo: "No te apresures, tenemos tiempo" (Don't rush, we have time)
+    Fecha: 2026-09-27
 
 6. Deslumbrante — Dazzling
-   Ejemplo: "El sol de la tarde está deslumbrante hoy" (The afternoon sun is dazzling today)
-   Fecha: 2026-09-28
+    Ejemplo: "El sol de la tarde está deslumbrante hoy" (The afternoon sun is dazzling today)
+    Fecha: 2026-09-28
 
 7. Remoto — Remote/Distant
-   Ejemplo: "El hotel está en un lugar muy remoto" (The hotel is in a very remote place)
-   Fecha: 2026-09-29
+    Ejemplo: "El hotel está en un lugar muy remoto" (The hotel is in a very remote place)
+    Fecha: 2026-09-29
 
 8. inevitable — inevitable
-   Ejemplo: "Es inevitable que el equipo pierda hoy" (It is inevitable that the team loses today)
-   Fecha: 2026-09-30
+    Ejemplo: "Es inevitable que el equipo pierda hoy" (It is inevitable that the team loses today)
+    Fecha: 2026-09-30
 
 9. el contratiempo — setback / mishap
-   Ejemplo: "Tuvimos un pequeño contratiempo con el coche, pero ya vamos en camino." (We had a small setback with the car, but we are already on our way.)
-   Fecha: 2026-10-02
+    Ejemplo: "Tuvimos un pequeño contratiempo con el coche, pero ya vamos en camino." (We had a small setback with the car, but we are already on our way.)
+    Fecha: 2026-10-02
 
 10. el atardecer — sunset
-   Ejemplo: "Nosotros vimos un atardecer hermosísimo en la playa ayer." (We saw a very beautiful sunset on the beach yesterday.)
-   Fecha: 2026-10-03
+    Ejemplo: "Nosotros vimos un atardecer hermosísimo en la playa ayer." (We saw a very beautiful sunset on the beach yesterday.)
+    Fecha: 2026-10-03
 
 11. el susurro — the whisper
-   Ejemplo: "Ella me dijo el secreto en un susurro." (She told me the secret in a whisper.)
-   Fecha: 2026-10-04
+    Ejemplo: "Ella me dijo el secreto en un susurro." (She told me the secret in a whisper.)
+    Fecha: 2026-10-04
 
 12. Frívolo — Frivolous
-   Ejemplo: "Él tiene un comportamiento muy frívolo" (He has a very frivolous behavior)
-   Fecha: 2026-10-05
+    Ejemplo: "Él tiene un comportamiento muy frívolo" (He has a very frivolous behavior)
+    Fecha: 2026-10-05
 
 13. Incesante — Incessant
-   Ejemplo: "El ruido incesante de la lluvia no me dejó dormir anoche" (The incessant noise of the rain didn't let me sleep last night)
-   Fecha: 2026-10-07
+    Ejemplo: "El ruido incesante de la lluvia no me dejó dormir anoche" (The incessant noise of the rain didn't let me sleep last night)
+    Fecha: 2026-10-07
 
 14. desprevenido — unprepared / off guard
-   Ejemplo: "El examen me tomó desprevenido." (The exam caught me off guard.)
-   Fecha: 2026-10-08
+    Ejemplo: "El examen me tomó desprevenido." (The exam caught me off guard.)
+    Fecha: 2026-10-08
 
 15. madrugar — to get up early
-   Ejemplo: "A mi hermano no le gusta madrugar los domingos." (My brother doesn't like to get up early on Sundays.)
-   Fecha: 2026-10-09
+    Ejemplo: "A mi hermano no le gusta madrugar los domingos." (My brother doesn't like to get up early on Sundays.)
+    Fecha: 2026-10-09
 
 16. imprescindible — essential / indispensable
-   Ejemplo: "Para viajar a otro país, el pasaporte es un documento imprescindible." (To travel to another country, a passport is an essential document.)
-   Fecha: 2026-10-10
+    Ejemplo: "Para viajar a otro país, el pasaporte es un documento imprescindible." (To travel to another country, a passport is an essential document.)
+    Fecha: 2026-10-10
 
 17. Desconcertar — To bewilder/confuse
-   Ejemplo: "Sus palabras me desconcertaron mucho" (His words bewildered me a lot)
-   Fecha: 2026-10-11
+    Ejemplo: "Sus palabras me desconcertaron mucho" (His words bewildered me a lot)
+    Fecha: 2026-10-11
 
 18. El hallazgo — Discovery/Find
-   Ejemplo: "El hallazgo de las llaves en la cocina fue una sorpresa" (The discovery of the keys in the kitchen was a surprise)
-   Fecha: 2026-10-12
+    Ejemplo: "El hallazgo de las llaves en la cocina fue una sorpresa" (The discovery of the keys in the kitchen was a surprise)
+    Fecha: 2026-10-12
+
+19. Resplandecer — To shine brightly / To glow
+    Ejemplo: "El sol resplandece en la playa hoy." (The sun shines brightly on the beach today.)
+    Fecha: 2026-10-15
 
