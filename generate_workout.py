@@ -97,7 +97,6 @@ def get_spanish_date_and_season(now):
     year = now.year
     year_word = numero_a_palabras(year)
 
-    # Meteorological Season Logic (June to August is Summer)
     month = now.month
     if 3 <= month <= 5:
         season = "Primavera 🌸"
@@ -197,7 +196,6 @@ else:
     number_bank = []
 
 def elegir_numero_aleatorio():
-    # Weighted so MOST numbers feel everyday/relatable, with occasional big ones
     roll = random.random()
     if roll < 0.55:
         return random.randint(1, 999)
@@ -215,11 +213,11 @@ def write_readable_numbers(filepath, bank):
             f.write("==========================\n\n")
             for i, item in enumerate(bank, 1):
                 f.write(f"{i}. {item.get('number', 0):,} — {item.get('words', '')}\n")
-                f.write(f"   Fecha: {item.get('date', '')}\n\n")
+                f.write(f"    Fecha: {item.get('date', '')}\n\n")
     except Exception as e:
         print(f"Error writing {filepath}: {e}")
 
-# --- 7. LOAD THE STUDENT'S FULL KNOWN-VOCABULARY / GRAMMAR BASE FROM YOUR TEXT FILE ---
+# --- 7. LOAD THE STUDENT'S FULL KNOWN-VOCABULARY / GRAMMAR BASE ---
 known_vocab_block = ""
 if os.path.exists("spanish_vocab.txt"):
     try:
@@ -228,7 +226,7 @@ if os.path.exists("spanish_vocab.txt"):
     except Exception as e:
         print(f"Note: Could not read spanish_vocab.txt ({e}).")
 
-# --- 8. SECRETS VALIDATION (Cleaned to prevent URL parsing errors) ---
+# --- 8. SECRETS VALIDATION ---
 gemini_api_key = os.environ.get("GEMINI_API_KEY", "").strip("[]'\" ")
 smtp_user = os.environ.get("SMTP_USER", "").strip("[]'\" ")
 smtp_password = os.environ.get("SMTP_PASSWORD", "").strip("[]'\" ")
@@ -385,10 +383,10 @@ TRACK_WORD: <palabra elegida> | <traducción al inglés> | <el mismo Ejemplo Pr�
 TRACK_PHRASE: <frase elegida> | <traducción al inglés> | <el mismo Ejemplo que escribiste en la sección 2, en el formato: "frase en español" (traducción)>
 """
 
-# --- 10. CALL GEMINI API VIA GOOGLE GENAI SDK ---
+# --- 10. CALL GEMINI API VIA GOOGLE GENAI SDK (Robust with Backoff & Multi-model Fallback) ---
 client = genai.Client(api_key=gemini_api_key)
-models_to_try = ["gemini-3.5-flash", "gemini-3.1-flash-lite"]
-max_retries = 2
+models_to_try = ["gemini-2.5-flash", "gemini-3.5-flash", "gemini-3.1-flash-lite"]
+max_retries = 3
 workout_html = None
 
 for model_name in models_to_try:
@@ -404,32 +402,31 @@ for model_name in models_to_try:
             )
             workout_html = response.text
             
-            # Clean up potential markdown formatting from the response
             if workout_html.startswith("```html"):
                 workout_html = workout_html[7:]
             if workout_html.endswith("```"):
                 workout_html = workout_html[:-3]
             workout_html = workout_html.strip()
             
-            break  # success, stop retrying this model
+            break 
         except Exception as e:
             print(f"Error calling Gemini with {model_name} (attempt {attempt}): {e}")
             if attempt < max_retries:
-                wait_time = 15 * attempt
+                wait_time = 20 * (2 ** (attempt - 1))  # Exponential backoff: 20s, 40s, 80s
                 print(f"Retrying in {wait_time} seconds...")
                 time.sleep(wait_time)
     if workout_html:
-        break  # success, stop trying other models
+        break
 
 if not workout_html:
     print("All models and retries exhausted. Giving up.")
     exit(1)
 
-# --- 11. INJECT THE REAL PREVIOUS WORD/PHRASE REVIEW (replaces Gemini's placeholders) ---
+# --- 11. INJECT THE REAL PREVIOUS WORD/PHRASE REVIEW ---
 workout_html = workout_html.replace("PLACEHOLDER_PREV_WORD_REVIEW", word_review_html)
 workout_html = workout_html.replace("PLACEHOLDER_PREV_PHRASE_REVIEW", phrase_review_html)
 
-# --- 12. GENERATE TODAY'S NUMBER (never repeats a previously used number) AND INJECT IT ---
+# --- 12. GENERATE TODAY'S NUMBER ---
 today_number = None
 for _ in range(50):
     candidate = elegir_numero_aleatorio()
@@ -438,7 +435,6 @@ for _ in range(50):
         break
 
 if today_number is None:
-    # Extremely unlikely fallback: scan for any unused number at all
     for candidate in range(1, 1_000_000_001):
         if candidate not in used_numbers:
             today_number = candidate
@@ -485,7 +481,6 @@ for line in workout_html.split("\n"):
 
 workout_html = "\n".join(cleaned_lines).strip()
 
-# Save word to word_bank
 if extracted_word != "Desconocida":
     word_bank.append({
         "word": extracted_word,
@@ -500,7 +495,6 @@ if extracted_word != "Desconocida":
     except Exception as e:
         print(f"Error saving word bank: {e}")
 
-# Save phrase to phrase_bank
 if extracted_phrase != "Desconocida":
     phrase_bank.append({
         "phrase": extracted_phrase,
@@ -515,7 +509,6 @@ if extracted_phrase != "Desconocida":
     except Exception as e:
         print(f"Error saving phrase bank: {e}")
 
-# Save number to number_bank
 number_bank.append({
     "number": today_number,
     "words": today_number_words,
@@ -538,8 +531,8 @@ def write_readable_bank(filepath, bank, item_key, label):
                 f.write(f"{i}. {item.get(item_key, '')} — {item.get('meaning', '')}\n")
                 example = item.get("example")
                 if example:
-                    f.write(f"   Ejemplo: {example}\n")
-                f.write(f"   Fecha: {item.get('date', '')}\n")
+                    f.write(f"    Ejemplo: {example}\n")
+                f.write(f"    Fecha: {item.get('date', '')}\n")
                 f.write("\n")
     except Exception as e:
         print(f"Error writing {filepath}: {e}")
