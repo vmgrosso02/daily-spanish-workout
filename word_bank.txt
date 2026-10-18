@@ -89,3 +89,7 @@
     Ejemplo: "Este problema tiene un matiz interesante." (This problem has an interesting nuance.)
     Fecha: 2026-10-17
 
+23. el peregrino — the pilgrim
+    Ejemplo: "El peregrino caminó muchos kilómetros para llegar a la catedral." (The pilgrim walked many kilometers to reach the cathedral.)
+    Fecha: 2026-10-18
+
