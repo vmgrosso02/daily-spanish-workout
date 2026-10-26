@@ -121,3 +121,7 @@
     Ejemplo: "La brisa del mar me ayuda a dormir." (The sea breeze helps me sleep.)
     Fecha: 2026-10-25
 
+31. el semáforo — traffic light
+    Ejemplo: "Para ir a la izquierda, debes esperar en el semáforo." (To go left, you must wait at the traffic light.)
+    Fecha: 2026-10-26
+
