@@ -129,3 +129,7 @@
     Ejemplo: "El chef nos dio una pauta para cocinar el pescado." (The chef gave us a guideline for cooking the fish.)
     Fecha: 2026-10-27
 
+33. El eslabón — The link / The chain link
+    Ejemplo: "El eslabón perdido de la cadena fue encontrado." (The missing link of the chain was found.)
+    Fecha: 2026-10-28
+
