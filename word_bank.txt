@@ -137,3 +137,7 @@
     Ejemplo: "El equipo va a desafiar a los campeones." (The team is going to challenge the champions.)
     Fecha: 2026-10-29
 
+35. El desván — Attic
+    Ejemplo: "El desván de la casa es muy viejo y lleno de polvo." (The attic of the house is very old and full of dust.)
+    Fecha: 2026-10-30
+
