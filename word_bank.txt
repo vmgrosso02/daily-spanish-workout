@@ -157,3 +157,7 @@
     Ejemplo: "Estaba esperando en el umbral de la puerta." (I was waiting at the threshold of the door.)
     Fecha: 2026-11-03
 
+40. el hito — milestone
+    Ejemplo: "Conseguir ese trabajo fue un hito importante en su carrera." (Getting that job was an important milestone in her career.)
+    Fecha: 2026-11-04
+
