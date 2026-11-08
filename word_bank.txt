@@ -173,3 +173,7 @@
     Ejemplo: "Nos reunimos en la cafetería para una tertulia sobre el arte." (We met at the cafe for a discussion about art.)
     Fecha: 2026-11-07
 
+44. el alboroto — commotion / racket
+    Ejemplo: "El alboroto en la calle despertó a todos los vecinos." (The commotion in the street woke up all the neighbors.)
+    Fecha: 2026-11-08
+
