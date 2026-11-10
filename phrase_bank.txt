@@ -181,3 +181,7 @@
     Ejemplo: "Le mandé un mensaje, pero me dejó en visto." (I sent him a message, but he left me on read.)
     Fecha: 2026-11-09
 
+46. Estar al pie de la letra — To be exact / Word for word
+    Ejemplo: "El estudiante debe seguir las instrucciones al pie de la letra." (The student must follow the instructions word for word.)
+    Fecha: 2026-11-10
+
