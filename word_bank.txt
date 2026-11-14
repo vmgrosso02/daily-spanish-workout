@@ -193,3 +193,7 @@
     Ejemplo: "Tengo un compromiso importante esta noche con mi familia." (I have an important commitment tonight with my family.)
     Fecha: 2026-11-13
 
+49. el rumbo — direction/course
+    Ejemplo: "¿Sabes el rumbo a la estación de tren?" (Do you know the direction to the train station?)
+    Fecha: 2026-11-14
+
