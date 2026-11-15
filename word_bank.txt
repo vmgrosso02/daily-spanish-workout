@@ -197,3 +197,7 @@
     Ejemplo: "¿Sabes el rumbo a la estación de tren?" (Do you know the direction to the train station?)
     Fecha: 2026-11-14
 
+50. el bostezo — the yawn
+    Ejemplo: "Después de estudiar mucho, tuve un bostezo grandísimo." (After studying a lot, I had a very big yawn.)
+    Fecha: 2026-11-15
+
