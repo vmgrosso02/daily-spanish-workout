@@ -205,3 +205,7 @@
     Ejemplo: "Esta foto es un recuerdo de mi familia." (This photo is a memory of my family.)
     Fecha: 2026-11-16
 
+52. el sendero — path / trail
+    Ejemplo: "Caminamos por un sendero estrecho en el bosque." (We walked along a narrow path in the forest.)
+    Fecha: 2026-11-17
+
