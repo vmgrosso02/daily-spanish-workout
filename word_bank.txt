@@ -209,3 +209,7 @@
     Ejemplo: "Caminamos por un sendero estrecho en el bosque." (We walked along a narrow path in the forest.)
     Fecha: 2026-11-17
 
+53. la charla — chat / talk
+    Ejemplo: "Tuvimos una charla muy interesante sobre el viaje." (We had a very interesting chat about the trip.)
+    Fecha: 2026-11-18
+
