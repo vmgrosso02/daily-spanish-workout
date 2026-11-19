@@ -213,3 +213,7 @@
     Ejemplo: "Tuvimos una charla muy interesante sobre el viaje." (We had a very interesting chat about the trip.)
     Fecha: 2026-11-18
 
+54. el horario — the schedule
+    Ejemplo: "Mi horario de clases es difícil este semestre." (My class schedule is difficult this semester.)
+    Fecha: 2026-11-19
+
