@@ -217,3 +217,7 @@
     Ejemplo: "Mi horario de clases es difícil este semestre." (My class schedule is difficult this semester.)
     Fecha: 2026-11-19
 
+55. charco — puddle
+    Ejemplo: "Después de la lluvia, había un gran charco en la calle." (After the rain, there was a big puddle in the street.)
+    Fecha: 2026-11-20
+
