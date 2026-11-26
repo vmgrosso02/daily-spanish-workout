@@ -241,3 +241,7 @@
     Ejemplo: "Limpiar toda la casa es una faena." (Cleaning the whole house is a chore.)
     Fecha: 2026-11-25
 
+61. la huella — footprint, trace
+    Ejemplo: "El detective buscaba huellas en la arena." (The detective was looking for footprints in the sand.)
+    Fecha: 2026-11-26
+
