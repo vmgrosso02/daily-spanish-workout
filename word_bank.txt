@@ -245,3 +245,7 @@
     Ejemplo: "El detective buscaba huellas en la arena." (The detective was looking for footprints in the sand.)
     Fecha: 2026-11-26
 
+62. el amanecer — dawn
+    Ejemplo: "Me encanta ver el amanecer desde la playa." (I love to watch the dawn from the beach.)
+    Fecha: 2026-11-27
+
